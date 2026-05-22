@@ -114,12 +114,12 @@ p { color: var(--color-text-muted); line-height: 1.8; }
 }
 
 .btn-outline {
-  background: transparent;
+  background: var(--color-rose-100);
   color: var(--color-rose-400);
   border: 2px solid var(--color-rose-300);
 }
 .btn-outline:hover {
-  background: var(--color-rose-100);
+  background: var(--color-rose-200);
   transform: translateY(-2px);
 }
 
