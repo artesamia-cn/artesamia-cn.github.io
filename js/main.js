@@ -218,10 +218,12 @@ function initProductos() {
           <span class="product-categoria">${p.categoria}</span>
           <h3 class="product-nombre">${p.nombre}</h3>
           <p class="product-descripcion">${p.descripcion}</p>
+          <p class="product-descripcion-2">${p.descripcion2}</p>
           <div class="product-caracteristicas">${caractsHtml}</div>
           ${tagsHtml ? `<div class="product-tags">${tagsHtml}</div>` : ''}
           <div class="product-footer">
-            <span class="product-precio">${p.precio}</span>
+            ${p.precioAntes ? `<div class="product-precio-antes">${p.precioAntes}</div>` : ''}
+            <span class="product-precio">&nbsp;${p.precio}</span>
           </div>
           <a href="${waUrl}" target="_blank" rel="noopener" class="btn btn-whatsapp">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">

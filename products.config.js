@@ -7,95 +7,119 @@
  */
 
 const PRODUCTS_CONFIG = [
-  {
-    id: "marcos-madera",
-    nombre: "Marcos de Madera Grabados",
-    categoria: "Decoración",
-    descripcion: "Marcos decorativos en madera MDF con diseños personalizados grabados con láser de alta precisión. Perfectos para bodas, bautizos, cumpleaños y decoración del hogar.",
+    {
+    id: "box-bienvenida",
+    nombre: "🎁Box de Bienvenida",
+    categoria: "Bebé",
+    descripcion: "Regala momentos, ternura y recuerdos con nuestras cajitas personalizadas 🍼💖",
+    descripcion2: "Arma tu pack con:",
     caracteristicas: [
-      "Madera MDF premium",
-      "Grabado láser personalizable",
-      "Diseños exclusivos",
-      "Varios tamaños disponibles"
+      "🧸 Mordedor",
+      "🐰 Sonajero",
+      "🍼 Porta chupete",
+      "💆‍♀️ Cepillo y peine de madera personalizados",
+      "🌿 Placa grabada para brazalete",
+      "🎁 Caja rígida personalizada"
     ],
-    precio: "$12.990",
-    imagenes: ["foto1.png", "foto2.png"],
+    precio: "Desde $5.000",
+    imagenes: ["image_1.png", "image_2.png", "image_3.png", "image_4.png"],
     disponible: true,
     destacado: true,
-    tags: ["Día de la Madre", "Bodas", "Cumpleaños"]
+    tags: ["Baby Shower", "Bebés"]
   },
   {
-    id: "velas-artesanales",
-    nombre: "Velas Artesanales",
-    categoria: "Velas",
-    descripcion: "Velas de soya 100% natural con flores secas y etiquetas de madera grabadas. Aromas únicos para crear ambientes especiales en cualquier momento del año.",
+    id: "placa-bienvenida",
+    nombre: "❤️ Placa de Bienvenida",
+    categoria: "Bebé",
+    descripcion: "Guarda el brazalete de nacimiento de tu bebé en una plaquita única, personalizada con su nombre y hecha con amor 💛",
+    descripcion2: "Transforma un momento especial, en algo eterno 🫶",
     caracteristicas: [
-      "Cera de soya natural",
-      "Flores secas decorativas",
-      "Etiqueta madera grabada",
-      "Aromas naturales"
+      "🪵 Madera grabada con láser",
+      "📏 Espacio especial para el brazalete",
+      "🎁 Ideal como recuerdo o regalo"
     ],
-    precio: "$8.990",
-    imagenes: ["foto1.png", "foto2.png"],
+    precio: "$5.000",
+    imagenes: ["image_1.png"],
     disponible: true,
     destacado: true,
-    tags: ["Día de la Madre", "Regalos", "Navidad"]
+    tags: ["Baby Shower", "Bebés"]
   },
-  {
-    id: "souvenirs",
-    nombre: "Souvenirs Personalizados",
-    categoria: "Souvenirs",
-    descripcion: "Llaveros, imanes y mini figuras decorativas con corte y grabado láser. El regalo perfecto para recordar momentos especiales: matrimonios, cumpleaños, baby showers.",
+    {
+    id: "libro-padrinos",
+    nombre: "✨ Libro Padrinos",
+    categoria: "Bebé",
+    descripcion: "🧚‍♂️✨ ¿Y si les preguntamos de una forma mágica...? Este libro no es solo un regalo… ¡es una gran pregunta! 💛",
+    descripcion2: "Ideal para crear un momento inolvidable 🫶",
     caracteristicas: [
-      "Corte láser de precisión",
-      "Madera natural",
-      "Diseño personalizado",
-      "Ideal para eventos"
+      "🪵 Madera grabada con láser"
     ],
-    precio: "$3.990",
-    imagenes: ["foto1.png", "foto2.png"],
+    precio: "$14.000",
+    imagenes: ["image_1.png", "image_2.png"],
     disponible: true,
     destacado: false,
-    tags: ["Matrimonios", "Baby Shower", "Eventos"]
+    tags: ["Bautizo", "Bebés"]
   },
-  {
-    id: "navidad",
-    nombre: "Adornos Navideños",
-    categoria: "Decoración",
-    descripcion: "Esferas y adornos navideños en madera MDF con grabado personalizado. Lleva los nombres de toda tu familia al árbol de Navidad con estas piezas únicas y eternas.",
+   {
+    id: "placa-bienvenida-animalitos",
+    nombre: "🌿 Placa de Bienvenida",
+    categoria: "Bebé",
+    descripcion: "🐘🦒🐻 <br> En Artesamía creamos recuerdos únicos como esta hermosa placa de nacimiento redonda personalizada ✨",
+    descripcion2: "🎁 Perfecta para decorar la habitación del bebé o regalar en su llegada 💛 <br>Incluye:",
     caracteristicas: [
-      "Madera MDF natural",
-      "Grabado con nombre personalizado",
-      "Diseños navideños exclusivos",
-      "Pack familia disponible"
+      "🍼 Nombre en relieve",
+      "📅 Fecha de nacimiento",
+      "⏰ Hora, peso y medida",
+      "🧸 Decoración con animalitos"
     ],
-    precio: "$4.990",
-    imagenes: ["foto1.png", "foto2.png"],
+    precioAntes: "$12.000",
+    precio: "$10.000",
+    imagenes: ["image_1.png"],
     disponible: true,
     destacado: false,
-    tags: ["Navidad", "Familia", "Decoración"]
+    tags: ["Oferta", "Nacimiento", "Bebés", "Regalos"]
   },
-  {
-    id: "regalos-especiales",
-    nombre: "Gift Box Día Especial",
-    categoria: "Regalos",
-    descripcion: "Caja regalo premium con productos artesanales seleccionados: marco grabado, vela aromática y tarjeta personalizada. El regalo perfecto para el Día del Padre, la Madre o el Niño.",
+   {
+    id: "placa-bienvenida-body",
+    nombre: "❤️ Placa de Bienvenida Body",
+    categoria: "Bebé",
+    descripcion: "💛 En Artesamía celebramos cada llegada con amor 💛",
+    descripcion2: "Sorprende a la familia con una placa de nacimiento personalizada como esta 🍼✨",
     caracteristicas: [
-      "Caja de madera grabada",
-      "Vela artesanal incluida",
-      "Marco personalizado",
-      "Tarjeta especial a mano"
+      "🍼 Nombre en relieve",
+      "📅 Fecha de nacimiento",
+      "⏰ Hora, peso y medida",
+      "🧸 Decoración personalizada"
     ],
-    precio: "$24.990",
-    imagenes: ["foto1.png", "foto2.png"],
+    precioAntes: "$12.000",
+    precio: "$10.000",
+    imagenes: ["image_1.png", "image_2.png"],
     disponible: true,
-    destacado: true,
-    tags: ["Día del Padre", "Día de la Madre", "Navidad", "Cumpleaños"]
+    destacado: false,
+    tags: ["Oferta", "Nacimiento", "Bebés", "Regalos"]
+  },
+     {
+    id: "cuadro-conmemorativo",
+    nombre: "📸 Cuadro Conmemorativo",
+    categoria: "Bebé",
+    descripcion: "🍼 Un año de vida, mil historias que contar 💛En Artesamía creamos recuerdos únicos como este hermoso marco en madera personalizado ✨",
+    descripcion2: "🎁 Ideal como regalo de cumpleaños o decoración de habitación infantil<br>Incluye:",
+    caracteristicas: [
+      "📸 Espacio para su foto más especial",
+      "🧡 Nombre y fecha grabados",
+      "🌟 Detalles decorativos llenos de ternura",
+      "💬 Frase personalizada"
+    ],
+    precioAntes: "$12.000",
+    precio: "$10.000",
+    imagenes: ["image_1.png"],
+    disponible: true,
+    destacado: false,
+    tags: ["Oferta", "Bebés", "Regalos"]
   },
 ];
 
 // Categorías para los filtros (en orden)
-const CATEGORIAS = ["Todos", "Decoración", "Velas", "Souvenirs", "Regalos"];
+const CATEGORIAS = ["Todos", "Bebé", "Decoración", "Velas", "Souvenirs", "Regalos"];
 
 // Hacer disponible en el navegador
 if (typeof window !== 'undefined') {

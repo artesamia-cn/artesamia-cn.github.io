@@ -713,6 +713,13 @@ p { color: var(--color-text-muted); line-height: 1.8; }
   color: var(--color-rose-300);
 }
 
+.product-categorias {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 2px;
+}
+
 .product-nombre {
   font-family: var(--font-heading);
   font-size: 1.15rem;
@@ -731,6 +738,16 @@ p { color: var(--color-text-muted); line-height: 1.8; }
   overflow: hidden;
 }
 
+.product-descripcion-2 {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .product-caracteristicas {
   display: flex;
   flex-wrap: wrap;
@@ -741,7 +758,7 @@ p { color: var(--color-text-muted); line-height: 1.8; }
   font-size: 0.72rem;
   font-weight: 700;
   color: var(--color-text-muted);
-  background: var(--color-surface);
+  background: var(--color-white);
   border: 1px solid var(--color-border);
   padding: 4px 10px;
   border-radius: var(--radius-xl);
@@ -750,7 +767,7 @@ p { color: var(--color-text-muted); line-height: 1.8; }
 .product-footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: right;
   padding-top: 12px;
   border-top: 1px solid var(--color-border);
   margin-top: auto;
@@ -761,6 +778,14 @@ p { color: var(--color-text-muted); line-height: 1.8; }
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--color-rose-400);
+}
+
+.product-precio-antes {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: line-through;
+  color: var(--color-rose-200);
 }
 
 .product-tags {
