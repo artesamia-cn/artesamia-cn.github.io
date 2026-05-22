@@ -59,7 +59,7 @@ const SITE_CONFIG = {
   faq: [
     {
       pregunta: "¿Cómo puedo hacer un pedido?",
-      respuesta: "Puedes hacer tu pedido directamente por WhatsApp o enviándonos un mensaje en Instagram. Haz clic en el botón '¡Lo quiero!' de cualquier producto y te contactamos de inmediato.",
+      respuesta: "Puedes hacer tu pedido directamente por WhatsApp o enviándonos un mensaje a nuestro correo. Haz clic en el botón '¡Lo quiero!' de cualquier producto y te contactamos de inmediato.",
     },
     {
       pregunta: "¿Los productos son personalizables?",
@@ -71,21 +71,25 @@ const SITE_CONFIG = {
     },
     {
       pregunta: "¿Hacen envíos a regiones?",
-      respuesta: "Sí, enviamos a todo Chile a través de servicios de courier. El costo de envío se calcula según la comuna de destino y el peso del paquete.",
+      respuesta: "Sí, enviamos a todo Chile a través de servicios de courier. El costo de envío se calcula según la comuna de destino y el tamaño del paquete.",
     },
     {
       pregunta: "¿Qué materiales utilizan?",
-      respuesta: "Trabajamos principalmente con maderas MDF y pino de alta calidad, cortadas y grabadas con láser de precisión. También usamos cuero natural, ecocuero y ceras naturales para nuestras velas artesanales.",
+      respuesta: "Trabajamos principalmente con maderas MDF, DUrolac y eucalipto de alta calidad, cortadas y grabadas con láser de precisión. También usamos cueros natural, ecocuero y ceras (parafina y soja) para nuestras velas artesanales.",
     },
     {
       pregunta: "¿Hacen pedidos corporativos?",
-      respuesta: "¡Por supuesto! Tenemos experiencia en regalos corporativos y pedidos en cantidad. Contáctanos para cotizar y te ofrecemos precios especiales por volumen.",
+      respuesta: "¡Por supuesto que realizamos regalos corporativos y pedidos en cantidad!. Contáctanos para cotizar y te ofrecemos precios especiales por volumen.",
+    },
+        {
+      pregunta: "¿Cuáles son los métodos de pago?",
+      respuesta: "Aceptamos transferencias bancarias y te compartimos los datos en cuanto confirmes tu compra. Recuerda que trabajamos con un pago previo del 50% para agendar tu pedido.",
     },
   ],
 
   // ── Textos Hero ───────────────────────────────────
   hero: {
-    titulo: "Detalles que\ninspiran sonrisas",
+    titulo: "Detalles que\n<em>inspiran sonrisas</em>",
     subtitulo: "Regalos únicos hechos a mano.\nDescubre creaciones artesanales perfectas para regalar o sorprender.",
     ctaTexto: "Ver productos",
     ctaLink: "#productos",

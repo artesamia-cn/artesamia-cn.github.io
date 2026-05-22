@@ -425,7 +425,7 @@ p { color: var(--color-text-muted); line-height: 1.8; }
   margin-bottom: 60px;
 }
 
-.section-header h2 { margin-bottom: 16px; }
+.section-header h2 { margin-bottom: 16px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif }
 .section-header p { font-size: 1.05rem; max-width: 560px; }
 .section-header.center { text-align: center; }
 .section-header.center p { margin: 0 auto; }
@@ -438,7 +438,7 @@ p { color: var(--color-text-muted); line-height: 1.8; }
   align-items: center;
 }
 
-.nosotros-text h2 { margin-bottom: 20px; }
+.nosotros-text h2 { margin-bottom: 20px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;}
 .nosotros-text p { margin-bottom: 32px; font-size: 1.05rem; }
 
 .nosotros-img-wrap {
@@ -554,7 +554,7 @@ p { color: var(--color-text-muted); line-height: 1.8; }
   color: var(--color-rose-300);
   margin-bottom: 8px;
 }
-.valor-card h4 { font-size: 0.95rem; margin-bottom: 4px; }
+.valor-card h4 { font-size: 0.95rem; margin-bottom: 4px; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;}
 .valor-card p { font-size: 0.85rem; line-height: 1.5; }
 
 /* ── Productos ───────────────────────────────────── */
@@ -727,15 +727,9 @@ p { color: var(--color-text-muted); line-height: 1.8; }
   color: var(--color-rose-300);
 }
 
-.product-categorias {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 5px;
-  margin-top: 2px;
-}
-
 .product-nombre {
   font-family: var(--font-heading);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 1.15rem;
   font-weight: 600;
   color: var(--color-text);
@@ -789,6 +783,7 @@ p { color: var(--color-text-muted); line-height: 1.8; }
 
 .product-precio {
   font-family: var(--font-heading);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 1.3rem;
   font-weight: 700;
   color: var(--color-rose-400);
@@ -796,6 +791,7 @@ p { color: var(--color-text-muted); line-height: 1.8; }
 
 .product-precio-antes {
   font-family: var(--font-heading);
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   font-size: 1rem;
   font-weight: 700;
   text-decoration: line-through;
@@ -914,6 +910,7 @@ p { color: var(--color-text-muted); line-height: 1.8; }
 }
 
 .faq-contact-box h3 {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   margin-bottom: 10px;
   font-size: 1.3rem;
 }
@@ -1153,6 +1150,7 @@ p { color: var(--color-text-muted); line-height: 1.8; }
 .footer-social-btn:hover { background: var(--color-rose-300); border-color: var(--color-rose-300); color: white; }
 
 .footer-col h4 {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: rgba(255,255,255,0.9);
   font-size: 0.85rem;
   font-weight: 700;
