@@ -40,7 +40,7 @@ const SITE_CONFIG = {
       { icono: "✍", titulo: "Hecho a Mano", descripcion: "Cada pieza es creada con dedicación y amor artesanal." },
       { icono: "✏️", titulo: "Personalizable", descripcion: "Adaptamos cada diseño a tu historia y estilo único." },
       { icono: "⭐", titulo: "Calidad Premium", descripcion: "Materiales de primera: maderas nobles, velas naturales." },
-      { icono: "🚚", titulo: "Envíos a Chile", descripcion: "Llevamos tu regalo a cualquier rincón del país." },
+      { icono: "🚚", titulo: "Envíos a todo Chile", descripcion: "Llevamos tu regalo a cualquier rincón del país." },
     ],
   },
 

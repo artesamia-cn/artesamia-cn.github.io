@@ -15,7 +15,7 @@
   <meta name="twitter:title" content="Artesamía | Decoración Exclusiva Hecha a Mano en Chile" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" href="assets/logos/favicon-32x32.png" />
 
   <!-- CSS -->
   <link rel="stylesheet" href="css/styles.css" />
@@ -33,9 +33,11 @@
       <!-- Logo -->
       <a href="#top" class="nav-logo" id="nav-logo">
         <span class="nav-logo-icon">
-          <img src="assets/images/logo_birds.png" alt="Artesamía" loading="lazy" />
+          <img src="assets/logos/logo_birds.png" alt="Artesamía" loading="lazy" />
         </span>
-        <span>Artesamía</span>
+        <span class="nav-logo-name">
+          <img src="assets/logos/logo_nombre-p-500.png"  loading="lazy"  />
+        </span>
       </a>
 
       <!-- Desktop links -->
@@ -43,7 +45,7 @@
         <a href="#nosotros" class="nav-link">Nosotros</a>
         <a href="#productos" class="nav-link">Productos</a>
         <a href="#faq" class="nav-link">FAQ</a>
-        <a href="#faq" class="nav-link nav-cta">Contáctanos</a>
+        <a href="#contacto" class="nav-link nav-cta">Contáctanos</a>
       </div>
 
       <!-- Hamburger -->
@@ -104,8 +106,8 @@
         <!-- Floating badges -->
         <div class="hero-badges" aria-hidden="true">
           <div class="hero-badge">
-            <div class="hero-badge-icon">🪵</div>
-            <div class="hero-badge-text">Madera Grabada</div>
+            <div class="hero-badge-icon">🪵⚡</div>
+            <div class="hero-badge-text">Diseños en Madera <br>Corte y Grabado Laser</div>
           </div>
           <div class="hero-badge">
             <div class="hero-badge-icon">🕯️</div>
@@ -210,7 +212,7 @@
           </div>
 
           <!-- Contact box -->
-          <div class="faq-contact-box fade-up" style="transition-delay:0.2s">
+          <div id="contacto" class="faq-contact-box fade-up" style="transition-delay:0.2s">
             <div class="icon-big" aria-hidden="true">💬</div>
             <h3>¿No encontraste tu respuesta?</h3>
             <p>Escríbenos directamente y te respondemos a la brevedad.</p>
@@ -384,10 +386,12 @@
         <!-- Brand -->
         <div class="footer-brand">
           <a href="#top" class="nav-logo-brand" aria-label="Inicio">
-            <span class="nav-logo-icon-brand">
-              <img src="assets/images/logo_birds.png" alt="Artesamía" loading="lazy" />
+            <span class="nav-logo-icon">
+              <img src="assets/logos/logo_birds.png" alt="Artesamía" loading="lazy" />
             </span>
-            <span>Artesamía</span>
+            <span class="nav-logo-name">
+              <img src="assets/logos/logo_nombre-p-500.png"  loading="lazy"  />
+            </span>
           </a>
           <p>Piezas únicas hechas a mano que combinan la calidez artesanal con diseños exclusivos y personalizados.</p>
 
@@ -427,10 +431,8 @@
         <div class="footer-col">
           <h4>Categorías</h4>
           <nav class="footer-links">
-            <a href="#productos">Decoración</a>
-            <a href="#productos">Velas Artesanales</a>
-            <a href="#productos">Souvenirs</a>
-            <a href="#productos">Regalos Especiales</a>
+            <a href="#categorias-tabs">Días Especiales</a>
+            <a href="#categorias-tabs">Bebé</a>
             <a href="#contacto">Pedidos Corporativos</a>
           </nav>
         </div>
