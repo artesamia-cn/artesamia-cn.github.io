@@ -149,10 +149,26 @@ function initProductos() {
   });
 
   // Render products
+  function getCategoriasProducto(p) {
+    if (Array.isArray(p.categorias) && p.categorias.length > 0) {
+      return [...new Set(p.categorias.filter(Boolean))];
+    }
+
+    if (typeof p.categoria === 'string' && p.categoria.trim()) {
+      return [p.categoria.trim()];
+    }
+
+    return [];
+  }
+
+  function productoTieneCategoria(p, categoria) {
+    return getCategoriasProducto(p).includes(categoria);
+  }
+
   function renderProductos() {
     const filtered = categoriaActiva === 'Todos'
       ? products
-      : products.filter(p => p.categoria === categoriaActiva);
+      : products.filter(p => productoTieneCategoria(p, categoriaActiva));
 
     if (filtered.length === 0) {
       gridContainer.innerHTML = '<p class="products-empty">No hay productos en esta categoría aún.</p>';
@@ -194,6 +210,10 @@ function initProductos() {
       ? p.tags.map(t => `<span class="product-tag">${t}</span>`).join('')
       : '';
 
+    const categoriasHtml = getCategoriasProducto(p)
+      .map(cat => `<span class="product-tag">${cat}</span>`)
+      .join('');
+
     const caractsHtml = p.caracteristicas
       .map(c => `<span class="caract-chip">${c}</span>`)
       .join('');
@@ -215,7 +235,7 @@ function initProductos() {
           ${p.imagenes.length > 1 ? `<div class="carousel-dots" id="dots-${p.id}">${dotsHtml}</div>` : ''}
         </div>
         <div class="product-body">
-          <span class="product-categoria">${p.categoria}</span>
+          ${categoriasHtml ? `<div class="product-tags">${categoriasHtml}</div>` : ''}
           <h3 class="product-nombre">${p.nombre}</h3>
           <p class="product-descripcion">${p.descripcion}</p>
           <p class="product-descripcion-2">${p.descripcion2}</p>
