@@ -441,6 +441,12 @@ function initCart() {
       navCartTipMobile.textContent = totalItems === 0 ? 'Tu carro está vacío' : `Total: ${formattedTotal}`;
     }
 
+    if (cartOpenMobile) {
+      const isEmpty = totalItems === 0;
+      cartOpenMobile.classList.toggle('is-hidden', isEmpty);
+      cartOpenMobile.setAttribute('aria-hidden', String(isEmpty));
+    }
+
     if (cart.length === 0) {
       cartEmpty.hidden = false;
       cartItems.innerHTML = '';
