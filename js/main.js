@@ -126,10 +126,12 @@ function initProductos() {
 
   const tabsContainer = document.getElementById('categorias-tabs');
   const gridContainer = document.getElementById('productos-grid');
+  const sortSelect = document.getElementById('catalogo-sort');
 
   if (!tabsContainer || !gridContainer) return;
 
   let categoriaActiva = 'Todos';
+  let ordenActual = sortSelect?.value || 'destacados';
   const carouselState = {}; // { productId: currentIndex }
 
   // Render tabs
@@ -147,6 +149,11 @@ function initProductos() {
       categoriaActiva = btn.dataset.cat;
       renderProductos();
     });
+  });
+
+  sortSelect?.addEventListener('change', (event) => {
+    ordenActual = event.target.value;
+    renderProductos();
   });
 
   // Render products
@@ -177,6 +184,20 @@ function initProductos() {
     return Number(normalized) || 0;
   }
 
+  function getProductsOrdenados(lista) {
+    const orden = lista.slice();
+
+    if (ordenActual === 'precio-asc') {
+      return orden.sort((a, b) => getPriceValue(a) - getPriceValue(b) || products.indexOf(a) - products.indexOf(b));
+    }
+
+    if (ordenActual === 'precio-desc') {
+      return orden.sort((a, b) => getPriceValue(b) - getPriceValue(a) || products.indexOf(a) - products.indexOf(b));
+    }
+
+    return orden.sort((a, b) => Number(Boolean(b.destacado)) - Number(Boolean(a.destacado)) || products.indexOf(a) - products.indexOf(b));
+  }
+
   function renderProductos() {
     const filtered = categoriaActiva === 'Todos'
       ? products
@@ -187,10 +208,12 @@ function initProductos() {
       return;
     }
 
-    gridContainer.innerHTML = filtered.map(p => buildProductCard(p)).join('');
+    const orderedProducts = getProductsOrdenados(filtered);
+
+    gridContainer.innerHTML = orderedProducts.map(p => buildProductCard(p)).join('');
 
     // Init carousels after render
-    filtered.forEach(p => {
+    orderedProducts.forEach(p => {
       carouselState[p.id] = 0;
       initCarousel(p);
     });
@@ -473,7 +496,7 @@ function initCart() {
           <button type="button" class="cart-qty-btn" data-action="increase" data-id="${item.id}" aria-label="Aumentar cantidad">+</button>
         </div>
         <div class="cart-item-subtotal">${formatCurrency(item.price * item.quantity)}</div>
-        <button type="button" class="cart-remove-btn" data-action="remove" data-id="${item.id}" aria-label="Quitar del carro">✕</button>
+        <button type="button" class="cart-remove-btn" data-action="remove" data-id="${item.id}" aria-label="Quitar del carro">❌</button>
       </div>
     `).join('');
   }

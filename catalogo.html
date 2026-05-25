@@ -82,8 +82,19 @@
             <p>Filtra por categoría para encontrar el regalo o recuerdo perfecto para cada ocasión.</p>
         </div>
 
-        <div class="categorias-tabs" id="categorias-tabs" role="tablist" aria-label="Filtrar por categoría">
-          <!-- Populated by JS -->
+        <div class="catalogo-toolbar">
+          <div class="categorias-tabs" id="categorias-tabs" role="tablist" aria-label="Filtrar por categoría">
+            <!-- Populated by JS -->
+          </div>
+
+          <label class="catalogo-sort" for="catalogo-sort">
+            <span>Ordenar por</span>
+            <select id="catalogo-sort" aria-label="Ordenar productos">
+              <option value="destacados">Destacados primero</option>
+              <option value="precio-asc">Precio: menor a mayor</option>
+              <option value="precio-desc">Precio: mayor a menor</option>
+            </select>
+          </label>
         </div>
 
         <div class="cart-backdrop" id="cart-backdrop" hidden></div>
@@ -103,8 +114,11 @@
 
           <div id="cart-footer" class="cart-footer" hidden>
             <div class="cart-footer-row">
-              <span>*Total por confirmar</span>
+              <span>Total por confirmar</span>
               <strong id="cart-subtotal">$0</strong>
+            </div>
+            <div class="cart-footer-row-envio">
+              <span>*No incluye costos de envío</span>
             </div>
             <a id="cart-whatsapp" class="btn btn-whatsapp" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
           </div>
