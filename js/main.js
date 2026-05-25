@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHero();
   initNosotros();
   initProductos();
+  initCart();
   initFAQ();
   initContacto();
   initScrollAnimations();
@@ -165,6 +166,17 @@ function initProductos() {
     return getCategoriasProducto(p).includes(categoria);
   }
 
+  function getPriceValue(product) {
+    const priceText = String(product?.precio || '');
+    const digits = priceText.match(/[\d.]+/g);
+    if (!digits) {
+      return 0;
+    }
+
+    const normalized = digits.join('').replace(/\./g, '');
+    return Number(normalized) || 0;
+  }
+
   function renderProductos() {
     const filtered = categoriaActiva === 'Todos'
       ? products
@@ -223,6 +235,7 @@ function initProductos() {
     const waUrl = cfg
       ? `https://wa.me/${cfg.contacto.whatsapp.numero}?text=${encodeURIComponent(waMsg)}`
       : '#';
+    const productPrice = getPriceValue(p);
 
     return `
       <article class="product-card fade-up" id="card-${p.id}">
@@ -244,6 +257,11 @@ function initProductos() {
           <div class="product-footer">
             ${p.precioAntes ? `<div class="product-precio-antes">${p.precioAntes}</div>` : ''}
             <span class="product-precio">&nbsp;${p.precio}</span>
+          </div>
+          <div class="product-actions">
+            <button type="button" class="btn btn-outline cart-add-btn" data-product-id="${p.id}" data-product-name="${p.nombre}" data-product-price="${productPrice}" data-product-image="${p.imagenes[0]}">
+              🛒 Agregar al carro
+            </button>
           </div>
           <a href="${waUrl}" target="_blank" rel="noopener" class="btn btn-whatsapp">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -306,6 +324,245 @@ function initProductos() {
 
   // Initial render
   renderProductos();
+}
+
+/* ══════════════════════════════════════════════════
+   CARRITO — Estático con almacenamiento local
+   ══════════════════════════════════════════════════ */
+function initCart() {
+  const cartPanel = document.getElementById('cart-panel');
+  const cartBackdrop = document.getElementById('cart-backdrop');
+  const cartItems = document.getElementById('cart-items');
+  const cartEmpty = document.getElementById('cart-empty');
+  const cartFooter = document.getElementById('cart-footer');
+  const cartCount = document.getElementById('cart-count');
+  const cartTotal = document.getElementById('cart-total');
+  const cartSubtotal = document.getElementById('cart-subtotal');
+  const cartWhatsapp = document.getElementById('cart-whatsapp');
+  const cartClear = document.getElementById('cart-clear');
+  const cartClose = document.getElementById('cart-close');
+  const cartOpen = document.getElementById('cart-open');
+  const cartOpenMobile = document.getElementById('cart-open-mobile');
+  const navCartBadge = document.getElementById('nav-cart-badge');
+  const navCartTip = document.getElementById('nav-cart-tip');
+  const navCartBadgeMobile = document.getElementById('nav-cart-badge-mobile');
+  const navCartTipMobile = document.getElementById('nav-cart-tip-mobile');
+  const productsGrid = document.getElementById('productos-grid');
+
+  if (!cartPanel || !cartBackdrop || !cartItems || !cartEmpty || !cartFooter || !cartSubtotal || !cartWhatsapp || !cartClear || !cartClose || !cartOpen || !navCartBadge || !navCartTip) {
+    return;
+  }
+
+  const STORAGE_KEY = 'artesamia-cart';
+
+  function openCart() {
+    cartPanel.hidden = false;
+    cartBackdrop.hidden = false;
+    document.body.classList.add('cart-open');
+  }
+
+  function closeCart() {
+    cartPanel.hidden = true;
+    cartBackdrop.hidden = true;
+    document.body.classList.remove('cart-open');
+  }
+
+  function getCart() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  function saveCart(cart) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+  }
+
+  function formatCurrency(value) {
+    return new Intl.NumberFormat('es-CL', { style: 'currency', currency: 'CLP' }).format(value);
+  }
+
+  function getCartTotal(cart) {
+    return cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+  }
+
+  function getTotalItems(cart) {
+    return cart.reduce((count, item) => count + item.quantity, 0);
+  }
+
+  function getMessage(cart) {
+    const cfg = window.SITE_CONFIG;
+    const numero = cfg?.contacto?.whatsapp?.numero || '';
+    const lines = cart.map(item => `• ${item.name} x${item.quantity} = ${formatCurrency(item.price * item.quantity)}`);
+    const total = formatCurrency(getCartTotal(cart));
+
+    const text = `¡Hola Artesamía! Quiero solicitar este pedido:%0A${lines.join('%0A') }%0A%0ATotal estimado: ${total}`;
+
+    if (!numero) {
+      return '#';
+    }
+
+    return `https://wa.me/${numero}?text=${text}`;
+  }
+
+  function renderCart() {
+    const cart = getCart();
+    const totalItems = getTotalItems(cart);
+    const total = getCartTotal(cart);
+    const formattedTotal = formatCurrency(total);
+
+    if (cartCount) {
+      cartCount.textContent = String(totalItems);
+    }
+
+    if (cartTotal) {
+      cartTotal.textContent = formattedTotal;
+    }
+
+    cartSubtotal.textContent = formattedTotal;
+    navCartBadge.textContent = String(totalItems);
+    navCartTip.textContent = totalItems === 0 ? 'Tu carro está vacío' : `Total: ${formattedTotal}`;
+
+    if (navCartBadgeMobile) {
+      navCartBadgeMobile.textContent = String(totalItems);
+    }
+
+    if (navCartTipMobile) {
+      navCartTipMobile.textContent = totalItems === 0 ? 'Tu carro está vacío' : `Total: ${formattedTotal}`;
+    }
+
+    if (cart.length === 0) {
+      cartEmpty.hidden = false;
+      cartItems.innerHTML = '';
+      cartFooter.hidden = true;
+      return;
+    }
+
+    cartEmpty.hidden = true;
+    cartFooter.hidden = false;
+    cartWhatsapp.href = getMessage(cart);
+
+    cartItems.innerHTML = cart.map(item => `
+      <div class="cart-item" data-cart-id="${item.id}">
+        <div class="cart-item-image">
+          <img src="products/${item.id}/${item.image}" alt="${item.name}" loading="lazy" onerror="this.src='assets/images/placeholder.png'">
+        </div>
+        <div class="cart-item-info">
+          <p class="cart-item-name">${item.name}</p>
+          <p class="cart-item-price">${formatCurrency(item.price)}</p>
+        </div>
+        <div class="cart-item-actions">
+          <button type="button" class="cart-qty-btn" data-action="decrease" data-id="${item.id}" aria-label="Disminuir cantidad">−</button>
+          <span>${item.quantity}</span>
+          <button type="button" class="cart-qty-btn" data-action="increase" data-id="${item.id}" aria-label="Aumentar cantidad">+</button>
+        </div>
+        <div class="cart-item-subtotal">${formatCurrency(item.price * item.quantity)}</div>
+        <button type="button" class="cart-remove-btn" data-action="remove" data-id="${item.id}" aria-label="Quitar del carro">✕</button>
+      </div>
+    `).join('');
+  }
+
+  function addItem(product) {
+    const cart = getCart();
+    const existing = cart.find(item => item.id === product.id);
+
+    if (existing) {
+      existing.quantity += 1;
+    } else {
+      cart.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.image,
+        quantity: 1
+      });
+    }
+
+    saveCart(cart);
+    renderCart();
+  }
+
+  function updateItem(id, delta) {
+    const cart = getCart();
+    const existing = cart.find(item => item.id === id);
+
+    if (!existing) {
+      return;
+    }
+
+    existing.quantity += delta;
+
+    if (existing.quantity <= 0) {
+      const filtered = cart.filter(item => item.id !== id);
+      saveCart(filtered);
+      renderCart();
+      return;
+    }
+
+    saveCart(cart);
+    renderCart();
+  }
+
+  function removeItem(id) {
+    saveCart(getCart().filter(item => item.id !== id));
+    renderCart();
+  }
+
+  if (productsGrid) {
+    productsGrid.addEventListener('click', (event) => {
+      const button = event.target.closest('.cart-add-btn');
+      if (!button) return;
+
+      addItem({
+        id: button.dataset.productId,
+        name: button.dataset.productName,
+        price: Number(button.dataset.productPrice),
+        image: button.dataset.productImage
+      });
+    });
+  }
+
+  cartItems.addEventListener('click', (event) => {
+    const button = event.target.closest('[data-action]');
+    if (!button) return;
+
+    const action = button.dataset.action;
+    const id = button.dataset.id;
+
+    if (action === 'increase') {
+      updateItem(id, 1);
+    }
+
+    if (action === 'decrease') {
+      updateItem(id, -1);
+    }
+
+    if (action === 'remove') {
+      removeItem(id);
+    }
+  });
+
+  cartClear.addEventListener('click', () => {
+    saveCart([]);
+    renderCart();
+  });
+
+  cartOpen.addEventListener('click', openCart);
+  if (cartOpenMobile) {
+    cartOpenMobile.addEventListener('click', openCart);
+  }
+  cartClose.addEventListener('click', closeCart);
+  cartBackdrop.addEventListener('click', closeCart);
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && !cartPanel.hidden) {
+      closeCart();
+    }
+  });
+
+  renderCart();
 }
 
 /* ══════════════════════════════════════════════════

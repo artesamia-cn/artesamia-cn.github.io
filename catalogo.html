@@ -35,6 +35,11 @@
         <a href="catalogo.html" class="nav-link">Catálogo</a>
         <a href="index.html#faq" class="nav-link">FAQ</a>
         <a href="index.html#contacto" class="nav-link nav-cta">Contáctanos</a>
+        <button type="button" class="nav-cart-btn" id="cart-open" aria-label="Abrir carro">
+          <span class="nav-cart-icon">🛒</span>
+          <span class="nav-cart-badge" id="nav-cart-badge">0</span>
+          <span class="nav-cart-tip" id="nav-cart-tip">Total: $0</span>
+        </button>
       </div>
 
       <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menú" aria-expanded="false">
@@ -77,6 +82,30 @@
 
         <div class="categorias-tabs" id="categorias-tabs" role="tablist" aria-label="Filtrar por categoría">
           <!-- Populated by JS -->
+        </div>
+
+        <div class="cart-backdrop" id="cart-backdrop" hidden></div>
+
+        <div class="cart-panel" id="cart-panel" hidden role="dialog" aria-modal="true" aria-labelledby="cart-modal-title">
+          <div class="cart-panel-header">
+            <h3 id="cart-modal-title">Carro</h3>
+            <div class="cart-panel-actions">
+              <button type="button" class="cart-panel-close" id="cart-clear">Vaciar carro</button>
+              <button type="button" class="cart-panel-close" id="cart-close">Cerrar</button>
+            </div>
+          </div>
+
+          <div id="cart-empty" class="cart-empty">Aún no agregas productos. Elige uno para comenzar tu pedido.</div>
+
+          <div id="cart-items" class="cart-items" aria-live="polite"></div>
+
+          <div id="cart-footer" class="cart-footer" hidden>
+            <div class="cart-footer-row">
+              <span>*Total por confirmar</span>
+              <strong id="cart-subtotal">$0</strong>
+            </div>
+            <a id="cart-whatsapp" class="btn btn-whatsapp" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
+          </div>
         </div>
 
         <div class="productos-grid" id="productos-grid" role="list" aria-label="Productos disponibles">
