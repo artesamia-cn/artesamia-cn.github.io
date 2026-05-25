@@ -203,6 +203,25 @@ const PRODUCTS_CONFIG = [
     destacado: true,
     tags: ["Día del Padre", "Regalos"]
   },
+    {
+    id: "pack-dia-del-padre-1",
+    nombre: "🍻 Set Cervecero Premium",
+    categoria: "Día del Padre",
+    descripcion: "✨ El regalo perfecto para celebrar al rey de la casa 👨‍👦",
+    descripcion2: "Es el obsequio ideal para sus momentos de relajo, combinando diseño rústico, utilidad y todo el cariño que él se merece.<br><b>Incluye:</b>",
+    caracteristicas: [
+      "⚡ Grabado a láser con acabados de calidad.",
+      "🌟 Espacio perfecto para 6 botellas de su cerveza favorita (no incluidas).",
+      "🪵 Destapador fabricado en madera sólida con herraje metálico resistente.",
+      "🍺 Set de posavasos de madera con grabados detallados.",
+      "💬 Opción de personalizar con nombres, frases o dedicatorias especiales."
+    ],
+    precio: "$20.000",
+    imagenes: ["image_1.png"],
+    disponible: true,
+    destacado: true,
+    tags: ["Día del Padre", "Regalos"]
+  },
   {
     id: "invitaciones-1",
     nombre: "💌 Invitaciones de Madera Premium",
