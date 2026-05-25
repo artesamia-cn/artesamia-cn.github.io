@@ -56,12 +56,18 @@
         </button>
       </div>
 
-      <!-- Hamburger -->
-      <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menú" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <div class="nav-mobile-actions">
+        <button type="button" class="nav-cart-btn nav-cart-btn-mobile" id="cart-open-mobile" aria-label="Abrir carro">
+          <span class="nav-cart-icon">🛒</span>
+          <span class="nav-cart-badge" id="nav-cart-badge-mobile">0</span>
+          <span class="nav-cart-tip" id="nav-cart-tip-mobile">Total: $0</span>
+        </button>
+        <button class="nav-hamburger" id="nav-hamburger" aria-label="Abrir menú" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
@@ -72,11 +78,6 @@
     <a href="catalogo.html" class="nav-link">Catálogo</a>
     <a href="#faq" class="nav-link">FAQ</a>
     <a href="#contacto" class="nav-link">Contáctanos</a>
-    <button type="button" class="nav-cart-btn" id="cart-open-mobile" aria-label="Abrir carro">
-      <span class="nav-cart-icon">🛒</span>
-      <span class="nav-cart-badge" id="nav-cart-badge-mobile">0</span>
-      <span class="nav-cart-tip" id="nav-cart-tip-mobile">Total: $0</span>
-    </button>
   </div>
 
   <div class="cart-backdrop" id="cart-backdrop" hidden></div>

@@ -355,16 +355,24 @@ function initCart() {
 
   const STORAGE_KEY = 'artesamia-cart';
 
+  function setMobileCartTipVisible(visible) {
+    if (cartOpenMobile) {
+      cartOpenMobile.classList.toggle('is-tip-open', visible);
+    }
+  }
+
   function openCart() {
     cartPanel.hidden = false;
     cartBackdrop.hidden = false;
     document.body.classList.add('cart-open');
+    setMobileCartTipVisible(true);
   }
 
   function closeCart() {
     cartPanel.hidden = true;
     cartBackdrop.hidden = true;
     document.body.classList.remove('cart-open');
+    setMobileCartTipVisible(false);
   }
 
   function getCart() {
