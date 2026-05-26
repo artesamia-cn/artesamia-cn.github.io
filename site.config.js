@@ -83,7 +83,7 @@ const SITE_CONFIG = {
     },
         {
       pregunta: "¿Cuáles son los métodos de pago?",
-      respuesta: "Aceptamos transferencias bancarias y te compartimos los datos en cuanto confirmes tu compra. Recuerda que trabajamos con un pago previo del 50% para agendar tu pedido.",
+      respuesta: "Aceptamos pago con tu tarjeta de crédito o débito mediante Link de Pago WebPay y transferencia electrónica. Una vez confirmado el pedido, te entregamos la información para que realices tu pago.",
     },
   ],
 
