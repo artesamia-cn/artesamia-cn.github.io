@@ -55,7 +55,7 @@ const PRODUCTS_CONFIG = [
     precio: "$12.000",
     imagenes: ["image_1.png"],
     disponible: true,
-    destacado: false,
+    destacado: true,
     tags: ["Día del Padre", "Regalos"]
   },
   {
@@ -73,7 +73,7 @@ const PRODUCTS_CONFIG = [
     precio: "$12.000",
     imagenes: ["image_1.png"],
     disponible: true,
-    destacado: false,
+    destacado: true,
     tags: ["Día del Padre", "Regalos"]
   },
   {
@@ -109,7 +109,7 @@ const PRODUCTS_CONFIG = [
     precio: "$12.000",
     imagenes: ["image_1.png", "image_2.png"],
     disponible: true,
-    destacado: false,
+    destacado: true,
     tags: ["Día del Padre", "Regalos"]
   },
     {
@@ -122,7 +122,7 @@ const PRODUCTS_CONFIG = [
       "⚡ Grabado a láser con acabados de calidad.",
       "🌟 Espacio perfecto para 6 botellas de su cerveza favorita (no incluidas).",
       "🪵 Destapador fabricado en madera sólida con herraje metálico resistente.",
-      "🍺 Set de posavasos (6)de madera con grabados detallados.",
+      "🍺 Set de posavasos (6) de madera con grabados detallados.",
       "💬 Opción de personalizar con nombres, frases o dedicatorias especiales."
     ],
     precio: "$20.000",
@@ -140,12 +140,29 @@ const PRODUCTS_CONFIG = [
     caracteristicas: [
       "⚡ Grabado a láser con acabados de calidad.",
       "🌟 Estructura resistente con la capacidad perfecta para una botella de vino de 750 cc (no incluida)",
-      "🪵 Destapador fabricado en madera sólida con herraje metálico resistente.",
-      "🍺 Set de posavasos (4) de madera con grabados detallados.",
+      "🍷 Set de posavasos (4) de madera con grabados detallados.",
       "💬 Opción de personalizar con nombres, frases o dedicatorias especiales."
     ],
     precio: "$14.000",
     imagenes: ["image_1.png"],
+    disponible: true,
+    destacado: true,
+    tags: ["Día del Padre", "Regalos"]
+  },
+  {
+    id: "tabla-cocina",
+    nombre: "🥩🔪 Tabla Asado / Gourmet Personalizada",
+    categoria: "Día del Padre",
+    descripcion: "🔥 El ingrediente secreto para los mejores momentos con papá 👨‍🍳",
+    descripcion2: "Es el regalo ideal para sus asados de domingo o para lucirse en la cocina, combinando un diseño rústico, gran utilidad y un valor sentimental único.<br><b>Incluye:</b>",
+    caracteristicas: [
+      "⚡ Grabado a láser con acabados de calidad.",
+      "🪵 Fabricada en madera resistente, con vetas naturales, canal de goteo para jugos y mango ergonómico",
+      "🌟 Un producto práctico, duradero y con un acabado prolijo que seguro querrá estrenar de inmediato.",
+      "💬 Espacio para personalización extra con su nombre, una fecha o tu propia dedicatoria."
+    ],
+    precio: "$12.000",
+    imagenes: ["image_1.png", "image_2.png"],
     disponible: true,
     destacado: true,
     tags: ["Día del Padre", "Regalos"]
