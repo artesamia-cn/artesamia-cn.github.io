@@ -19,6 +19,15 @@
 
 <body>
 
+    <!-- ══════════════════════════════════════════
+       ANNOUNCEMENT BANNER
+       ══════════════════════════════════════════ -->
+  <div class="announcement-banner" id="announcement-banner" role="status" aria-live="polite" aria-atomic="true">
+    <div class="announcement-content">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+  
   <nav class="navbar" id="navbar" role="navigation" aria-label="Menú principal">
     <div class="container">
       <a href="../index.html#top" class="nav-logo" id="nav-logo">
@@ -122,14 +131,28 @@
 
           <div id="cart-footer" class="cart-footer" hidden>
             <div class="cart-footer-row">
-              <span>Total por confirmar</span>
-              <strong id="cart-subtotal">$0</strong>
+                <span>Subtotal</span>
+                <strong id="cart-subtotal">$0</strong>
             </div>
-            <div class="cart-footer-row-envio">
-              <span>*No incluye costos de envío</span>
+            <div class="cart-footer-row">
+                <span>Descuento</span>
+                <strong id="cart-descuento">$0</strong>
+            </div>
+            <div class="cart-footer-row">
+                <span>Total por confirmar</span>
+                <strong id="cart-total">$0</strong>
+            </div>
+            <div id="cart-discount" class="cart-footer-row-descuento" hidden>
+              <span></span>
+            </div>
+            <div id="cart-offer" class="cart-footer-row-oferta" hidden>
+              <span>Oferta Cyber - Envío Gratis (sólo RM)</span>
+            </div>
+            <div id="cart-envio" class="cart-footer-row-envio">
+                <span>*No incluye costos de envío</span>
             </div>
             <a id="cart-whatsapp" class="btn btn-whatsapp" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
-          </div>
+            </div>
         </div>
     </section>
 
