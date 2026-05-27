@@ -113,7 +113,7 @@ function initProductos() {
         </div>
         <div class="valor-card-body">
           <div class="valor-card-image">
-            <img src="${v.imagen}" alt="${v.titulo}" loading="lazy" onerror="this.src='assets/images/placeholder.png'">
+            <img src="${v.imagen}" alt="${v.titulo}" loading="lazy" onerror="this.src='../assets/images/placeholder.png'">
           </div>
           <p>${v.descripcion}</p>
         </div>
@@ -226,7 +226,7 @@ function initProductos() {
   function buildProductCard(p) {
     const imagesHtml = p.imagenes.map((img, i) => `
       <div class="carousel-slide">
-        <img src="../products/${p.id}/${img}" alt="${p.nombre} - foto ${i+1}" loading="lazy" onerror="this.src='assets/images/placeholder.png'">
+        <img src="../products/${p.id}/${img}" alt="${p.nombre} - foto ${i+1}" loading="lazy" onerror="this.src='../assets/images/placeholder.png'">
       </div>
     `).join('');
 
@@ -487,7 +487,7 @@ function initCart() {
     cartItems.innerHTML = cart.map(item => `
       <div class="cart-item" data-cart-id="${item.id}">
         <div class="cart-item-image">
-          <img src="../products/${item.id}/${item.image}" alt="${item.name}" loading="lazy" onerror="this.src='assets/images/placeholder.png'">
+          <img src="../products/${item.id}/${item.image}" alt="${item.name}" loading="lazy" onerror="this.src='../assets/images/placeholder.png'">
         </div>
         <div class="cart-item-info">
           <p class="cart-item-name">${item.name}</p>
