@@ -6,6 +6,8 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
+  initCyberBanner();
+  initAnnouncementBanner();
   initNavbar();
   initHero();
   initHomePreviews();
@@ -18,8 +20,87 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollTop();
 });
 
+/* ══════════════════════════════════════════════════
+   CYBER BANNER MODAL — Auto-open, session storage
+   ══════════════════════════════════════════════════ */
+function initCyberBanner() {
+  const backdrop = document.getElementById('cyber-banner-backdrop');
+  const closeBtn = document.getElementById('cyber-banner-close');
+  const STORAGE_KEY = 'cyber-banner-closed';
+
+  if (!backdrop) return;
+
+  // Check if already closed in this session
+  const isClosed = sessionStorage.getItem(STORAGE_KEY);
+
+  function closeBanner() {
+    backdrop.hidden = true;
+    document.body.style.overflow = 'auto';
+    sessionStorage.setItem(STORAGE_KEY, 'true');
+  }
+
+  // Open automatically on first load (if not closed before)
+  if (!isClosed) {
+    backdrop.hidden = false;
+    document.body.style.overflow = 'hidden';
+  }
+
+  // Close button listener
+  closeBtn?.addEventListener('click', closeBanner);
+
+  // Close when clicking backdrop
+  backdrop?.addEventListener('click', (e) => {
+    if (e.target === backdrop) {
+      closeBanner();
+    }
+  });
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !backdrop.hidden) {
+      closeBanner();
+    }
+  });
+}
+
  
   
+/* ══════════════════════════════════════════════════
+   ANNOUNCEMENT BANNER
+   ══════════════════════════════════════════════════ */
+function initAnnouncementBanner() {
+  const cfg = window.SITE_CONFIG;
+  const bannerEl = document.getElementById('announcement-banner');
+  const contentEl = bannerEl?.querySelector('.announcement-content');
+
+  if (!cfg?.anuncio?.activo || !contentEl) {
+    if (bannerEl) bannerEl.hidden = true;
+    return;
+  }
+
+    var imagePath = '../assets';
+  if (window.location.pathname.includes("index")) {
+    imagePath = 'assets';
+  }
+
+  const mensaje_1 = cfg.anuncio.mensaje_1 || '';
+  const mensaje_2 = cfg.anuncio.mensaje_2 || '';
+  const mensaje_3 = cfg.anuncio.mensaje_3 || '';
+  
+  // Create two copies of the message for seamless loop
+  contentEl.innerHTML = '<div class="announcement__slide"><div class="body-size-2"><p style="color:white;">・</p></div></div>'
+                       +'<div class="announcement__slide"><div class="body-size-2"><p style="color:white;">'+mensaje_1+'</p></div></div>'
+                       +'<div class="announcement__slide"><div class="body-size-2"><p style="color:white;">・</p></div></div>'
+                       +'<img src="'+imagePath+'/logos/cyber_logo.png" alt="Cyber" width="5%" height="5%"></img>'
+                       +'<div class="announcement__slide"><div class="body-size-2"><p style="color:white;">・</p></div></div>'
+                       +'<div class="announcement__slide"><div class="body-size-2"><p style="color:white;">'+mensaje_2+'</p></div></div>'
+                       +'<div class="announcement__slide"><div class="body-size-2"><p style="color:white;">・</p></div></div>'
+                       +'<img src="'+imagePath+'/logos/cyber_logo.png" alt="Cyber" width="5%" height="5%"></img>'
+                       +'<div class="announcement__slide"><div class="body-size-2"><p style="color:white;">・</p></div></div>'
+                       +'<div class="announcement__slide"><div class="body-size-2"><p style="color:white;">'+mensaje_3+'</p></div></div>'
+                      +'<div class="announcement__slide"><div class="body-size-2"><p style="color:white;">・</p></div></div>';
+}
+
 /* ══════════════════════════════════════════════════
    NAVBAR
    ══════════════════════════════════════════════════ */
@@ -455,6 +536,11 @@ function initCart() {
   const cartTotal = document.getElementById('cart-total');
   const cartSubtotal = document.getElementById('cart-subtotal');
   const cartWhatsapp = document.getElementById('cart-whatsapp');
+  const cartOffer = document.getElementById('cart-offer');
+  const cartDiscount = document.getElementById('cart-discount');
+  const cartEnvio = document.getElementById('cart-envio');
+  const cartDescuento = document.getElementById('cart-descuento');
+  const cartTotalEl = document.getElementById('cart-total');
   const cartClear = document.getElementById('cart-clear');
   const cartClose = document.getElementById('cart-close');
   const cartOpen = document.getElementById('cart-open');
@@ -520,9 +606,32 @@ function initCart() {
     const cfg = window.SITE_CONFIG;
     const numero = cfg?.contacto?.whatsapp?.numero || '';
     const lines = cart.map(item => `• ${item.name} x${item.quantity} = ${formatCurrency(item.price * item.quantity)}`);
-    const total = formatCurrency(getCartTotal(cart));
+    const originalTotal = getCartTotal(cart);
+    const totalItems = getTotalItems(cart);
+    let discountPercent = 0;
+    if (totalItems === 2) discountPercent = 0.2;
+    else if (totalItems == 3) discountPercent = 0.25;
+    else if (totalItems > 3) discountPercent = 0.3;
+    const discounted = Math.round(originalTotal * (1 - discountPercent));
+    const discountAmount = originalTotal - discounted;
+    const formattedOriginal = formatCurrency(originalTotal);
+    const formattedDiscounted = formatCurrency(discounted);
+    const formattedDiscountAmount = formatCurrency(discountAmount);
+    const hasFreeShipping = discounted >= 35000;
 
-    const text = `¡Hola Artesamía! Quiero solicitar este pedido:%0A${lines.join('%0A') }%0A%0ATotal estimado: ${total}`;
+    let text = `¡Hola Artesamía! Quiero solicitar este pedido:%0A${lines.join('%0A') }%0A`;
+    
+    // Add subtotal and discount info if discount applies
+    if (discountPercent > 0) {
+      text += `%0ASubtotal: ${formattedOriginal}%0ADescuento (${Math.round(discountPercent * 100)}%): -${formattedDiscountAmount}%0ATotal: ${formattedDiscounted}`;
+    } else {
+      text += `%0ATotal: ${formattedDiscounted}`;
+    }
+
+    // Add free shipping info if applicable
+    if (hasFreeShipping) {
+      text += `%0A✅ Oferta: Envío Gratis`;
+    }
 
     if (!numero) {
       return '#';
@@ -535,7 +644,15 @@ function initCart() {
     const cart = getCart();
     const totalItems = getTotalItems(cart);
     const total = getCartTotal(cart);
+    let discountPercent = 0;
+    if (totalItems === 2) discountPercent = 0.2;
+    else if (totalItems == 3) discountPercent = 0.25;
+    else if (totalItems > 3) discountPercent = 0.30;
+    const discountedTotal = Math.round(total * (1 - discountPercent));
     const formattedTotal = formatCurrency(total);
+    const formattedDiscounted = formatCurrency(discountedTotal);
+    const discountAmount = total - discountedTotal;
+    const formattedDiscountAmount = "-" + formatCurrency(discountAmount);
 
     if (cartCount) {
       cartCount.textContent = String(totalItems);
@@ -545,9 +662,14 @@ function initCart() {
       cartTotal.textContent = formattedTotal;
     }
 
-    cartSubtotal.textContent = formattedTotal;
+    // Show original subtotal, discount and final total
+    if (cartSubtotal) cartSubtotal.textContent = formattedTotal;
+    if (cartDescuento) {
+      cartDescuento.textContent = formattedDiscountAmount;
+    }
+    if (cartTotalEl) cartTotalEl.textContent = formattedDiscounted;
     navCartBadge.textContent = String(totalItems);
-    navCartTip.textContent = totalItems === 0 ? 'Tu carro está vacío' : `Total: ${formattedTotal}`;
+    navCartTip.textContent = totalItems === 0 ? 'Tu carro está vacío' : `Total: ${formattedDiscounted}`;
 
     if (navCartBadgeMobile) {
       navCartBadgeMobile.textContent = String(totalItems);
@@ -574,6 +696,23 @@ function initCart() {
     cartFooter.hidden = false;
     cartWhatsapp.href = getMessage(cart);
 
+    const hasCyberOffer = discountedTotal >= 35000;
+    if (cartOffer) {
+      cartOffer.hidden = !hasCyberOffer;
+    }
+    if (cartEnvio) {
+      cartEnvio.hidden = hasCyberOffer;
+    }
+    // Discount badge
+    if (cartDiscount) {
+      if (discountPercent > 0) {
+        cartDiscount.querySelector('span').textContent = `Descuento Cyber - ${Math.round(discountPercent * 100)}%`;
+        cartDiscount.hidden = false;
+      } else {
+        cartDiscount.hidden = true;
+      }
+    }
+    
     var productsPath = '../products';
     if (window.location.pathname.includes("index")) {
       productsPath = 'products';
@@ -659,25 +798,27 @@ function initCart() {
     });
   }
 
-  cartItems.addEventListener('click', (event) => {
-    const button = event.target.closest('[data-action]');
-    if (!button) return;
+  if (cartItems) {
+    cartItems.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-action]');
+      if (!button) return;
 
-    const action = button.dataset.action;
-    const id = button.dataset.id;
+      const action = button.dataset.action;
+      const id = button.dataset.id;
 
-    if (action === 'increase') {
-      updateItem(id, 1);
-    }
+      if (action === 'increase') {
+        updateItem(id, 1);
+      }
 
-    if (action === 'decrease') {
-      updateItem(id, -1);
-    }
+      if (action === 'decrease') {
+        updateItem(id, -1);
+      }
 
-    if (action === 'remove') {
-      removeItem(id);
-    }
-  });
+      if (action === 'remove') {
+        removeItem(id);
+      }
+    });
+  }
 
   cartClear.addEventListener('click', () => {
     saveCart([]);

@@ -26,6 +26,33 @@
 
 
 <body>
+<!-- ══════════════════════════════════════════
+       ANNOUNCEMENT BANNER
+       ══════════════════════════════════════════ -->
+  <div class="announcement-banner" id="announcement-banner" role="status" aria-live="polite" aria-atomic="true">
+    <div class="announcement-content">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       CYBER BANNER MODAL
+       ══════════════════════════════════════════ -->
+  <div class="cyber-banner-backdrop" id="cyber-banner-backdrop" role="dialog" aria-modal="true" aria-labelledby="cyber-banner-title" hidden>
+    <div class="cyber-banner-modal">
+      <button type="button" class="cyber-banner-close" id="cyber-banner-close" aria-label="Cerrar">×</button>
+      <div class="cyber-banner-image">
+        <img src="assets/images/banner_cyber.png" alt="Promoción Cyber" loading="lazy" onerror="this.src='assets/images/placeholder.png'">
+      </div>
+      <div class="cyber-banner-actions">
+        <a href="pages/catalogo.html" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+            Ver Catálogo</a>
+      </div>
+    </div>
+  </div>
 
   <!-- ══════════════════════════════════════════
        NAVBAR
@@ -93,10 +120,24 @@
 
     <div id="cart-footer" class="cart-footer" hidden>
       <div class="cart-footer-row">
-        <span>Total por confirmar</span>
+        <span>Subtotal</span>
         <strong id="cart-subtotal">$0</strong>
       </div>
-      <div class="cart-footer-row-envio">
+      <div class="cart-footer-row">
+        <span>Descuento</span>
+        <strong id="cart-descuento">$0</strong>
+      </div>
+      <div class="cart-footer-row">
+        <span>Total por confirmar</span>
+        <strong id="cart-total">$0</strong>
+      </div>
+      <div id="cart-discount" class="cart-footer-row-descuento" hidden>
+        <span></span>
+      </div>
+      <div id="cart-offer" class="cart-footer-row-oferta" hidden>
+        <span>Oferta Cyber - Envío Gratis (sólo RM)</span>
+      </div>
+      <div id="cart-envio" class="cart-footer-row-envio">
         <span>*No incluye costos de envío</span>
       </div>
       <a id="cart-whatsapp" class="btn btn-whatsapp" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
