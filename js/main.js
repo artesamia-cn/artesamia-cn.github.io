@@ -617,7 +617,7 @@ function initCart() {
     const formattedOriginal = formatCurrency(originalTotal);
     const formattedDiscounted = formatCurrency(discounted);
     const formattedDiscountAmount = formatCurrency(discountAmount);
-    const hasFreeShipping = discounted >= 30000;
+    const hasFreeShipping = discounted >= 35000;
 
     let text = `¡Hola Artesamía! Quiero solicitar este pedido:%0A${lines.join('%0A') }%0A`;
     
@@ -696,7 +696,7 @@ function initCart() {
     cartFooter.hidden = false;
     cartWhatsapp.href = getMessage(cart);
 
-    const hasCyberOffer = discountedTotal >= 30000;
+    const hasCyberOffer = discountedTotal >= 35000;
     if (cartOffer) {
       cartOffer.hidden = !hasCyberOffer;
     }
