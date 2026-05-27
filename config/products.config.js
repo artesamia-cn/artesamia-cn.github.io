@@ -213,7 +213,7 @@ const PRODUCTS_CONFIG = [
       "⚡ Grabado a láser con acabados de calidad.",
       "🌟 Espacio perfecto para 6 botellas de su cerveza favorita (no incluidas).",
       "🪵 Destapador fabricado en madera sólida con herraje metálico resistente.",
-      "🍺 Set de posavasos de madera con grabados detallados.",
+      "🍺 Set de posavasos (6)de madera con grabados detallados.",
       "💬 Opción de personalizar con nombres, frases o dedicatorias especiales."
     ],
     precio: "$20.000",
