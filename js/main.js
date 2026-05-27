@@ -8,6 +8,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initNavbar();
   initHero();
+  initHomePreviews();
   initNosotros();
   initProductos();
   initCart();
@@ -353,6 +354,95 @@ function initProductos() {
 }
 
 /* ══════════════════════════════════════════════════
+   HOME PREVIEWS — Muestra hasta 3 productos por categoría
+   ══════════════════════════════════════════════════ */
+function initHomePreviews() {
+  const products = window.PRODUCTS_CONFIG || [];
+  const categorias = window.CATEGORIAS || [];
+  const container = document.getElementById('home-previews-grid');
+  if (!container || !products.length || !categorias.length) return;
+  function getCategoriasProducto(p) {
+    if (Array.isArray(p.categorias) && p.categorias.length > 0) {
+      return [...new Set(p.categorias.filter(Boolean))];
+    }
+    if (typeof p.categoria === 'string' && p.categoria.trim()) {
+      return [p.categoria.trim()];
+    }
+    return [];
+  }
+
+  function getPriceValue(product) {
+    const priceText = String(product?.precio || '');
+    const digits = priceText.match(/[\d.]+/g);
+    if (!digits) return 0;
+    const normalized = digits.join('').replace(/\./g, '');
+    return Number(normalized) || 0;
+  }
+
+  const cats = categorias.filter(c => String(c).toLowerCase() !== 'todos');
+
+  container.innerHTML = cats.map(cat => {
+    const items = products.filter(p => getCategoriasProducto(p).includes(cat));
+    if (!items.length) return '';
+
+    const sorted = items.slice().sort((a, b) => {
+      const fa = a.destacado ? 0 : 1;
+      const fb = b.destacado ? 0 : 1;
+      if (fa !== fb) return fa - fb;
+      return getPriceValue(a) - getPriceValue(b);
+    });
+
+    const slice = sorted.slice(0, 3);
+
+    const cardsHtml = slice.map(p => {
+      const categoriasHtml = getCategoriasProducto(p)
+        .map(cn => `<span class="product-tag">${cn}</span>`)
+        .join('');
+
+      const caractsHtml = Array.isArray(p.caracteristicas)
+        ? p.caracteristicas.map(c => `<span class="caract-chip">${c}</span>`).join('')
+        : '';
+
+      return `
+        <article class="product-card preview" id="preview-${p.id}">
+          <div class="carousel">
+            ${p.destacado ? '<span class="product-badge-dest">⭐ Destacado</span>' : ''}
+            <div class="carousel-track">
+              <div class="carousel-slide">
+                <img src="products/${p.id}/${p.imagenes[0]}" alt="${p.nombre}" loading="lazy" onerror="this.src='assets/images/placeholder.png'">
+              </div>
+            </div>
+          </div>
+          <div class="product-body">
+            ${categoriasHtml ? `<div class="product-tags">${categoriasHtml}</div>` : ''}
+            <h3 class="product-nombre">${p.nombre}</h3>
+            <div  style="text-align: right;">
+            <a href="pages/catalogo.html" class="btn-preview btn-primary-preview">
+              <span>Ver más</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+            </a>
+            <div>
+            <div class="product-footer">
+              ${p.precioAntes ? `<div class="product-precio-antes">${p.precioAntes}</div>` : ''}
+              <span class="product-precio">${p.precio}</span>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    return `
+      <div class="home-preview-category">
+        <h3 class="home-preview-cat">${cat}</h3>
+        <div class="home-preview-cards">${cardsHtml}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+/* ══════════════════════════════════════════════════
    CARRITO — Estático con almacenamiento local
    ══════════════════════════════════════════════════ */
 function initCart() {
@@ -484,10 +574,15 @@ function initCart() {
     cartFooter.hidden = false;
     cartWhatsapp.href = getMessage(cart);
 
+    var productsPath = '../products';
+    if (window.location.pathname.includes("index")) {
+      productsPath = 'products';
+    }
+
     cartItems.innerHTML = cart.map(item => `
       <div class="cart-item" data-cart-id="${item.id}">
         <div class="cart-item-image">
-          <img src="../products/${item.id}/${item.image}" alt="${item.name}" loading="lazy" onerror="this.src='../assets/images/placeholder.png'">
+          <img src="${productsPath}/${item.id}/${item.image}" alt="${item.name}" loading="lazy" onerror="this.src='../assets/images/placeholder.png'">
         </div>
         <div class="cart-item-info">
           <p class="cart-item-name">${item.name}</p>

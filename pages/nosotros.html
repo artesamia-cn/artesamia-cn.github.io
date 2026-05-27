@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Catálogo | Artesamía</title>
-  <meta name="description" content="Explora el catálogo completo de Artesamía con filtros por categoría y tarjetas de productos personalizables." />
-  <meta name="keywords" content="catálogo, regalos personalizados, filtro por categoría, Artesamía" />
-  <meta property="og:title" content="Catálogo | Artesamía" />
-  <meta property="og:description" content="Explora el catálogo completo de Artesamía con filtros por categoría y productos artesanales hechos a mano." />
+  <title>Nosotros | Artesamía</title>
+  <meta name="description" content="Conoce a Artesamía." />
+  <meta name="keywords" content="Artesamía, Nosotros, regalos personalizados, regalos artesanales" />
+  <meta property="og:title" content="Nosotros | Artesamía" />
+  <meta property="og:description" content="Conoce a Artesamía." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="##D4897A">
@@ -23,15 +23,15 @@
     <div class="container">
       <a href="../index.html#top" class="nav-logo" id="nav-logo">
         <span class="nav-logo-icon">
-            <img src="../assets/logos/logo_birds.png" alt="Artesamía" loading="lazy" />
-          </span>
-          <span class="nav-logo-name">
-            <img src="../assets/logos/logo_nombre-p-500.png" loading="lazy" />
+          <img src="../assets/logos/logo_birds.png" alt="Artesamía" loading="lazy" />
+        </span>
+        <span class="nav-logo-name">
+          <img src="../assets/logos/logo_nombre-p-500.png" loading="lazy" />
         </span>
       </a>
 
       <div class="nav-links">
-        <a href="nosotros.html" class="nav-link">Nosotros</a>
+        <a href="#nosotros" class="nav-link">Nosotros</a>
         <a href="productos.html" class="nav-link">Productos</a>
         <a href="catalogo.html" class="nav-link">Catálogo</a>
         <a href="faq-contacto.html" class="nav-link">FAQ</a>
@@ -54,7 +54,7 @@
   </nav>
 
   <div class="nav-mobile" id="nav-mobile" role="navigation" aria-label="Menú móvil">
-    <a href="nosotros.html" class="nav-link">Nosotros</a>
+    <a href="#nosotros" class="nav-link">Nosotros</a>
     <a href="productos.html" class="nav-link">Productos</a>
     <a href="catalogo.html" class="nav-link">Catálogo</a>
     <a href="faq-contacto.html" class="nav-link">FAQ</a>
@@ -62,89 +62,91 @@
   </div>
 
   <main>
-    <section id="catalogo" class="section productos-section section-alt" aria-labelledby="catalogo-heading">
-      
-        <div class="container">
-        
-            <div id="catalogo-hero" class="section-header center fade-up">
-            <div class="hero-bg" style="background-image: url('../assets/images/va-p-1080.png');" role="img" aria-label="Artículos artesanales de Artesamía"></div>
-            <div class="hero-overlay-catalogo">
-                <span class="section-label">🛍️ Catálogo</span>
-                <h2 id="catalogo-heading">Descubre nuestros productos</h2>
-            </div>
-            
-            <div>
-                <h2 id="catalogo-heading-2">Descubre nuestros productos</h2>
-                <p>Filtra por categoría para encontrar el regalo o recuerdo perfecto para cada ocasión.</p>
-            </div>
-        </div>
-        
-        <div id="filter-text">        
-            <p>Filtra por categoría para encontrar el regalo o recuerdo perfecto para cada ocasión.</p>
-        </div>
 
-        <div class="catalogo-toolbar">
-          <div class="categorias-tabs" id="categorias-tabs" role="tablist" aria-label="Filtrar por categoría">
-            <!-- Populated by JS -->
+    <section id="nosotros" class="section" aria-labelledby="nosotros-heading">
+      <div class="container">
+        <div class="nosotros-grid">
+
+          <div class="nosotros-text fade-up">
+            <span class="section-label">📜 Quiénes somos</span>
+            <h2 id="nosotros-heading">Nosotros</h2>
+            <p id="nosotros-texto">
+              En <strong>Artesamía</strong>, fusionamos la calidez del trabajo artesanal con el significado de la familia.
+              Nuestro nombre rinde homenaje a nuestras hijas, Sofía y Amanda, quienes inspiran cada una de nuestras creaciones.
+              Especializados en regalos y diseños personalizados para momentos trascendentales —como aniversarios, nacimientos, etc.—,
+              garantizamos piezas únicas de alta calidad donde el detalle y la durabilidad son nuestra firma personal.
+            </p>
+
+            <div class="valores-grid" id="valores-grid">
+              <!-- Populated by JS -->
+            </div>
+
+                    <div class="hero-actions" style="justify-content:center; margin-top: 1.5rem;">
+          <a href="catalogo.html" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+            Ir al catálogo
+          </a>
+        </div>
           </div>
 
-          <label class="catalogo-sort" for="catalogo-sort">
-            <span>Ordenar por</span>
-            <select id="catalogo-sort" aria-label="Ordenar productos">
-              <option value="destacados">Destacados primero</option>
-              <option value="precio-asc">Precio: menor a mayor</option>
-              <option value="precio-desc">Precio: mayor a menor</option>
-            </select>
-          </label>
-        </div>
-
-        <div class="cart-backdrop" id="cart-backdrop" hidden></div>
-
-        <div class="cart-panel" id="cart-panel" hidden role="dialog" aria-modal="true" aria-labelledby="cart-modal-title">
-          <div class="cart-panel-header">
-            <h3 id="cart-modal-title">Carro</h3>
-            <div class="cart-panel-actions">
-              <button type="button" class="cart-panel-close" id="cart-clear">Vaciar carro</button>
-              <button type="button" class="cart-panel-close" id="cart-close">Cerrar</button>
+          <div class="nosotros-img-wrap fade-up" style="transition-delay: 0.15s">
+            <img src="../assets/images/nosotros-2.png" alt="Taller artesanal de Artesamía" loading="lazy" />
+            <div class="nosotros-img-badge" aria-hidden="true">
+              <span class="num">100%</span>
+              <span class="label">Hecho a Mano</span>
             </div>
           </div>
 
-          <div id="cart-empty" class="cart-empty">Aún no agregas productos. Elige uno para comenzar tu pedido.</div>
+                  
 
-          <div id="cart-items" class="cart-items" aria-live="polite"></div>
-
-          <div id="cart-footer" class="cart-footer" hidden>
-            <div class="cart-footer-row">
-              <span>Total por confirmar</span>
-              <strong id="cart-subtotal">$0</strong>
-            </div>
-            <div class="cart-footer-row-envio">
-              <span>*No incluye costos de envío</span>
-            </div>
-            <a id="cart-whatsapp" class="btn btn-whatsapp" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
-          </div>
-        </div>
-
-        <div class="productos-grid" id="productos-grid" role="list" aria-label="Productos disponibles">
-          <!-- Populated by JS -->
         </div>
       </div>
     </section>
+
   </main>
+
+  <div class="cart-backdrop" id="cart-backdrop" hidden></div>
+  <div class="cart-panel" id="cart-panel" hidden role="dialog" aria-modal="true" aria-labelledby="cart-modal-title">
+    <div class="cart-panel-header">
+      <h3 id="cart-modal-title">Carro</h3>
+      <div class="cart-panel-actions">
+        <button type="button" class="cart-panel-close" id="cart-clear">Vaciar carro</button>
+        <button type="button" class="cart-panel-close" id="cart-close">Cerrar</button>
+      </div>
+    </div>
+
+    <div id="cart-empty" class="cart-empty">Aún no agregas productos. Elige uno para comenzar tu pedido.</div>
+    <div id="cart-items" class="cart-items" aria-live="polite"></div>
+
+    <div id="cart-footer" class="cart-footer" hidden>
+      <div class="cart-footer-row">
+        <span>Total por confirmar</span>
+        <strong id="cart-subtotal">$0</strong>
+      </div>
+      <div class="cart-footer-row-envio">
+        <span>*No incluye costos de envío</span>
+      </div>
+      <a id="cart-whatsapp" class="btn btn-whatsapp" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
+    </div>
+  </div>
 
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer-grid">
+
         <div class="footer-brand">
           <a href="../index.html#top" class="nav-logo-brand" aria-label="Inicio">
             <span class="nav-logo-icon">
               <img src="../assets/logos/logo_birds.png" alt="Artesamía" loading="lazy" />
             </span>
             <span class="nav-logo-name">
-              <img src="../assets/logos/logo_nombre-p-500.png" loading="lazy" />
+              <img src="../assets/logos/logo_nombre-p-500.png" alt="Artesamía" loading="lazy" />
             </span>
           </a>
           <p>Piezas únicas hechas a mano que combinan la calidez artesanal con diseños exclusivos y personalizados.</p>
+
           <div class="footer-social">
             <a href="#" class="footer-social-btn" id="footer-wa" target="_blank" rel="noopener" aria-label="WhatsApp">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
@@ -164,8 +166,8 @@
           <h4>Navegación</h4>
           <nav class="footer-links">
             <a href="../index.html#top">Inicio</a>
-            <a href="nosotros.html">Nosotros</a>
-            <a href="nosotros.html#productos">Productos</a>
+            <a href="#nosotros">Nosotros</a>
+            <a href="productos.html">Productos</a>
             <a href="catalogo.html">Catálogo</a>
             <a href="faq-contacto.html">FAQ</a>
             <a href="faq-contacto.html">Contáctanos</a>
@@ -174,15 +176,14 @@
         </div>
 
         <div class="footer-col">
-          <h4>Ir al home</h4>
+          <h4>Catálogo</h4>
           <nav class="footer-links">
-            <a href="nosotros.html">Nosotros</a>
-            <a href="productos.html">Productos</a>
-            <a href="#catalogo">Catálogo</a>
-            <a href="faq-contacto.html">FAQ</a>
-            <a href="faq-contacto.html">Contáctanos</a>
+            <a href="catalogo.html">Ver catálogo completo</a>
+            <a href="catalogo.html">Filtrar por categoría</a>
+            <a href="faq-contacto.html">Pedidos Corporativos</a>
           </nav>
         </div>
+
       </div>
 
       <div class="footer-payments">

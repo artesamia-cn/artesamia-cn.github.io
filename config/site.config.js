@@ -48,10 +48,10 @@ const SITE_CONFIG = {
   productos: {
     titulo: "Nuestros Productos",
     valores: [
-      { icono: "🪵", imagen: "assets/images/nosotros.png", titulo: "Diseños en Madera", descripcion: "Gracias a la versatilidad de la madera, podemos ofrecer una <strong>gama infinita de acabados</strong>. Ya sea en su tono natural para un estilo minimalista, o intervenido con pinturas de alta calidad, cada creación se adapta totalmente a tu estilo. Es el lienzo perfecto para dar vida a los detalles de bodas, bautizos y dormitorios infantiles." },
-      { icono: "🕯️", imagen: "assets/images/gv-p-800.png", titulo: "Momentos Inolvidables", descripcion: "En <strong>Artesamía</strong>, sabemos que hay noticias que se dan una sola vez y celebraciones que se guardan en el alma. Por eso, transformamos las materias primas en mensajera de tus mejores momentos. Desde <strong>invitaciones de matrimonio</strong> que sorprenden por su elegancia y grabado eterno, hasta <strong>velitas de recuerdo para baby showers</strong> que iluminan la llegada de un nuevo amor; cada pieza es cortada y grabada con la precisión del láser y el cariño de nuestra familia." },
-      { icono: "🏷️", imagen: "assets/images/et-p-800.png", titulo: "Etiquetas Personalizables", descripcion: "En <strong>Artesamía</strong>, sabemos que los grandes proyectos se definen en los pequeños detalles. Nuestras etiquetas personalizadas de <strong>cuero natural y ecocuero</strong> son el complemento perfecto para darle identidad y profesionalismo a tus creaciones. Ya sea que te dediques al tejido, la costura, la marroquinería o la papelería, una etiqueta grabada con tu logo marca la diferencia entre un producto genérico y una pieza de autor." },
-      { icono: "⚡", imagen: "assets/images/va-p-1080.png", titulo: "Grabados", descripcion: "'La diferencia entre un regalo y un recuerdo inolvidable es lo que grabamos en él. Lo que se personaliza tiene la vocación de ser guardado. Un recuerdo con diseño único no termina en la basura; se convierte en parte de la decoración del hogar, en un tesoro que <strong>vence el paso del tiempo</strong>" },
+      { icono: "🪵", imagen: "../assets/images/nosotros.png", titulo: "Diseños en Madera", descripcion: "Gracias a la versatilidad de la madera, podemos ofrecer una <strong>gama infinita de acabados</strong>. Ya sea en su tono natural para un estilo minimalista, o intervenido con pinturas de alta calidad, cada creación se adapta totalmente a tu estilo. Es el lienzo perfecto para dar vida a los detalles de bodas, bautizos y dormitorios infantiles." },
+      { icono: "🕯️", imagen: "../assets/images/gv-p-800.png", titulo: "Momentos Inolvidables", descripcion: "En <strong>Artesamía</strong>, sabemos que hay noticias que se dan una sola vez y celebraciones que se guardan en el alma. Por eso, transformamos las materias primas en mensajera de tus mejores momentos. Desde <strong>invitaciones de matrimonio</strong> que sorprenden por su elegancia y grabado eterno, hasta <strong>velitas de recuerdo para baby showers</strong> que iluminan la llegada de un nuevo amor; cada pieza es cortada y grabada con la precisión del láser y el cariño de nuestra familia." },
+      { icono: "🏷️", imagen: "../assets/images/et-p-800.png", titulo: "Etiquetas Personalizables", descripcion: "En <strong>Artesamía</strong>, sabemos que los grandes proyectos se definen en los pequeños detalles. Nuestras etiquetas personalizadas de <strong>cuero natural y ecocuero</strong> son el complemento perfecto para darle identidad y profesionalismo a tus creaciones. Ya sea que te dediques al tejido, la costura, la marroquinería o la papelería, una etiqueta grabada con tu logo marca la diferencia entre un producto genérico y una pieza de autor." },
+      { icono: "⚡", imagen: "../assets/images/va-p-1080.png", titulo: "Grabados", descripcion: "La diferencia entre un regalo y un recuerdo inolvidable es lo que grabamos en él. Lo que se personaliza tiene la vocación de ser guardado. Un recuerdo con diseño único no termina en la basura; se convierte en parte de la decoración del hogar, en un tesoro que <strong>vence el paso del tiempo</strong>" },
     ],
   },
 
@@ -92,7 +92,7 @@ const SITE_CONFIG = {
     titulo: "Detalles que\n<em>inspiran sonrisas</em>",
     subtitulo: "Regalos únicos hechos a mano.\nDescubre creaciones artesanales perfectas para regalar o sorprender.",
     ctaTexto: "Ver productos",
-    ctaLink: "#productos",
+    ctaLink: "pages/productos.html",
   },
 };
 

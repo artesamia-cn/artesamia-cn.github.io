@@ -102,12 +102,38 @@ p { color: var(--color-text-muted); line-height: 1.8; }
   cursor: pointer;
 }
 
+.btn-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 10px;
+  border-radius: var(--radius-xl);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  transition: var(--transition);
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
 .btn-primary {
   background: var(--color-rose-300);
   color: var(--color-white);
   box-shadow: 0 4px 16px rgba(212, 137, 122, 0.35);
 }
 .btn-primary:hover {
+  background: var(--color-rose-400);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(212, 137, 122, 0.45);
+}
+
+.btn-primary-preview {
+  background: var(--color-rose-300);
+  color: var(--color-white);
+  box-shadow: 0 4px 16px rgba(212, 137, 122, 0.35);
+}
+.btn-primary-preview:hover {
   background: var(--color-rose-400);
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(212, 137, 122, 0.45);
@@ -796,6 +822,56 @@ p { color: var(--color-text-muted); line-height: 1.8; }
 .product-card:hover {
   transform: translateY(-6px);
   box-shadow: var(--shadow-lg);
+}
+
+/* ── Home previews: compact product cards (small) ───────────────── */
+.home-previews-grid {
+  display: grid;
+  gap: 28px;
+}
+
+.home-preview-category {
+  display: block;
+}
+
+.home-preview-cat {
+  margin-bottom: 12px;
+  font-size: 1.05rem;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.home-preview-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.product-card.preview {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card.preview .carousel { aspect-ratio: 4/3; }
+.product-card.preview .product-body { padding: 12px; gap: 8px; }
+.product-card.preview .product-nombre { font-size: 1rem; }
+.product-card.preview .product-descripcion { font-size: 0.85rem; -webkit-line-clamp: 2; }
+.product-card.preview .product-descripcion-2 { display: none; }
+.product-card.preview .product-precio { font-size: 1rem; }
+.product-card.preview .product-precio-antes { font-size: 0.9rem; }
+.product-card.preview .product-footer { justify-content: space-between; }
+
+@media (max-width: 900px) {
+  .home-preview-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 580px) {
+  .home-preview-cards { grid-template-columns: 1fr; gap: 12px; }
 }
 
 /* Carrusel */
