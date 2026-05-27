@@ -83,7 +83,7 @@ const SITE_CONFIG = {
     },
         {
       pregunta: "¿Cuáles son los métodos de pago?",
-      respuesta: "Aceptamos pago con tu tarjeta de crédito o débito mediante Link de Pago WebPay y transferencia electrónica. Una vez confirmado el pedido, te entregamos la información para que realices tu pago.",
+      respuesta: "Aceptamos pago con tu tarjeta de crédito o débito mediante links de pago de WebPay, de MercadoPago o transferencia electrónica. Una vez confirmado el pedido, te entregamos la información para que realices tu pago.",
     },
   ],
 
