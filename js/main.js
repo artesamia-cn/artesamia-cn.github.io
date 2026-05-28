@@ -608,10 +608,10 @@ function initCart() {
     const lines = cart.map(item => `• ${item.name} x${item.quantity} = ${formatCurrency(item.price * item.quantity)}`);
     const originalTotal = getCartTotal(cart);
     const totalItems = getTotalItems(cart);
-    let discountPercent = 0;
+    let discountPercent = 0.2;
     if (totalItems === 2) discountPercent = 0.2;
-    else if (totalItems == 3) discountPercent = 0.25;
-    else if (totalItems > 3) discountPercent = 0.3;
+    else if (totalItems == 3) discountPercent = 0.3;
+    else if (totalItems > 3) discountPercent = 0.4;
     const discounted = Math.round(originalTotal * (1 - discountPercent));
     const discountAmount = originalTotal - discounted;
     const formattedOriginal = formatCurrency(originalTotal);
@@ -644,10 +644,10 @@ function initCart() {
     const cart = getCart();
     const totalItems = getTotalItems(cart);
     const total = getCartTotal(cart);
-    let discountPercent = 0;
+    let discountPercent = 0.2;
     if (totalItems === 2) discountPercent = 0.2;
-    else if (totalItems == 3) discountPercent = 0.25;
-    else if (totalItems > 3) discountPercent = 0.30;
+    else if (totalItems == 3) discountPercent = 0.3;
+    else if (totalItems > 3) discountPercent = 0.4;
     const discountedTotal = Math.round(total * (1 - discountPercent));
     const formattedTotal = formatCurrency(total);
     const formattedDiscounted = formatCurrency(discountedTotal);
