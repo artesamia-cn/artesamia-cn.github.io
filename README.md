@@ -1,37 +1,60 @@
 # 🌸 Artesamía — Sitio Web
 
-Sitio web estático para la tienda artesanal **Artesamía**. Hecho con HTML, CSS Vanilla y JavaScript puro. Sin dependencias externas, sin frameworks.
+Sitio web estático para la tienda artesanal **Artesamía**. Hecho con HTML, CSS puro y JavaScript sin dependencias externas.
 
 ## 📁 Estructura del Proyecto
 
 ```
-Artsamia/
-├── index.html              ← Página principal (one-page)
-├── site.config.js          ← ⚙️ Config: contacto, redes, textos, FAQ
-├── products.config.js      ← ⚙️ Config: catálogo de productos
+artesamia.github.io/
+├── index.html
+├── pages/
+│   ├── catalogo.html
+│   ├── faq-contacto.html
+│   ├── nosotros.html
+│   ├── productos.html
+│   └── terminos-y-condiciones.html
+├── config/
+│   ├── site.config.js
+│   └── products.config.js
 ├── css/
-│   └── styles.css          ← Estilos principales
+│   └── styles.css
 ├── js/
-│   └── main.js             ← Lógica dinámica
+│   └── main.js
 ├── assets/
-│   └── images/
-│       ├── hero-bg.png     ← Imagen hero
-│       └── nosotros.png    ← Imagen sección Nosotros
+│   ├── images/
+│   └── logos/
 └── products/
-    ├── marcos-madera/      ← Carpeta del producto (id)
-    │   ├── foto1.png
-    │   └── foto2.png
-    ├── velas-artesanales/
-    ├── souvenirs/
-    ├── navidad/
-    └── regalos-especiales/
+    ├── box-bienvenida/
+    ├── caja-vino/
+    ├── caja-whisky/
+    ├── cuadro-conmemorativo/
+    ├── cuadro-super-papa/
+    ├── four-pack/
+    ├── invitaciones-1/
+    ├── invitaciones-2/
+    ├── libro-padrinos/
+    ├── llavero-recuerdo/
+    ├── pack-dia-del-padre-1/
+    ├── pack-dia-del-padre-2/
+    ├── placa-bienvenida/
+    ├── placa-bienvenida-animalitos/
+    ├── placa-bienvenida-body/
+    ├── porta-celular-papa/
+    ├── recuerdo-profesor/
+    ├── six-pack/
+    ├── tabla-cocina/
+    └── velas-baby-shower/
 ```
 
 ---
 
-## ⚙️ Cómo parametrizar el sitio
+## ⚙️ Configuración del sitio
 
-### 1. Cambiar datos de contacto → `site.config.js`
+### `config/site.config.js`
+
+Ajusta textos, contacto, redes sociales, FAQ y contenido general del sitio.
+
+Ejemplo de contacto:
 
 ```js
 contacto: {
@@ -48,31 +71,34 @@ contacto: {
 },
 ```
 
-### 2. Agregar un nuevo producto → `products.config.js`
+### `config/products.config.js`
+
+Define cada producto y su contenido.
 
 ```js
 {
-  id: "mi-nuevo-producto",        // ← Debe coincidir con nombre de carpeta en /products/
+  id: "mi-nuevo-producto",        // Debe coincidir con la carpeta en /products/
   nombre: "Nombre del Producto",
-  categoria: "Decoración",        // Todos / Decoración / Velas / Souvenirs / Regalos
+  categoria: "Decoración",
   descripcion: "Descripción...",
   caracteristicas: ["Madera MDF", "Personalizable"],
   precio: "$9.990",
-  imagenes: ["foto1.jpg", "foto2.jpg"],   // Archivos en products/mi-nuevo-producto/
+  imagenes: ["foto1.jpg", "foto2.jpg"],
   disponible: true,
   destacado: false,
   tags: ["Navidad", "Regalos"]
 },
 ```
 
-### 3. Agregar fotos de un producto
+### Agregar imágenes de producto
 
-1. Crea una carpeta con el **mismo nombre que el `id`** del producto dentro de `/products/`
-2. Copia tus fotos a esa carpeta
-3. Actualiza el array `imagenes` en `products.config.js` con los nombres de archivo
+1. Crea una carpeta dentro de `products/` con el mismo nombre que el `id`.
+2. Copia las imágenes dentro de esa carpeta.
+3. Actualiza el array `imagenes` en `config/products.config.js`.
 
 Ejemplo:
-```
+
+```text
 products/
 └── mesa-rustica/
     ├── foto-principal.jpg
@@ -88,7 +114,9 @@ products/
 }
 ```
 
-### 4. Editar las FAQ → `site.config.js`
+### Editar FAQ
+
+En `config/site.config.js`, actualiza el arreglo `faq`:
 
 ```js
 faq: [
@@ -96,7 +124,6 @@ faq: [
     pregunta: "¿Tu pregunta?",
     respuesta: "Tu respuesta...",
   },
-  // ... más preguntas
 ],
 ```
 
@@ -126,7 +153,6 @@ Simplemente abre el archivo `index.html` en tu navegador. No requiere servidor.
 - ✅ Desktop (Chrome, Firefox, Safari, Edge)
 - ✅ Tablet
 - ✅ Móvil (responsive)
-- ✅ Swipe en carrusel (táctil)
 
 ---
 
