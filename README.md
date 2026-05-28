@@ -157,3 +157,4 @@ Simplemente abre el archivo `index.html` en tu navegador. No requiere servidor.
 ---
 
 *Artesamía © 2026 · San Bernardo, Santiago, Chile*
+
