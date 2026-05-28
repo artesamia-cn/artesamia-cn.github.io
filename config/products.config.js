@@ -181,7 +181,7 @@ const PRODUCTS_CONFIG = [
       "🌿 Placa grabada para brazalete",
       "🎁 Caja rígida personalizada"
     ],
-    precio: "Desde $6.000",
+    precio: "Desde $7.000",
     imagenes: ["image_1.png", "image_2.png", "image_3.png", "image_4.png"],
     disponible: true,
     destacado: true,
@@ -198,7 +198,7 @@ const PRODUCTS_CONFIG = [
       "📏 Espacio especial para el brazalete",
       "🎁 Ideal como recuerdo o regalo"
     ],
-    precio: "$6.000",
+    precio: "$7.000",
     imagenes: ["image_1.png"],
     disponible: true,
     destacado: true,
@@ -214,7 +214,7 @@ const PRODUCTS_CONFIG = [
     caracteristicas: [
       "🪵 Madera grabada con láser"
     ],
-    precio: "$15.000",
+    precio: "$16.000",
     imagenes: ["image_1.png", "image_2.png"],
     disponible: true,
     destacado: false,
@@ -232,8 +232,7 @@ const PRODUCTS_CONFIG = [
       "⏰ Hora, peso y medida",
       "🧸 Decoración con animalitos"
     ],
-    precioAntes: "$13.000",
-    precio: "$11.000",
+    precio: "$12.000",
     imagenes: ["image_1.png"],
     disponible: true,
     destacado: false,
@@ -251,8 +250,7 @@ const PRODUCTS_CONFIG = [
       "⏰ Hora, peso y medida",
       "🧸 Decoración personalizada"
     ],
-    precioAntes: "$13.000",
-    precio: "$11.000",
+    precio: "$12.000",
     imagenes: ["image_1.png", "image_2.png"],
     disponible: true,
     destacado: false,
@@ -270,8 +268,7 @@ const PRODUCTS_CONFIG = [
         "🌟 Detalles decorativos llenos de ternura",
         "💬 Frase personalizada"
     ],
-    precioAntes: "$13.000",
-    precio: "$11.000",
+    precio: "$12.000",
     imagenes: ["image_1.png"],
     disponible: true,
     destacado: false,
@@ -307,7 +304,7 @@ const PRODUCTS_CONFIG = [
       "🧲 Sistema magnético integrado en MDF resistente, perfecto para lucir en el refrigerador.",
       "💬 Un detalle tierno, original y pensado detalladamente para sorprender a quienes más quieres."
     ],
-    precio: "Desde $2.000",
+    precio: "Desde $2.500",
     imagenes: ["image_1.png", "image_2.png"],
     disponible: true,
     destacado: false,
@@ -324,7 +321,7 @@ const PRODUCTS_CONFIG = [
       "🪻 Velas aromáticas de alta calidad con fragancias suaves y reconfortantes.",
       "💬 Dedicatoria o frase especial totalmente personalizada para sorprender a tus seres queridos."
     ],
-    precio: "Desde $2.500",
+    precio: "Desde $2.800",
     imagenes: ["image_1.png", "image_2.png", "image_3.png"],
     disponible: true,
     destacado: true,
@@ -342,7 +339,7 @@ const PRODUCTS_CONFIG = [
       "⚡ El nombre, fecha o esa frase especial que tú elijas grabados a láser.",
       "💬 Un detalle práctico, compacto y con un toque natural que a todos les encanta recibir."
     ],
-    precio: "$1.200",
+    precio: "Desde $1.400",
     imagenes: ["image_1.png"],
     disponible: true,
     destacado: false,
