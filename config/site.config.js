@@ -100,7 +100,7 @@ const SITE_CONFIG = {
     activo: true,
     mensaje_1: "  📢  Cyber Hecho a Mano!!!  En toda la tienda!!!",
     mensaje_2: "  🚚  Envío Gratis en compras superiores a $35.000 (Sólo RM)",
-    mensaje_3: "  🎉  Descuentos desde el 20% en el total de tu compra, por 2 o más productos",
+    mensaje_3: "  🎉  Hasta 40% de descuento en el total de tu compra.",
   },
 };
 
