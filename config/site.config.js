@@ -75,7 +75,7 @@ const SITE_CONFIG = {
     },
     {
       pregunta: "¿Qué materiales utilizan?",
-      respuesta: "Trabajamos principalmente con maderas MDF, DUrolac y eucalipto de alta calidad, cortadas y grabadas con láser de precisión. También usamos cueros natural, ecocuero y ceras (parafina y soja) para nuestras velas artesanales.",
+      respuesta: "Trabajamos principalmente con maderas MDF, Durolac y eucalipto de alta calidad, cortadas y grabadas con láser de precisión. También usamos cueros natural, ecocuero y ceras (parafina y soja) para nuestras velas artesanales.",
     },
     {
       pregunta: "¿Hacen pedidos corporativos?",
@@ -94,16 +94,7 @@ const SITE_CONFIG = {
     ctaTexto: "Ver productos",
     ctaLink: "pages/productos.html",
   },
-
-    // ── Anuncio ─────────────────────────────────────────
-  anuncio:{
-    activo: true,
-    mensaje_1: "  📢  Cyber Hecho a Mano!!!  En toda la tienda!!!",
-    mensaje_2: "  🚚  Envío Gratis en compras superiores a $35.000 (Sólo RM)",
-    mensaje_3: "  🎉  Hasta 40% de descuento en el total de tu compra.",
-  },
 };
-
 
 // Hacer disponible en el navegador
 if (typeof window !== 'undefined') {
