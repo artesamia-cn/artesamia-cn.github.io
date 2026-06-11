@@ -281,7 +281,8 @@ function initProductos() {
           ${tagsHtml ? `<div class="product-tags">${tagsHtml}</div>` : ''}
           <div class="product-footer">
             ${p.precioAntes ? `<div class="product-precio-antes">${p.precioAntes}</div>` : ''}
-            <span class="product-precio">&nbsp;${p.precio}</span>
+            <span class="product-precio">&nbsp;${p.precio} CLP</span>
+            <span class="product-impuestos">Impuestos Incluidos</span>
           </div>
           ${!isDesdePrice ? `
           <div class="product-actions">
@@ -426,7 +427,8 @@ function initHomePreviews() {
             <div>
             <div class="product-footer">
               ${p.precioAntes ? `<div class="product-precio-antes">${p.precioAntes}</div>` : ''}
-              <span class="product-precio">${p.precio}</span>
+              <span class="product-precio">${p.precio} CLP</span>
+              <span class="product-impuestos">Impuestos Incluidos</span>
             </div>
           </div>
         </article>
@@ -542,19 +544,19 @@ function initCart() {
     }
 
     if (cartTotal) {
-      cartTotal.textContent = formattedTotal;
+      cartTotal.textContent = formattedTotal + ' CLP';
     }
 
-    cartSubtotal.textContent = formattedTotal;
+    cartSubtotal.textContent = formattedTotal + ' CLP';
     navCartBadge.textContent = String(totalItems);
-    navCartTip.textContent = totalItems === 0 ? 'Tu carro está vacío' : `Total: ${formattedTotal}`;
+    navCartTip.textContent = totalItems === 0 ? 'Tu carro está vacío' : `Total: ${formattedTotal} CLP`;
 
     if (navCartBadgeMobile) {
       navCartBadgeMobile.textContent = String(totalItems);
     }
 
     if (navCartTipMobile) {
-      navCartTipMobile.textContent = totalItems === 0 ? 'Tu carro está vacío' : `Total: ${formattedTotal}`;
+      navCartTipMobile.textContent = totalItems === 0 ? 'Tu carro está vacío' : `Total: ${formattedTotal} CLP`;
     }
 
     if (cartOpenMobile) {
@@ -586,14 +588,14 @@ function initCart() {
         </div>
         <div class="cart-item-info">
           <p class="cart-item-name">${item.name}</p>
-          <p class="cart-item-price">Precio Unitario: ${formatCurrency(item.price)}</p>
+          <p class="cart-item-price">Precio Unitario: ${formatCurrency(item.price)} CLP</p>
         </div>
         <div class="cart-item-actions">
           <button type="button" class="cart-qty-btn" data-action="decrease" data-id="${item.id}" aria-label="Disminuir cantidad">−</button>
           <span>${item.quantity}</span>
           <button type="button" class="cart-qty-btn" data-action="increase" data-id="${item.id}" aria-label="Aumentar cantidad">+</button>
         </div>
-        <div class="cart-item-subtotal">${formatCurrency(item.price * item.quantity)}</div>
+        <div class="cart-item-subtotal">${formatCurrency(item.price * item.quantity)} CLP</div>
         <button type="button" class="cart-remove-btn" data-action="remove" data-id="${item.id}" aria-label="Quitar del carro">❌</button>
       </div>
     `).join('');

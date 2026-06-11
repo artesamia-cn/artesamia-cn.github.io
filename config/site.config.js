@@ -59,7 +59,7 @@ const SITE_CONFIG = {
   faq: [
     {
       pregunta: "¿Cómo puedo hacer un pedido?",
-      respuesta: "Puedes hacer tu pedido directamente por WhatsApp o enviándonos un mensaje a nuestro correo. Haz clic en el botón '¡Lo quiero!' de cualquier producto y te contactamos de inmediato.",
+      respuesta: "Puedes hacer tu pedido directamente por <strong>WhatsApp</strong> o enviándonos un mensaje a nuestro correo. Haz clic en el botón <strong>'¡Lo quiero!'</strong> de cualquier producto y te contactamos de inmediato.",
     },
     {
       pregunta: "¿Los productos son personalizables?",
@@ -67,23 +67,27 @@ const SITE_CONFIG = {
     },
     {
       pregunta: "¿Cuánto demora la entrega?",
-      respuesta: "Los tiempos varían según el producto y la personalización. Generalmente entre 3 a 7 días hábiles. Para pedidos urgentes consúltanos y buscamos soluciones.",
+      respuesta: "Los tiempos varían según el producto y la personalización. Generalmente entre <strong>3 a 7 días hábiles</strong> (incluye tiempo de confección y despacho). Para pedidos urgentes consúltanos y buscamos soluciones.",
     },
     {
       pregunta: "¿Hacen envíos a regiones?",
-      respuesta: "Sí, enviamos a todo Chile a través de servicios de courier. El costo de envío se calcula según la comuna de destino y el tamaño del paquete.",
+      respuesta: "Sí, enviamos a <strong>todo Chile</strong> a través de servicios de courier. El costo de envío se calcula según la comuna de destino y el tamaño del paquete.",
+    },
+    {
+      pregunta: "¿Cuál es el costo de envío?",
+      respuesta: "Tenemos los siguientes costos: <br> - ¡Envío <strong>GRATIS</strong> en Provincia de Santiago (incluyendo comunas de San Bernardo y Puente Alto) para compras sobre <strong>$20.000</strong>!<br> - Retira <strong>GRATIS</strong> en nuestra ubicación en San Bernardo.<br> - Envíos dentro y fuera de la RM desde <strong>$2.900</strong>, dependiendo del destino y tamaño del paquete. Este se calcula una vez confirmado el pedido.",
     },
     {
       pregunta: "¿Qué materiales utilizan?",
-      respuesta: "Trabajamos principalmente con maderas MDF, Durolac y eucalipto de alta calidad, cortadas y grabadas con láser de precisión. También usamos cueros natural, ecocuero y ceras (parafina y soja) para nuestras velas artesanales.",
+      respuesta: "Trabajamos principalmente con maderas <strong>MDF, Durolac y eucalipto de alta calidad</strong>, cortadas y grabadas con láser de precisión. También usamos <strong>cueros natural, ecocuero y ceras (parafina y soja)</strong> para nuestras velas artesanales.",
     },
     {
       pregunta: "¿Hacen pedidos corporativos?",
-      respuesta: "¡Por supuesto que realizamos regalos corporativos y pedidos en cantidad!. Contáctanos para cotizar y te ofrecemos precios especiales por volumen.",
+      respuesta: "¡Por supuesto que realizamos regalos corporativos y pedidos en cantidad!. <strong>Contáctanos</strong> para cotizar y te ofrecemos precios especiales por volumen.",
     },
         {
       pregunta: "¿Cuáles son los métodos de pago?",
-      respuesta: "Aceptamos pago con tu tarjeta de crédito o débito mediante links de pago de WebPay, de MercadoPago o transferencia electrónica. Una vez confirmado el pedido, te entregamos la información para que realices tu pago.",
+      respuesta: "Aceptamos pago con tu tarjeta de crédito o débito mediante links de pago de <strong>WebPay</strong>, de <strong>MercadoPago</strong> o transferencia electrónica. Una vez confirmado el pedido, te entregamos la información para que realices tu pago.",
     },
   ],
 

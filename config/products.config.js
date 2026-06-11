@@ -95,6 +95,23 @@ const PRODUCTS_CONFIG = [
     tags: ["Día del Padre", "Regalos"]
   },
     {
+    id: "organizador-celular",
+    nombre: "📱 Estación de Organización",
+    categoria: "Día del Padre",
+    descripcion: "¿Cansado de perder las llaves o no saber dónde dejaste el teléfono? 🪵📱",
+    descripcion2: "Mantén tus esenciales diarios en un solo lugar. Transforma el caos de tu mesa en un espacio con estilo y orden. ✨",
+    caracteristicas: [
+      "💼 Espacio dedicado para tu smartphone, lentes, reloj y llaves",
+      "🪵 Acabado natural, resistente y con un diseño minimalista que combina con todo",
+      "💬 Opción de personalizar con nombres, frases o dedicatorias especiales"
+    ],
+    precio: "$10.000",
+    imagenes: ["image_1.jpeg", "image_2.jpeg", "image_3.jpeg", "image_4.jpeg", "image_5.jpeg"],
+    disponible: true,
+    destacado: true,
+    tags: ["Día del Padre", "Regalos"]
+  },
+    {
     id: "cuadro-super-papa",
     nombre: "📸 Cuadro Collage Papá",
     categoria: "Día del Padre",
