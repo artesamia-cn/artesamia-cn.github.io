@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Catálogo | Artesamía</title>
-  <meta name="description" content="Explora el catálogo completo de Artesamía con filtros por categoría y tarjetas de productos personalizables." />
+  <meta name="description" content="Catálogo de Artesamía: explora regalos personalizados y souvenirs. Filtra por categoría para ver productos en madera, velas artesanales y opciones para empresas." />
   <meta name="keywords" content="catálogo, regalos personalizados, filtro por categoría, Artesamía" />
   <meta property="og:title" content="Catálogo | Artesamía" />
   <meta property="og:description" content="Explora el catálogo completo de Artesamía con filtros por categoría y productos artesanales hechos a mano." />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="theme-color" content="##D4897A">
+  <meta name="theme-color" content="#D4897A">
 
   <link rel="icon" type="image/png" href="../assets/logos/favicon-32x32.png" />
   <link rel="stylesheet" href="../css/styles.css" />
@@ -32,7 +32,6 @@
 
       <div class="nav-links">
         <a href="nosotros.html" class="nav-link">Nosotros</a>
-        <a href="productos.html" class="nav-link">Productos</a>
         <a href="catalogo.html" class="nav-link">Catálogo</a>
         <a href="faq-contacto.html" class="nav-link">FAQ</a>
         <a href="faq-contacto.html" class="nav-link">Contáctanos</a>
@@ -55,7 +54,6 @@
 
   <div class="nav-mobile" id="nav-mobile" role="navigation" aria-label="Menú móvil">
     <a href="nosotros.html" class="nav-link">Nosotros</a>
-    <a href="productos.html" class="nav-link">Productos</a>
     <a href="catalogo.html" class="nav-link">Catálogo</a>
     <a href="faq-contacto.html" class="nav-link">FAQ</a>
     <a href="faq-contacto.html" class="nav-link">Contáctanos</a>
@@ -79,8 +77,10 @@
             </div>
         </div>
         
-        <div id="filter-text">        
-            <p>Filtra por categoría para encontrar el regalo o recuerdo perfecto para cada ocasión.</p>
+        <div id="filter-text">
+          <label class="catalogo-search" for="catalogo-search">
+            <input id="catalogo-search" type="search" placeholder="Buscar por nombre, descripción o tags" aria-label="Buscar productos" />
+          </label>
         </div>
 
         <div class="catalogo-toolbar">
@@ -97,6 +97,8 @@
             </select>
           </label>
         </div>
+        <p id="filter-text-message"></p>
+
 
         <div class="cart-backdrop" id="cart-backdrop" hidden></div>
 
@@ -172,8 +174,7 @@
           <nav class="footer-links">
             <a href="../index.html#top">Inicio</a>
             <a href="nosotros.html">Nosotros</a>
-            <a href="nosotros.html#productos">Productos</a>
-            <a href="catalogo.html">Catálogo</a>
+            <a href="catalogo.html#catalogo">Catálogo</a>
             <a href="faq-contacto.html">FAQ</a>
             <a href="faq-contacto.html">Contáctanos</a>
             <a href="terminos-y-condiciones.html">Términos y Condiciones</a>
@@ -181,16 +182,6 @@
           </nav>
         </div>
 
-        <div class="footer-col">
-          <h4>Ir al home</h4>
-          <nav class="footer-links">
-            <a href="nosotros.html">Nosotros</a>
-            <a href="productos.html">Productos</a>
-            <a href="#catalogo">Catálogo</a>
-            <a href="faq-contacto.html">FAQ</a>
-            <a href="faq-contacto.html">Contáctanos</a>
-          </nav>
-        </div>
       </div>
 
       <div class="footer-payments">

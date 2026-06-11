@@ -96,7 +96,7 @@ const SITE_CONFIG = {
     titulo: "Detalles que\n<em>inspiran sonrisas</em>",
     subtitulo: "Regalos únicos hechos a mano.\nDescubre creaciones artesanales perfectas para regalar o sorprender.",
     ctaTexto: "Ver productos",
-    ctaLink: "pages/productos.html",
+    ctaLink: "pages/catalogo.html",
   },
 };
 
