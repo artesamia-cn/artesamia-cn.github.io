@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHomePreviews();
   initNosotros();
   initProductos();
+  initEmpresas();
   initCart();
   initFAQ();
   initContacto();
@@ -726,6 +727,102 @@ function initCart() {
   });
 
   renderCart();
+}
+
+/* ══════════════════════════════════════════════════
+   EMPRESAS — Regalos Corporativos
+   ══════════════════════════════════════════════════ */
+function initEmpresas() {
+  const cfg = window.SITE_CONFIG;
+  const products = window.PRODUCTS_CONFIG;
+  if (!cfg || !cfg.empresas) return;
+
+  const emp = cfg.empresas;
+
+  // Hero
+  const titulo = document.getElementById('empresas-titulo');
+  const subtitulo = document.getElementById('empresas-subtitulo');
+  if (titulo) titulo.innerHTML = emp.hero.titulo.replace('\n', '<br>');
+  if (subtitulo) subtitulo.textContent = emp.hero.subtitulo;
+
+  // CTA texts
+  const ctaTitulo = document.getElementById('empresas-cta-titulo');
+  const ctaSubtitulo = document.getElementById('empresas-cta-subtitulo');
+  if (ctaTitulo) ctaTitulo.textContent = emp.cta.titulo;
+  if (ctaSubtitulo) ctaSubtitulo.textContent = emp.cta.subtitulo;
+
+  // CTA buttons
+  const waBtn = document.getElementById('empresas-wa-btn');
+  const mailBtn = document.getElementById('empresas-mail-btn');
+  const ctaHeroBtn = document.getElementById('empresas-cta-btn');
+
+  const waUrl = `https://wa.me/${cfg.contacto.whatsapp.numero}?text=${encodeURIComponent(emp.cta.mensajeWhatsapp)}`;
+  if (waBtn) waBtn.href = waUrl;
+  if (ctaHeroBtn) ctaHeroBtn.href = waUrl;
+  if (mailBtn) {
+    const asunto = encodeURIComponent('Consulta regalos corporativos - Artesamía');
+    mailBtn.href = `mailto:${cfg.contacto.email}?subject=${asunto}`;
+  }
+
+  // Beneficios
+  const beneficiosGrid = document.getElementById('empresas-beneficios-grid');
+  if (beneficiosGrid && emp.beneficios) {
+    beneficiosGrid.innerHTML = emp.beneficios.map(b => `
+      <div class="valor-card fade-up">
+        <div class="valor-icon">${b.icono}</div>
+        <h4>${b.titulo}</h4>
+        <p>${b.descripcion}</p>
+      </div>
+    `).join('');
+  }
+
+  // Proceso
+  const procesoGrid = document.getElementById('empresas-proceso-grid');
+  if (procesoGrid && emp.proceso) {
+    procesoGrid.innerHTML = emp.proceso.map(p => `
+      <div class="proceso-paso fade-up">
+        <div class="proceso-numero">${p.numero}</div>
+        <h4>${p.titulo}</h4>
+        <p>${p.descripcion}</p>
+      </div>
+    `).join('');
+  }
+
+  // Productos recomendados
+  const prodGrid = document.getElementById('empresas-productos-grid');
+  if (prodGrid && products && emp.productosIds) {
+    const seleccionados = emp.productosIds
+      .map(id => products.find(p => p.id === id))
+      .filter(Boolean);
+
+    prodGrid.innerHTML = seleccionados.map(p => `
+      <article class="product-card preview fade-up">
+        <div class="carousel">
+          ${p.destacado ? '<span class="product-badge-dest">⭐ Destacado</span>' : ''}
+          <div class="carousel-track">
+            <div class="carousel-slide">
+              <img src="../products/${p.id}/${p.imagenes[0]}" alt="${p.nombre}" loading="lazy" onerror="this.src='../assets/images/placeholder.png'">
+            </div>
+          </div>
+        </div>
+        <div class="product-body">
+          <h3 class="product-nombre">${p.nombre}</h3>
+          <div style="text-align: right;">
+            <a href="../products/${p.id}/index.html" class="btn-preview btn-primary-preview">
+              <span>Ver producto</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+          <div class="product-footer">
+            <span class="product-precio">${p.precio} CLP</span>
+            <span class="product-impuestos">Impuestos Incluidos</span>
+          </div>
+        </div>
+      </article>
+    `).join('');
+  }
 }
 
 /* ══════════════════════════════════════════════════
