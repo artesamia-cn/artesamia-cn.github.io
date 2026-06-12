@@ -140,6 +140,7 @@ function generateProductHTML(product) {
       <div class="nav-links">
         <a href="../../pages/nosotros.html" class="nav-link">Nosotros</a>
         <a href="../../pages/catalogo.html" class="nav-link">Catálogo</a>
+        <a href="../../pages/empresas.html" class="nav-link">Empresas</a>
         <a href="../../pages/faq-contacto.html" class="nav-link">FAQ</a>
         <a href="../../pages/faq-contacto.html" class="nav-link">Contáctanos</a>
         <button type="button" class="nav-cart-btn" id="cart-open" aria-label="Abrir carro">
@@ -163,6 +164,7 @@ function generateProductHTML(product) {
   <div class="nav-mobile" id="nav-mobile" role="navigation" aria-label="Menú móvil">
     <a href="../../pages/nosotros.html" class="nav-link">Nosotros</a>
     <a href="../../pages/catalogo.html" class="nav-link">Catálogo</a>
+    <a href="../../pages/empresas.html" class="nav-link">Empresas</a>
     <a href="../../pages/faq-contacto.html" class="nav-link">FAQ</a>
     <a href="../../pages/faq-contacto.html" class="nav-link">Contáctanos</a>
   </div>
@@ -291,6 +293,7 @@ function generateProductHTML(product) {
             <a href="../../index.html#top">Inicio</a>
             <a href="../../pages/nosotros.html">Nosotros</a>
             <a href="../../pages/catalogo.html">Catálogo</a>
+            <a href="../../pages/empresas.html">Empresas</a>
             <a href="../../pages/faq-contacto.html">FAQ</a>
             <a href="../../pages/faq-contacto.html">Contáctanos</a>
             <a href="../../pages/terminos-y-condiciones.html">Términos y Condiciones</a>
@@ -302,7 +305,7 @@ function generateProductHTML(product) {
           <h4>PRODUCTOS</h4>
           <nav class="footer-links">
             <a href="../../pages/catalogo.html">Ver catálogo completo</a>
-            <a href="../../pages/faq-contacto.html">Pedidos Corporativos</a>
+            <a href="../../pages/empresas.html">Regalos Corporativos</a>
           </nav>
         </div>
 

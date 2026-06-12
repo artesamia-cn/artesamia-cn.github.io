@@ -139,6 +139,16 @@ p { color: var(--color-text-muted); line-height: 1.8; }
   box-shadow: 0 8px 24px rgba(212, 137, 122, 0.45);
 }
 
+.btn-primary-wa {
+  background: #25D366;
+  color: white;
+}
+
+.btn-primary-wa:hover { 
+  background: #1EBF5A; 
+  transform: translateY(-2px); }
+
+
 .btn-outline {
   background: var(--color-rose-100);
   color: var(--color-rose-400);
@@ -495,6 +505,7 @@ p { color: var(--color-text-muted); line-height: 1.8; }
 .hero-content {
   position: relative;
   z-index: 2;
+  text-align: center;
   max-width: 680px;
   padding: 60px 0;
 }
@@ -527,7 +538,7 @@ p { color: var(--color-text-muted); line-height: 1.8; }
 
 .hero-subtitle {
   font-size: 1.1rem;
-  color: var(--color-text-muted);
+  color: black;
   white-space: pre-line;
   margin-bottom: 40px;
   max-width: 500px;
@@ -1945,5 +1956,195 @@ body.cart-open {
     padding: 0.5rem;
     border-left: 3px solid #D4897A;
     font-size: clamp(0.75rem, 1.3vw, 0.8rem);
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   EMPRESAS — Regalos Corporativos
+   ══════════════════════════════════════════════════ */
+
+.empresas-hero {
+  position: relative;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: var(--nav-height);
+}
+
+.empresas-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.04);
+}
+
+.empresas-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(253, 248, 245, 0.88) 0%,
+    rgba(250, 234, 226, 0.75) 50%,
+    rgba(237, 185, 172, 0.45) 100%
+  );}
+
+.empresas-hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 4rem 0 3rem;
+}
+
+.empresas-hero-content h1 {
+  white-space: pre-line;
+  margin-bottom: 24px;
+  color: var(--color-text);
+}
+.empresas-hero-content h1 em {
+  font-style: italic;
+  color: var(--color-rose-400);
+}
+
+.empresas-hero-content .hero-eyebrow {
+  color: var(--color-rose-400);
+}
+
+.empresas-hero-content .hero-subtitle {
+  color: black;
+  font-size: 1.1rem;
+}
+
+/* Proceso en 4 pasos */
+.proceso-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.proceso-paso {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.proceso-paso:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.proceso-numero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--color-rose-300);
+  color: var(--color-white);
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: var(--font-heading);
+  margin-bottom: 1rem;
+}
+
+.proceso-paso h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+.proceso-paso p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* CTA cotización */
+.empresas-cta-box {
+  background: var(--color-rose-300);
+  border-radius: var(--radius-xl);
+  padding: 3.5rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.empresas-cta-content h2 {
+  color: var(--color-white);
+  margin-bottom: 0.75rem;
+}
+
+.empresas-cta-content p {
+  color: rgba(255,255,255,0.88);
+  max-width: 480px;
+}
+
+.empresas-cta-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.empresas-cta-box .btn-primary {
+  background: var(--color-white);
+  color: var(--color-rose-400);
+  border-color: var(--color-white);
+}
+
+.empresas-cta-box .btn-primary:hover {
+  background: var(--color-rose-100);
+}
+
+.empresas-cta-box .btn-outline {
+  border-color: rgba(255,255,255,0.7);
+  color: var(--color-white);
+}
+
+.empresas-cta-box .btn-outline:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: var(--color-white);
+}
+
+.btn-lg {
+  padding: 16px 32px;
+  font-size: 1rem;
+}
+
+/* Responsive empresas */
+@media (max-width: 900px) {
+  .proceso-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .empresas-hero {
+    min-height: 420px;
+  }
+
+  .proceso-grid {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .empresas-cta-box {
+    flex-direction: column;
+    text-align: center;
+    padding: 2.5rem 1.5rem;
+  }
+
+  .empresas-cta-actions {
+    width: 100%;
+    justify-content: center;
   }
 }

@@ -16,6 +16,11 @@
     <priority>0.64</priority>
   </url>
   <url>
+    <loc>https://artesamia.cl/pages/empresas.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://artesamia.cl/pages/nosotros.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.64</priority>

@@ -91,6 +91,33 @@ const SITE_CONFIG = {
     },
   ],
 
+  // ── Empresas / Regalos Corporativos ───────────────
+  empresas: {
+    hero: {
+      eyebrow: "🏢 Regalos para Empresas",
+      titulo: "Regalos corporativos\n<em>que dejan huella</em>",
+      subtitulo: "Personaliza con el logo de tu empresa y sorprende a tu equipo, clientes y socios con piezas artesanales únicas. Pedidos en volumen con precios especiales.",
+    },
+    beneficios: [
+      { icono: "🏷️", titulo: "Personalización con tu marca", descripcion: "Grabamos el logo, nombre y mensaje de tu empresa en cada pieza. Tu marca presente en cada detalle." },
+      { icono: "📦", titulo: "Pedidos en volumen", descripcion: "Desde 10 unidades. Mientras más unidades, mejor el precio. Cotización sin compromiso." },
+      { icono: "⚡", titulo: "Entrega a tiempo", descripcion: "Cumplimos los plazos acordados. Para eventos y fechas importantes, consúltanos con anticipación." },
+      { icono: "🧾", titulo: "Facturación y boleta", descripcion: "Emitimos boleta o factura para tus adquisiciones corporativas. Facilitamos el proceso para tu empresa." },
+    ],
+    proceso: [
+      { numero: "01", titulo: "Cotiza sin compromiso", descripcion: "Escríbenos por WhatsApp o email con la cantidad, producto y personalización que necesitas." },
+      { numero: "02", titulo: "Diseño y aprobación", descripcion: "Te enviamos una vista previa del diseño con tu logo o mensaje. Ajustamos hasta que quedes conforme." },
+      { numero: "03", titulo: "Producción artesanal", descripcion: "Fabricamos cada pieza a mano con corte y grabado láser de precisión, en el plazo acordado." },
+      { numero: "04", titulo: "Entrega en tu empresa", descripcion: "Coordinamos la entrega directamente en tu oficina o despacho a todo Chile." },
+    ],
+    productosIds: ["llavero-recuerdo", "caja-vino", "caja-whisky", "tabla-cocina", "organizador-celular", "recuerdo-profesor"],
+    cta: {
+      titulo: "¿Listo para cotizar?",
+      subtitulo: "Cuéntanos tu idea y te respondemos en menos de 24 horas con una cotización personalizada.",
+      mensajeWhatsapp: "¡Hola Artesamía! Me interesa cotizar regalos corporativos para mi empresa. ¿Podrían ayudarme?",
+    },
+  },
+
   // ── Textos Hero ───────────────────────────────────
   hero: {
     titulo: "Detalles que\n<em>inspiran sonrisas</em>",
