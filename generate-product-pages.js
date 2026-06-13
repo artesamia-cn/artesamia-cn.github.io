@@ -343,7 +343,7 @@ function generateProductHTML(product) {
   <!-- Scripts -->
   <script src="../../config/site.config.js"><\/script>
   <script src="../../config/products.config.js"><\/script>
-  <script src="../../js/main.js"><\/script>
+  <script type="module" src="../../js/main.js"></script>
 
   <!-- Carousel específico para esta página -->
   <script>

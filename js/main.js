@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initContacto();
   initScrollAnimations();
   initScrollTop();
+  obtenerDatos().then(() => {
+    initProductReviews();
+  });
 });
 
  
@@ -993,3 +996,362 @@ function initScrollTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 }
+
+/* ══════════════════════════════════════════════════
+   SUPABASE — Obtener Reseñas de Productos
+   ══════════════════════════════════════════════════ */
+
+async function obtenerDatos() {
+  try {
+    const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm');
+
+    const SUPABASE_URL = "https://zbqrlyvjgfeycczixgqc.supabase.co/";
+    const SUPABASE_ANON_KEY = "sb_publishable_sE5jMRoQ-SNjuSMWJSY63g_OEGn5h8e";
+    
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const { data, error } = await supabase
+      .from('review_product')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      console.error("Error al obtener reseñas:", error.message);
+      return null;
+    }
+
+    // Guardar las reseñas en window para acceso global
+    window.REVIEWS_DATA = data || [];
+    console.log("Reseñas obtenidas de Supabase:", window.REVIEWS_DATA);
+    return window.REVIEWS_DATA;
+  } catch (error) {
+    console.error("Error en obtenerDatos:", error);
+    return null;
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   PRODUCT REVIEWS — Renderizar reseñas por producto
+   ══════════════════════════════════════════════════ */
+
+function initProductReviews() {
+  // Solo ejecutar en páginas de productos
+  if (!window.location.pathname.includes('/products/')) return;
+
+  // Extraer el ID del producto de la URL
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  const productIdIndex = pathParts.indexOf('products');
+  
+  if (productIdIndex === -1 || !pathParts[productIdIndex + 1]) return;
+  
+  const currentProductId = pathParts[productIdIndex + 1];
+  const reviews = window.REVIEWS_DATA || [];
+  
+  // Filtrar reseñas del producto actual
+  const productReviews = reviews.filter(r => r.id_product === currentProductId);
+  
+  if (productReviews.length === 0) return;
+
+  // Crear sección de reseñas
+  renderReviewsSection(currentProductId, productReviews);
+}
+
+function renderReviewsSection(productId, reviews) {
+  // Buscar o crear el contenedor de reseñas
+  let reviewsContainer = document.getElementById('product-reviews-section');
+  
+  if (!reviewsContainer) {
+    // Crear el contenedor si no existe (después del detalle del producto)
+    const productDetail = document.querySelector('.product-detail-info') || document.querySelector('.product-detail-grid');
+    if (!productDetail || !productDetail.parentElement) return;
+
+    reviewsContainer = document.createElement('section');
+    reviewsContainer.id = 'product-reviews-section';
+    reviewsContainer.className = 'section';
+    reviewsContainer.style.marginTop = '3rem';
+    reviewsContainer.style.paddingTop = '0px';
+    
+    productDetail.parentElement.parentElement.appendChild(reviewsContainer);
+  }
+
+  const avgRating = (reviews.reduce((sum, r) => sum + r.qualification, 0) / reviews.length).toFixed(1);
+  const ratingCounts = {
+    5: reviews.filter(r => r.qualification === 5).length,
+    4: reviews.filter(r => r.qualification === 4).length,
+    3: reviews.filter(r => r.qualification === 3).length,
+    2: reviews.filter(r => r.qualification === 2).length,
+    1: reviews.filter(r => r.qualification === 1).length
+  };
+
+  const starsHtml = generateStars(parseInt(avgRating));
+  
+  const ratingBarsHtml = [5, 4, 3, 2, 1]
+    .map(star => {
+      const count = ratingCounts[star];
+      const percent = reviews.length > 0 ? (count / reviews.length) * 100 : 0;
+      return `
+        <div class="rating-bar-row">
+          <span class="rating-stars">${generateStars(star)}</span>
+          <div class="rating-bar">
+            <div class="rating-bar-fill" style="width: ${percent}%"></div>
+          </div>
+          <span class="rating-count">${count}</span>
+        </div>
+      `;
+    })
+    .join('');
+
+  const reviewsHtml = reviews
+    .map((review, idx) => {
+      const date = new Date(review.created_at);
+      const formattedDate = date.toLocaleDateString('es-CL', { 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric' 
+      });
+      
+      return `
+        <div class="review-item fade-up" style="--review-delay: ${idx * 100}ms;">
+          <div class="review-header">
+            <div class="review-author">
+              <strong>${escapeHtml(review.name_customer)}</strong>
+              <span class="review-date">${formattedDate}</span>
+            </div>
+            <div class="review-rating">${generateStars(review.qualification)}</div>
+            <div class="review-date">${review.comment_product}</div>
+          </div>
+        </div>
+      `;
+    })
+    .join('');
+
+  reviewsContainer.innerHTML = `
+    <div class="container">
+      <div class="reviews-wrapper">
+        <div class="reviews-header">
+          <h3 class="reviews-title">💬 Opiniones de Nuestros Clientes</h3>
+          <button class="btn btn-primary" id="btn-add-review" data-product-id="${productId}">Agregar Opinión</button>
+        </div>
+        
+        <div class="reviews-summary">
+          <div class="reviews-average">
+            <div class="average-score">${avgRating}</div>
+            <div class="average-stars">${starsHtml}</div>
+            <div class="average-count">Basado en ${reviews.length} opinión${reviews.length !== 1 ? 'es' : ''}</div>
+          </div>
+          
+          <!--div class="rating-distribution">
+            ${ratingBarsHtml}
+          </div-->
+        </div>
+
+        <div class="reviews-list">
+          ${reviewsHtml}
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Agregar event listener al botón
+  const btnAddReview = document.getElementById('btn-add-review');
+  if (btnAddReview) {
+    btnAddReview.addEventListener('click', () => {
+      openReviewModal(productId);
+    });
+  }
+
+  observeElements();
+}
+
+function openReviewModal(productId) {
+  let modal = document.getElementById('review-modal');
+  
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'review-modal';
+    modal.className = 'review-modal';
+    modal.innerHTML = `
+      <div class="review-modal-backdrop"></div>
+      <div class="review-modal-content">
+        <div class="review-modal-header">
+          <h3>Comparte tu Opinión</h3>
+          <button class="review-modal-close" aria-label="Cerrar">✕</button>
+        </div>
+        
+        <form id="review-form" class="review-form">
+          <div class="form-group">
+            <label for="review-name">Tu Nombre</label>
+            <input type="text" id="review-name" name="name" required placeholder="Tu nombre" maxlength="100">
+          </div>
+
+          <div class="form-group">
+            <label for="review-rating">Calificación</label>
+            <div class="rating-input">
+              <input type="radio" id="star5" name="rating" value="5" required>
+              <label for="star5" class="star-label">★</label>
+              <input type="radio" id="star4" name="rating" value="4">
+              <label for="star4" class="star-label">★</label>
+              <input type="radio" id="star3" name="rating" value="3">
+              <label for="star3" class="star-label">★</label>
+              <input type="radio" id="star2" name="rating" value="2">
+              <label for="star2" class="star-label">★</label>
+              <input type="radio" id="star1" name="rating" value="1">
+              <label for="star1" class="star-label">★</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="review-comment">Tu Comentario</label>
+            <textarea id="review-comment" name="comment" required placeholder="Cuéntanos tu experiencia..." maxlength="500" rows="4"></textarea>
+            <small id="char-count">0/500</small>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="review-cancel">Cancelar</button>
+            <button type="submit" class="btn btn-primary" id="review-submit">Enviar Opinión</button>
+          </div>
+
+          <div id="review-success-msg" class="review-success-msg" style="display: none;">
+            ✓ ¡Gracias por tu opinión! Aparecerá pronto.
+          </div>
+          <div id="review-error-msg" class="review-error-msg" style="display: none;"></div>
+        </form>
+      </div>
+    `;
+    document.body.appendChild(modal);
+  }
+
+  // Actualizar el product ID en el formulario
+  const form = document.getElementById('review-form');
+  form.dataset.productId = productId;
+
+  // Event listeners
+  document.getElementById('review-modal-close')?.addEventListener('click', closeReviewModal) || 
+  document.querySelector('.review-modal-close')?.addEventListener('click', closeReviewModal);
+  
+  document.querySelector('.review-modal-backdrop')?.addEventListener('click', closeReviewModal);
+  document.getElementById('review-cancel')?.addEventListener('click', closeReviewModal);
+  
+  // Mostrar modal
+  modal.style.display = 'flex';
+  document.body.classList.add('review-modal-open');
+
+  // Character counter
+  const textarea = document.getElementById('review-comment');
+  const charCount = document.getElementById('char-count');
+  textarea?.addEventListener('input', (e) => {
+    charCount.textContent = `${e.target.value.length}/500`;
+  });
+
+  // Form submission
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    await submitReview(form);
+  });
+}
+
+function closeReviewModal() {
+  const modal = document.getElementById('review-modal');
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.classList.remove('review-modal-open');
+    const form = document.getElementById('review-form');
+    form?.reset();
+    document.getElementById('char-count').textContent = '0/500';
+  }
+}
+
+async function submitReview(form) {
+  const submitBtn = document.getElementById('review-submit');
+  const successMsg = document.getElementById('review-success-msg');
+  const errorMsg = document.getElementById('review-error-msg');
+  const productId = form.dataset.productId;
+
+  const name = document.getElementById('review-name')?.value || '';
+  const rating = document.querySelector('input[name="rating"]:checked')?.value || '';
+  const comment = document.getElementById('review-comment')?.value || '';
+
+  if (!name || !rating || !comment) {
+    errorMsg.textContent = 'Por favor completa todos los campos.';
+    errorMsg.style.display = 'block';
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Enviando...';
+  errorMsg.style.display = 'none';
+  successMsg.style.display = 'none';
+
+  try {
+    const { createClient } = await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm');
+    const SUPABASE_URL = "https://zbqrlyvjgfeycczixgqc.supabase.co/";
+    const SUPABASE_ANON_KEY = "sb_publishable_sE5jMRoQ-SNjuSMWJSY63g_OEGn5h8e";
+    
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const { data, error } = await supabase
+      .from('review_product')
+      .insert([
+        {
+          id_product: productId,
+          qualification: parseInt(rating),
+          name_customer: name,
+          comment_product: comment,
+          created_at: new Date().toISOString()
+        }
+      ]);
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    successMsg.style.display = 'block';
+    form.reset();
+    document.getElementById('char-count').textContent = '0/500';
+
+    // Actualizar las reseñas después de 2 segundos
+    setTimeout(() => {
+      closeReviewModal();
+      obtenerDatos().then(() => {
+        initProductReviews();
+      });
+    }, 2000);
+
+  } catch (error) {
+    console.error('Error al enviar reseña:', error);
+    errorMsg.textContent = 'Error al enviar la opinión. Intenta nuevamente.';
+    errorMsg.style.display = 'block';
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Enviar Opinión';
+  }
+}
+
+function generateStars(rating) {
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 >= 0.5;
+  let html = '';
+
+  for (let i = 1; i <= 5; i++) {
+    if (i <= fullStars) {
+      html += '★';
+    } else if (i === fullStars + 1 && hasHalfStar) {
+      html += '★';
+    } else {
+      html += '☆';
+    }
+  }
+
+  return html;
+}
+
+function escapeHtml(text) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, m => map[m]);
+}
+
