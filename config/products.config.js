@@ -10,6 +10,7 @@ const PRODUCTS_CONFIG = [
   {
     id: "caja-vino",
     nombre: "🍷 Caja de Vino Premium",
+    seo: "Caja de Vino Premium de Artesamía en madera de MDF, grabada a láser y personalizable con nombre o frase. El regalo ideal para papá en el Día del Padre.",
     categoria: "Día del Padre",
     descripcion: "✨ Un brindis con estilo para el mejor ejemplo a seguir 💙 En Artesamía creamos regalos únicos hechos con amor para celebrar como se merece",
     descripcion2: "🌟Es el obsequio ideal para sorprenderlo en su día y dejar un recuerdo emotivo que combina elegancia, cariño y utilidad.",
@@ -27,6 +28,7 @@ const PRODUCTS_CONFIG = [
    {
     id: "six-pack",
     nombre: "🍺 Caja Porta Cervezas x6",
+    seo: "Caja Porta Cervezas x6 en madera de MDF grabada a láser, personalizable con nombre o frase. El regalo perfecto para papá cervecero en el Día del Padre.",
     categoria: "Día del Padre",
     descripcion: "🎉 Este Día del Padre, regálale algo especial ❤️ En Artesamía creamos detalles únicos como esta hermosa caja de madera fabricada en MDF ✨",
     descripcion2: "✨Es el regalo ideal para sorprender a papá en su día o para complementar sus momentos de celebración favoritos.",
@@ -44,6 +46,7 @@ const PRODUCTS_CONFIG = [
     {
     id: "four-pack",
     nombre: "🍻 Caja Porta Cervezas x4",
+    seo: "Caja Porta Cervezas x4 en madera de MDF grabada a láser, personalizable con nombre o frase. El regalo original y práctico para papá en el Día del Padre.",
     categoria: "Día del Padre",
     descripcion: "💙 Un detalle original y práctico para homenajear a papá 🌟 En Artesamía creamos regalos únicos hechos con amor para celebrar como se merece ✨",
     descripcion2: "✨Es el obsequio ideal para sorprenderlo en su día y dejar un recuerdo emotivo que usará siempre.",
@@ -61,6 +64,7 @@ const PRODUCTS_CONFIG = [
   {
     id: "caja-whisky",
     nombre: "🥃 Caja de Whisky Premium",
+    seo: "Caja de Whisky Premium de Artesamía en madera de MDF, grabada a láser y personalizable con nombre o frase. El regalo elegante para papá en su gran día.",
     categoria: "Día del Padre",
     descripcion: "🎁 ¡El regalo perfecto para papá está aquí! 🥃 En Artesamía creamos recuerdos únicos para sorprender a ese superhéroe sin capa con un detalle elegante ✨",
     descripcion2: "Es el obsequio ideal para celebrar este Día del Padre con un regalo que combina estilo, cariño y buen gusto.",
@@ -79,6 +83,7 @@ const PRODUCTS_CONFIG = [
   {
     id: "porta-celular-papa",
     nombre: "📱 Soporte de Celular con Foto",
+    seo: "Soporte de Celular con Foto personalizado para papá. Grabado a láser en madera con dedicatoria especial. El regalo útil y emotivo para el Día del Padre.",
     categoria: "Día del Padre",
     descripcion: "Un regalo con emoción y utilidad para este Día del Padre ✨ En Artesamía creamos recuerdos únicos hechos con amor para sorprender a papá en su día. 🌟",
     descripcion2: "Es el detalle ideal para colocar en su escritorio, velador o ese rincón especial, combinando practicidad y sentimiento.",
@@ -97,6 +102,7 @@ const PRODUCTS_CONFIG = [
     {
     id: "organizador-celular",
     nombre: "📱 Estación de Organización",
+    seo: "Estación Organizadora de escritorio en madera, personalizable a láser. Ordena smartphone, llaves y más. El regalo práctico y moderno para el Día del Padre.",
     categoria: "Día del Padre",
     descripcion: "¿Cansado de perder las llaves o no saber dónde dejaste el teléfono? 🪵📱",
     descripcion2: "Mantén tus esenciales diarios en un solo lugar. Transforma el caos de tu mesa en un espacio con estilo y orden. ✨",
@@ -114,6 +120,7 @@ const PRODUCTS_CONFIG = [
     {
     id: "cuadro-super-papa",
     nombre: "📸 Cuadro Collage Papá",
+    seo: "Cuadro Collage Papá en madera con tus fotos y nombre de los hijos grabado a láser. El regalo más emotivo y especial para el Día del Padre de Artesamía.",
     categoria: "Día del Padre",
     descripcion: "✨ El recuerdo más emocionante para el mejor papá ❤️",
     descripcion2: "Es el obsequio ideal para sorprenderlo en su día o decorar su oficina, combinando un diseño moderno con un profundo valor sentimental.",
@@ -132,6 +139,7 @@ const PRODUCTS_CONFIG = [
     {
     id: "pack-dia-del-padre-1",
     nombre: "🍻 Set Cervecero Premium",
+    seo: "Set Cervecero Premium: caja para x6, destapador y posavasos de madera grabados a láser. El regalo completo y personalizado para papá en el Día del Padre.",
     categoria: "Día del Padre",
     descripcion: "✨ El regalo perfecto para celebrar al rey de la casa 👨‍👦",
     descripcion2: "Es el obsequio ideal para sus momentos de relajo, combinando diseño rústico, utilidad y todo el cariño que él se merece.",
@@ -151,6 +159,7 @@ const PRODUCTS_CONFIG = [
      {
     id: "pack-dia-del-padre-2",
     nombre: "🍷 Set Vino Premium",
+    seo: "Set Vino Premium: caja porta vino y posavasos de madera grabados a láser. El regalo elegante y personalizado para papá en el Día del Padre de Artesamía.",
     categoria: "Día del Padre",
     descripcion: "✨ Un brindis con estilo para el mejor ejemplo a seguir 💙",
     descripcion2: "Es el obsequio ideal para sus momentos de relajo, combinando diseño rústico, utilidad y todo el cariño que él se merece.",
@@ -169,6 +178,7 @@ const PRODUCTS_CONFIG = [
        {
     id: "pack-dia-del-padre-3",
     nombre: "🔥 Set Parrillero Premium",
+    seo: "Set Parrillero Premium: caja x6, destapador de pared y soplador en madera personalizada y grabada a láser. El regalo ideal para el papá asador del domingo.",
     categoria: "Día del Padre",
     descripcion: "🍺 ¡El rito del fin de semana se respeta y se mejora! 🔪🥩",
     descripcion2: "Si tu papá no perdona el asadito y quieres coronarte con el mejor regalo para tu viejo, este pack parrillero y cervecero es lo que necesitas. 🪵✨",
@@ -188,6 +198,7 @@ const PRODUCTS_CONFIG = [
   {
     id: "tabla-cocina",
     nombre: "🔪🥩 Tabla Asado / Gourmet Personalizada",
+    seo: "Tabla de Asado o Gourmet personalizada en madera con canal de goteo, grabada a láser. El regalo práctico e ideal para papá cocinero o asador los domingos.",
     categoria: "Día del Padre",
     descripcion: "🔥 El ingrediente secreto para los mejores momentos con papá 👨‍🍳",
     descripcion2: "Es el regalo ideal para sus asados de domingo o para lucirse en la cocina, combinando un diseño rústico, gran utilidad y un valor sentimental único.",
@@ -203,29 +214,10 @@ const PRODUCTS_CONFIG = [
     destacado: true,
     tags: ["Día del Padre", "Regalos"]
   },
-  {
-    id: "box-bienvenida",
-    nombre: "🎁Box de Bienvenida",
-    categoria: "Bebé",
-    descripcion: "Regala momentos, ternura y recuerdos con nuestras cajitas personalizadas 🍼💖",
-    descripcion2: "Arma tu pack con:",
-    caracteristicas: [
-      "🧸 Mordedor",
-      "🐰 Sonajero",
-      "🍼 Porta chupete",
-      "💆‍♀️ Cepillo y peine de madera personalizados",
-      "🌿 Placa grabada para brazalete",
-      "🎁 Caja rígida personalizada"
-    ],
-    precio: "Desde $7.000",
-    imagenes: ["image_1.png", "image_2.png", "image_3.png", "image_4.png"],
-    disponible: true,
-    destacado: true,
-    tags: ["Baby Shower", "Bebés"]
-  },
-  {
+   {
     id: "placa-bienvenida",
     nombre: "❤️ Placa de Bienvenida",
+    seo: "Placa de Bienvenida en madera grabada a láser con espacio para el brazalete de nacimiento. El recuerdo más especial y personalizado para celebrar al bebé.",
     categoria: "Bebé",
     descripcion: "Guarda el brazalete de nacimiento de tu bebé en una plaquita única, personalizada con su nombre y hecha con amor 💛",
     descripcion2: "Transforma un momento especial, en algo eterno 🫶",
@@ -240,9 +232,65 @@ const PRODUCTS_CONFIG = [
     destacado: true,
     tags: ["Baby Shower", "Bebés"]
   },
+  {
+    id: "box-bienvenida-S",
+    nombre: "🎁Box de Bienvenida Small",
+    seo: "Box de Bienvenida para bebé personalizado: mordedor y placa grabada en madera. El regalo ideal para baby shower o nacimiento.",
+    categoria: "Bebé",
+    descripcion: "Regala momentos, ternura y recuerdos con nuestras cajitas personalizadas 🍼💖",
+    caracteristicas: [
+      "🧸 Mordedor",
+      "🌿 Placa grabada para brazalete",
+      "🎁 Caja rígida personalizada"
+    ],
+    precio: "$9.000",
+    imagenes: ["image_1.png", "image_2.png"],
+    disponible: true,
+    destacado: true,
+    tags: ["Baby Shower", "Bebés"]
+  },
+    {
+    id: "box-bienvenida-M",
+    nombre: "🎁Box de Bienvenida Medium",
+    seo: "Box de Bienvenida para bebé personalizado: mordedor, cepillo, peine y placa grabada en madera. El regalo ideal para baby shower o nacimiento.",
+    categoria: "Bebé",
+    descripcion: "Regala momentos, ternura y recuerdos con nuestras cajitas personalizadas 🍼💖",
+    caracteristicas: [
+      "🧸 Mordedor",
+      "💆‍♀️ Cepillo y peine de madera con grabado personalizados",
+      "🌿 Placa grabada para brazalete",
+      "🎁 Caja rígida personalizada"
+    ],
+    precio: "$14.000",
+    imagenes: ["image_1.png", "image_2.png"],
+    disponible: true,
+    destacado: true,
+    tags: ["Baby Shower", "Bebés"]
+  },
+    {
+    id: "box-bienvenida-L",
+    nombre: "🎁Box de Bienvenida Large",
+    seo: "Box de Bienvenida para bebé personalizado: mordedor, sonajero, porta chupete, cepillo y placa grabada en madera. El regalo ideal para baby shower o nacimiento.",
+    categoria: "Bebé",
+    descripcion: "Regala momentos, ternura y recuerdos con nuestras cajitas personalizadas 🍼💖",
+    caracteristicas: [
+      "🧸 Mordedor",
+      "🐰 Sonajero",
+      "🍼 Porta chupete",
+      "💆‍♀️ Cepillo y peine de madera con grabado personalizados",
+      "🌿 Placa grabada para brazalete",
+      "🎁 Caja rígida personalizada"
+    ],
+    precio: "$25.000",
+    imagenes: ["image_1.png", "image_2.png"],
+    disponible: true,
+    destacado: true,
+    tags: ["Baby Shower", "Bebés"]
+  },
     {
     id: "libro-padrinos",
     nombre: "✨ Libro Padrinos",
+    seo: "Libro de Padrinos con tapas de madera grabada y encuadernación ecocuero. El regalo más original para invitar a tus padrinos de una manera muy especial.",
     categoria: "Bebé",
     categorias: ["Bebé", "Eventos"],
     descripcion: "🧚‍♂️✨ ¿Y si les preguntamos de una forma mágica...? Este libro no es solo un regalo… ¡es una gran pregunta! 💛",
@@ -261,6 +309,7 @@ const PRODUCTS_CONFIG = [
    {
     id: "placa-bienvenida-animalitos",
     nombre: "🌿 Placa de Bienvenida",
+    seo: "Placa de Nacimiento redonda y personalizada en madera con nombre, fecha, hora, peso y tiernos animalitos. Perfecta para decorar la habitación del bebé.",
     categoria: "Bebé",
     descripcion: "🐘🦒🐻 <br> En Artesamía creamos recuerdos únicos como esta hermosa placa de nacimiento redonda personalizada ✨",
     descripcion2: "🎁 Perfecta para decorar la habitación del bebé o regalar en su llegada 💛",
@@ -279,6 +328,7 @@ const PRODUCTS_CONFIG = [
      {
     id: "placa-bienvenida-colgante",
     nombre: "🐘 Placa de Bienvenida",
+    seo: "Placa de Nacimiento colgante personalizada en madera con animalitos, nombre y fecha. Ideal para decorar la habitación del bebé o regalar antes de su llegada.",
     categoria: "Bebé",
     descripcion: "🐘🦒🐻 <br> En Artesamía creamos recuerdos únicos como esta hermosa placa de nacimiento para regalar✨",
     descripcion2: "🎁 Perfecta para decorar la habitación del bebé o regalar previo a su llegada 💛",
@@ -297,6 +347,7 @@ const PRODUCTS_CONFIG = [
    {
     id: "placa-bienvenida-body",
     nombre: "❤️ Placa de Bienvenida Body",
+    seo: "Placa de Nacimiento Body personalizada en madera con nombre, fecha, hora, peso y medida grabados a láser. El recuerdo más especial para celebrar al bebé.",
     categoria: "Bebé",
     descripcion: "💛 En Artesamía celebramos cada llegada con amor 💛",
     descripcion2: "Sorprende a la familia con una placa de nacimiento personalizada como esta 🍼✨",
@@ -315,6 +366,7 @@ const PRODUCTS_CONFIG = [
      {
     id: "cuadro-conmemorativo",
       nombre: "📸 Cuadro Conmemorativo",
+      seo: "Cuadro Conmemorativo del primer año del bebé personalizado en madera. Con foto, nombre y frase grabados a láser. El regalo más especial de cumpleaños.",
       categoria: "Bebé",
       descripcion: "🍼 Un año de vida, mil historias que contar 💛En Artesamía creamos recuerdos únicos como este hermoso marco en madera personalizado ✨",
       descripcion2: "🎁 Ideal como regalo de cumpleaños o decoración de habitación infantil.",
@@ -333,6 +385,7 @@ const PRODUCTS_CONFIG = [
   {
     id: "invitaciones-1",
     nombre: "💌 Invitaciones de Madera Premium",
+    seo: "Invitaciones de Madera Premium grabadas a láser para matrimonios y bautizos. Personalizadas con nombres y fechas. Un recuerdo elegante que nadie olvidará.",
     categoria: "Eventos",
     descripcion: "✨ Invitaciones que enamoran desde el primer momento 💌 ✨",
     descripcion2: "Es la opción ideal para matrimonios, bautizos o cualquier ocasión especial.",
@@ -351,6 +404,7 @@ const PRODUCTS_CONFIG = [
   {
     id: "invitaciones-2",
     nombre: "📸 Portarretratos Personalizados",
+    seo: "Portarretratos magnéticos personalizados para bautizos, baby showers y cumpleaños. Con foto impresa y grabado a láser. El souvenir que tus invitados amarán.",
     categoria: "Eventos",
     descripcion: "💖 Haz que cada momento especial sea inolvidable con recuerdos únicos para bautizos, cumpleaños, baby showers y más. 🌟",
     descripcion2: "Es el souvenir ideal para regalar a tus invitados y dejar un detalle emotivo que combina diseño, cariño y utilidad en su día a día.",
@@ -369,6 +423,7 @@ const PRODUCTS_CONFIG = [
   {
     id: "velas-baby-shower",
     nombre: "🕯️ Velas Aromáticas para Baby Shower",
+    seo: "Velas Aromáticas personalizadas para Baby Shower con nombre y fecha del evento. El souvenir perfecto para agradecer a tus invitados con un detalle único.",
     categoria: "Eventos",
     descripcion: "👶💛 Celebra la llegada del bebé con un recuerdo único con detalles llenos de ternura para que tu baby shower sea un momento inolvidable. ✨",
     descripcion2: "Es el souvenir ideal para regalar a tus invitados, dejando un recuerdo delicado que combina aroma, cariño y utilidad.",
@@ -386,6 +441,7 @@ const PRODUCTS_CONFIG = [
     {
     id: "libro-aniversario",
     nombre: "📒 Libro de Aniversario de Matrimonio",
+    seo: "Libro de Aniversario de Matrimonio personalizado con tapas de madera y encuadernación rústica. El regalo ideal para celebrar fechas especiales con amor.",
     categoria: "Eventos",
     descripcion: "❤️ ¡El amor se celebra en cada detalle! ✨",
     descripcion2: "Es el regalo ideal para conmemorar matrimonios o cualquier fecha que haya marcado sus vidas. 💍✨",
@@ -403,6 +459,7 @@ const PRODUCTS_CONFIG = [
   {
     id: "llavero-recuerdo",
     nombre: "🔑 Llaveros de Madera Personalizados",
+    seo: "Llaveros de Madera Personalizados grabados a láser con nombre o frase especial. Incluyen bolsita de lino. El regalo ideal para eventos y agradecimientos.",
     categoria: "Eventos",
     descripcion: "✨ ¡Un detalle único para regalar o regalarte!",
     descripcion2: "Es el regalo ideal para agradecimientos, fechas importantes o simplemente como un recordatorio diario lleno de significado.",
@@ -421,6 +478,7 @@ const PRODUCTS_CONFIG = [
   {
     id: "recuerdo-profesor",
     nombre: "🎀 Reconocimiento para Profesores",
+    seo: "Reconocimiento para Profesores personalizado en madera MDF, grabado a láser con nombre y dedicatoria. El detalle perfecto para ese docente que dejó huella.",
     categoria: "Eventos",
     descripcion: "✨ Un detalle único que marca la diferencia para homenajear a quienes dejan huella con su enseñanza. 🌟",
     descripcion2: "Es el reconocimiento ideal para regalar como un agradecimiento especial para ese profesor o profesora inolvidable.",
