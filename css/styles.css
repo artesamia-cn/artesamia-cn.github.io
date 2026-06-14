@@ -41,6 +41,7 @@
 
 /* ── Reset & Base ────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+[hidden] { display: none !important; }
 
 html { scroll-behavior: smooth; font-size: 16px; }
 
@@ -1956,6 +1957,207 @@ body.cart-open {
     padding: 0.5rem;
     border-left: 3px solid #D4897A;
     font-size: clamp(0.75rem, 1.3vw, 0.8rem);
+  }
+}
+
+/* ══════════════════════════════════════════════════
+   TESTIMONIOS — Carrusel de reseñas
+   ══════════════════════════════════════════════════ */
+
+.testimonios-wrapper {
+  margin-top: 3rem;
+  position: relative;
+}
+
+/* Carrusel */
+.testimonios-carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.testimonios-carousel-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.testimonios-viewport {
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.testimonios-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Tarjeta individual — ancho fijado por JS */
+.testimonio-card {
+  flex-shrink: 0;
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+}
+
+.testimonio-photo {
+  width: 100%;
+  aspect-ratio: 4/3;
+  overflow: hidden;
+  background: var(--color-surface-2);
+}
+
+.testimonio-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.testimonio-card:hover .testimonio-img {
+  transform: scale(1.03);
+}
+
+.testimonio-img-fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-rose-100);
+}
+
+.testimonio-img-fallback span {
+  font-size: 4rem;
+  font-weight: 700;
+  color: var(--color-rose-300);
+  font-family: var(--font-heading);
+}
+
+.testimonio-footer {
+  padding: 1.25rem 1.5rem 1.5rem;
+  text-align: center;
+}
+
+.testimonio-stars {
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+  margin-bottom: 0.6rem;
+}
+
+.testimonio-star {
+  font-size: 1.3rem;
+  color: var(--color-border);
+  transition: color 0.2s;
+}
+
+.testimonio-star.filled {
+  color: #F5A623;
+}
+
+.testimonio-name {
+  font-weight: 700;
+  color: var(--color-text);
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.testimonio-comment {
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.testimonio-date {
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+}
+
+/* Botones prev/next — flotan sobre el viewport */
+.testimonios-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(6px);
+  border: 1.5px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-rose-400);
+  transition: var(--transition);
+  z-index: 2;
+}
+
+.testimonios-nav:hover {
+  background: var(--color-rose-100);
+  border-color: var(--color-rose-300);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.testimonios-prev { left: 8px; }
+.testimonios-next { right: 8px; }
+
+/* Dots */
+.testimonios-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.testimonios-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-rose-200);
+  transition: var(--transition);
+}
+
+.testimonios-dot.active {
+  background: var(--color-rose-300);
+  transform: scale(1.25);
+}
+
+/* Estado de carga / error */
+.testimonios-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.testimonios-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--color-rose-200);
+  border-top-color: var(--color-rose-300);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Responsive testimonios */
+@media (max-width: 600px) {
+  .testimonios-prev { left: 4px; }
+  .testimonios-next { right: 4px; }
+
+  .testimonios-nav {
+    width: 36px;
+    height: 36px;
   }
 }
 

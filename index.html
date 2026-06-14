@@ -196,6 +196,54 @@
       </div>
     </section>
 
+    <!-- ══════════════════════════════════════════
+         TESTIMONIOS — Reseñas de clientes
+         ══════════════════════════════════════════ -->
+    <section id="testimonios" class="section section-alt" aria-labelledby="testimonios-heading" style="padding-top: 30px;" hidden>
+      <div class="container">
+        <div class="section-header center fade-up">
+          <span class="section-label">⭐ Testimonios</span>
+          <h2 id="testimonios-heading">Lo que dicen nuestros clientes</h2>
+          <p>Cada foto es una sonrisa real. Gracias a quienes comparten su regalo con nosotros.</p>
+        </div>
+
+        <div class="testimonios-wrapper fade-up">
+
+          <div class="testimonios-carousel" id="testimonios-carousel" hidden>
+            <div class="testimonios-carousel-wrap">
+              <button class="testimonios-nav testimonios-prev" id="testimonios-prev" aria-label="Reseña anterior">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+              </button>
+
+              <div class="testimonios-viewport" id="testimonios-viewport">
+                <div class="testimonios-track" id="testimonios-track">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+
+              <button class="testimonios-nav testimonios-next" id="testimonios-next" aria-label="Reseña siguiente">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+              </button>
+            </div>
+
+            <div class="testimonios-dots" id="testimonios-dots" role="tablist" aria-label="Selector de reseña"></div>
+          </div>
+
+          <div id="testimonios-loading" class="testimonios-state">
+            <div class="testimonios-spinner"></div>
+            <p>Cargando reseñas...</p>
+          </div>
+          <div id="testimonios-empty" class="testimonios-state" hidden>
+            <p>Aún no hay reseñas publicadas.</p>
+          </div>
+          <div id="testimonios-error" class="testimonios-state" hidden>
+            <p>No fue posible cargar las reseñas. Intenta más tarde.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <!-- ══════════════════════════════════════════
@@ -294,6 +342,7 @@
   <!-- Scripts -->
   <script src="config/site.config.js"></script>
   <script src="config/products.config.js"></script>
+  <script src="config/supabase.config.js"></script>
   <script src="js/main.js"></script>
 
 </body>

@@ -128,7 +128,7 @@ function generateProductHTML(product) {
   <!-- NAVBAR -->
   <nav class="navbar" id="navbar" role="navigation" aria-label="Menú principal">
     <div class="container">
-      <a href="../../index.html#top" class="nav-logo" id="nav-logo">
+      <a href="../../index.html" class="nav-logo" id="nav-logo">
         <span class="nav-logo-icon">
           <img src="../../assets/logos/logo_birds.png" alt="Artesamía" loading="lazy" />
         </span>
@@ -276,7 +276,7 @@ function generateProductHTML(product) {
       <div class="footer-grid">
 
         <div class="footer-brand">
-          <a href="../../index.html#top" class="nav-logo-brand" aria-label="Inicio">
+          <a href="../../index.html" class="nav-logo-brand" aria-label="Inicio">
             <span class="nav-logo-icon">
               <img src="../../assets/logos/logo_birds.png" alt="Artesamía" loading="lazy" />
             </span>
@@ -290,7 +290,7 @@ function generateProductHTML(product) {
         <div class="footer-col">
           <h4>Navegación</h4>
           <nav class="footer-links">
-            <a href="../../index.html#top">Inicio</a>
+            <a href="../../index.html">Inicio</a>
             <a href="../../pages/nosotros.html">Nosotros</a>
             <a href="../../pages/catalogo.html">Catálogo</a>
             <a href="../../pages/empresas.html">Empresas</a>
