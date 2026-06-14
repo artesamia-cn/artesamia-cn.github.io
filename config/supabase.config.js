@@ -1,6 +1,6 @@
 const SUPABASE_CONFIG = {
-  url:     '___VALOR_API_URL___',
-  anonKey: '___VALOR_API_KEY___'
+  API_URL: '___VALOR_API_URL___',
+  API_KEY: '___VALOR_API_KEY___'
 };
 
 if (typeof window !== 'undefined') window.SUPABASE_CONFIG = SUPABASE_CONFIG;
