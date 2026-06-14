@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initContacto();
   initScrollAnimations();
   initScrollTop();
+  initTestimonios();
 });
 
  
@@ -976,6 +977,212 @@ function observeElements() {
     }
     observer.observe(el);
   });
+}
+
+/* ══════════════════════════════════════════════════
+   TESTIMONIOS — Carrusel de reseñas desde Supabase
+   ══════════════════════════════════════════════════ */
+async function initTestimonios() {
+  const section = document.getElementById('testimonios');
+  if (!section) return;
+
+  const cfg = window.SUPABASE_CONFIG;
+  const loading = document.getElementById('testimonios-loading');
+  const empty = document.getElementById('testimonios-empty');
+  const errorEl = document.getElementById('testimonios-error');
+  const carousel = document.getElementById('testimonios-carousel');
+
+  // Si no hay credenciales configuradas, la sección permanece oculta
+  if (!cfg || !cfg.API_URL || !cfg.API_KEY) return;
+
+  section.hidden = false;
+
+  try {
+    const res = await fetch(
+      `${cfg.API_URL.replace(/\/$/, '')}/rest/v1/review?select=*&visible=eq.true&order=created_at.desc&limit=10`,
+      {
+        headers: {
+          'apikey': cfg.API_KEY,
+          'Authorization': `Bearer ${cfg.API_KEY}`,
+          'Accept': 'application/json'
+        }
+      }
+    );
+
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const reviews = await res.json();
+
+    loading.hidden = true;
+
+    if (!Array.isArray(reviews) || reviews.length === 0) {
+      empty.hidden = false;
+      return;
+    }
+
+    carousel.hidden = false;
+    buildTestimoniosCarousel(reviews);
+    observeElements();
+
+  } catch (err) {
+    loading.hidden = true;
+    errorEl.hidden = false;
+  }
+}
+
+function buildTestimoniosCarousel(reviews) {
+  const track = document.getElementById('testimonios-track');
+  const dotsEl = document.getElementById('testimonios-dots');
+  const prevBtn = document.getElementById('testimonios-prev');
+  const nextBtn = document.getElementById('testimonios-next');
+  const viewport = document.getElementById('testimonios-viewport');
+  if (!track || !dotsEl || !prevBtn || !nextBtn || !viewport) return;
+
+  let current = 0;
+  let autoTimer = null;
+  let visibleCount = 3;
+  let cardPx = 0;
+  const GAP = 24; // debe coincidir con gap: 24px en CSS
+
+  function byteaToDataUrl(raw) {
+    if (!raw) return null;
+    if (typeof raw === 'string') {
+      if (raw.startsWith('\\x') || raw.startsWith('0x')) {
+        const hex = raw.replace(/^\\x|^0x/i, '');
+        try {
+          const bytes = new Uint8Array(hex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+          let bin = '';
+          bytes.forEach(b => { bin += String.fromCharCode(b); });
+          return `data:image/jpeg;base64,${btoa(bin)}`;
+        } catch { return null; }
+      }
+      return `data:image/jpeg;base64,${raw}`;
+    }
+    return null;
+  }
+
+  function renderStars(n) {
+    const val = Math.max(1, Math.min(5, Number(n) || 5));
+    return Array.from({ length: 5 }, (_, i) =>
+      `<span class="testimonio-star ${i < val ? 'filled' : ''}" aria-hidden="true">★</span>`
+    ).join('');
+  }
+
+  function formatDate(ts) {
+    if (!ts) return '';
+    return new Date(ts).toLocaleDateString('es-CL', { year: 'numeric', month: 'long' , day: 'numeric' });
+  }
+
+  // Render tarjetas
+  track.innerHTML = reviews.map((r, i) => {
+    const imgSrc = byteaToDataUrl(r.image);
+    const imgHtml = imgSrc
+      ? `<div class="testimonio-photo"><img src="${imgSrc}" alt="Foto de producto de ${r.user_name || 'cliente'}" loading="lazy" class="testimonio-img"></div>`
+      : `<div class="testimonio-img-fallback" aria-hidden="true"></div>`;
+    return `
+      <div class="testimonio-card" role="tabpanel" aria-label="Reseña ${i + 1} de ${reviews.length}">
+        
+        <div class="testimonio-footer">
+          <div class="testimonio-stars" aria-label="${r.qualification || 5} estrellas">${renderStars(r.qualification)}</div>
+          <p class="testimonio-name">${r.user_name || 'Cliente'}</p>
+          <p class="testimonio-comment">${r.comment || 'Sin comentario'}</p>
+          ${imgHtml}
+          <p class="testimonio-date">${formatDate(r.created_at)}</p>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  function getVisibleCount() {
+    if (window.innerWidth < 640) return 1;
+    if (window.innerWidth < 960) return 2;
+    return Math.min(3, reviews.length);
+  }
+
+  function maxIdx() {
+    return Math.max(0, reviews.length - visibleCount);
+  }
+
+  function updateCardSizes() {
+    visibleCount = getVisibleCount();
+    cardPx = (viewport.offsetWidth - (visibleCount - 1) * GAP) / visibleCount;
+    track.querySelectorAll('.testimonio-card').forEach(c => {
+      c.style.width = cardPx + 'px';
+    });
+  }
+
+  function applyTranslation() {
+    track.style.transform = `translateX(-${current * (cardPx + GAP)}px)`;
+  }
+
+  function syncDots() {
+    dotsEl.querySelectorAll('.testimonios-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+      d.setAttribute('aria-selected', String(i === current));
+    });
+  }
+
+  function rebuildDots() {
+    const positions = maxIdx() + 1;
+    const needNav = positions > 1;
+    prevBtn.hidden = !needNav;
+    nextBtn.hidden = !needNav;
+    dotsEl.hidden = !needNav;
+    if (!needNav) { dotsEl.innerHTML = ''; return; }
+
+    dotsEl.innerHTML = Array.from({ length: positions }, (_, i) =>
+      `<button class="testimonios-dot ${i === current ? 'active' : ''}" role="tab" aria-selected="${i === current}" aria-label="Posición ${i + 1}"></button>`
+    ).join('');
+
+    dotsEl.querySelectorAll('.testimonios-dot').forEach((d, i) => {
+      d.addEventListener('click', () => { goTo(i); startAuto(); });
+    });
+  }
+
+  function goTo(index) {
+    const total = maxIdx();
+    current = total <= 0 ? 0 : ((index % (total + 1)) + (total + 1)) % (total + 1);
+    applyTranslation();
+    syncDots();
+  }
+
+  function startAuto() {
+    stopAuto();
+    if (maxIdx() <= 0) return;
+    autoTimer = setInterval(() => goTo(current >= maxIdx() ? 0 : current + 1), 5000);
+  }
+
+  function stopAuto() {
+    if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+  }
+
+  function layout() {
+    updateCardSizes();
+    current = Math.min(current, maxIdx());
+    applyTranslation();
+    rebuildDots();
+  }
+
+  prevBtn.addEventListener('click', () => { goTo(current - 1); startAuto(); });
+  nextBtn.addEventListener('click', () => { goTo(current + 1); startAuto(); });
+
+  let startX = 0;
+  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) { goTo(current + (diff > 0 ? 1 : -1)); startAuto(); }
+  }, { passive: true });
+
+  viewport.addEventListener('mouseenter', stopAuto);
+  viewport.addEventListener('mouseleave', startAuto);
+
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(layout, 150);
+  });
+
+  layout();
+  startAuto();
 }
 
 /* ══════════════════════════════════════════════════

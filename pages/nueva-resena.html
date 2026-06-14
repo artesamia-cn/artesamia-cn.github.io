@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deja tu Reseña | Artesamía</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/png" href="../assets/logos/favicon-32x32.png" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <style>
+    body { background: var(--color-surface); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 2rem 1rem; }
+
+    .resena-card {
+      background: var(--color-white);
+      border-radius: var(--radius-xl);
+      padding: 2.5rem 2rem;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--color-border);
+      width: 100%;
+      max-width: 500px;
+    }
+
+    .resena-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .resena-logo img { height: 36px; width: auto; }
+    .resena-logo img:last-child { height: 26px; }
+
+    .resena-header { text-align: center; margin-bottom: 2rem; }
+    .resena-header h1 { font-size: clamp(1.3rem, 3vw, 1.7rem); margin: 0.5rem 0; }
+
+    .form-group { margin-bottom: 1.5rem; }
+    .form-label { display: block; font-weight: 700; color: var(--color-text); font-size: 0.9rem; margin-bottom: 0.5rem; }
+    .form-hint { font-size: 0.78rem; color: var(--color-text-light); margin-top: 0.3rem; }
+
+    /* ── Contador de caracteres ── */
+    .char-counter {
+      display: block;
+      text-align: right;
+      font-size: 0.78rem;
+      color: var(--color-text-light);
+      margin-top: 0.3rem;
+      transition: color 0.2s;
+    }
+    .char-counter.warning { color: #e65100; }
+    .char-counter.error   { color: #c62828; font-weight: 700; }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1.5px solid var(--color-border);
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--color-text);
+      background: var(--color-bg);
+      transition: border-color 0.2s;
+    }
+    .form-input:focus { outline: none; border-color: var(--color-rose-300); }
+
+    /* ── Stars ── */
+    .stars-input {
+      display: flex;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+      gap: 4px;
+    }
+    .stars-input input[type="radio"] { display: none; }
+    .stars-input label {
+      font-size: 2.4rem;
+      color: var(--color-border);
+      cursor: pointer;
+      transition: color 0.1s;
+      line-height: 1;
+      user-select: none;
+    }
+    .stars-input label:hover,
+    .stars-input label:hover ~ label,
+    .stars-input input[type="radio"]:checked ~ label {
+      color: #F5A623;
+    }
+
+    /* ── Image upload ── */
+    .upload-label {
+      display: block;
+      border: 2px dashed var(--color-rose-200);
+      border-radius: var(--radius-md);
+      padding: 1.75rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .upload-label:hover { border-color: var(--color-rose-300); background: var(--color-rose-100); }
+    .upload-icon { font-size: 2rem; display: block; margin-bottom: 0.4rem; }
+    .upload-label p { font-size: 0.88rem; color: var(--color-text-muted); margin: 0; }
+
+    .img-preview { margin-top: 1rem; border-radius: var(--radius-md); overflow: hidden; display: none; }
+    .img-preview img { width: 100%; height: 200px; object-fit: cover; display: block; }
+
+    /* ── Submit ── */
+    .btn-resena { width: 100%; justify-content: center; margin-top: 0.5rem; font-size: 1rem; }
+    .btn-resena:disabled { opacity: 0.7; cursor: not-allowed; transform: none !important; }
+
+    /* ── Feedback ── */
+    .resena-feedback {
+      display: none;
+      margin-top: 1.25rem;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+    .resena-feedback.success { display: block; background: #e8f5e9; color: #2e7d32; border: 1px solid #a5d6a7; }
+    .resena-feedback.error   { display: block; background: #fce4ec; color: #c62828; border: 1px solid #ef9a9a; }
+  </style>
+</head>
+<body>
+
+  <div class="resena-card">
+
+    <div class="resena-logo">
+      <img src="../assets/logos/logo_birds.png" alt="Artesamía" />
+      <img src="../assets/logos/logo_nombre-p-500.png" alt="Artesamía" />
+    </div>
+
+    <div class="resena-header">
+      <span class="section-label">📸 Reseña de cliente</span>
+      <h1>¡Nos encanta saber de ti!</h1>
+      <p>Comparte una foto de tu regalo y dinos cómo fue tu experiencia.</p>
+    </div>
+
+    <form id="resena-form" novalidate>
+
+      <!-- Nombre -->
+      <div class="form-group">
+        <label class="form-label" for="resena-nombre">Tu nombre *</label>
+        <input class="form-input" type="text" id="resena-nombre" placeholder="Ej: María González" autocomplete="name" required />
+      </div>
+
+      <!-- Comentario -->
+      <div class="form-group">
+        <label class="form-label" for="resena-comentario">Tu comentario *</label>
+        <textarea class="form-input" id="resena-comentario" placeholder="Cuéntanos tu experiencia..." rows="4" required></textarea>
+        <span class="char-counter" id="char-counter">0 / 500</span>
+      </div>
+
+      <!-- Estrellas -->
+      <div class="form-group">
+        <span class="form-label">Tu calificación *</span>
+        <div class="stars-input" role="radiogroup" aria-label="Calificación de 1 a 5 estrellas">
+          <input type="radio" name="qualification" id="star5" value="5" />
+          <label for="star5" title="5 estrellas">★</label>
+          <input type="radio" name="qualification" id="star4" value="4" />
+          <label for="star4" title="4 estrellas">★</label>
+          <input type="radio" name="qualification" id="star3" value="3" />
+          <label for="star3" title="3 estrellas">★</label>
+          <input type="radio" name="qualification" id="star2" value="2" />
+          <label for="star2" title="2 estrellas">★</label>
+          <input type="radio" name="qualification" id="star1" value="1" />
+          <label for="star1" title="1 estrella">★</label>
+        </div>
+      </div>
+
+      <!-- Foto -->
+      <div class="form-group">
+        <span class="form-label">Foto de tu producto</span>
+        <label class="upload-label" for="resena-imagen">
+          <span class="upload-icon">📷</span>
+          <p id="upload-text">Toca aquí para subir una foto</p>
+          <p class="form-hint">JPG, PNG o WEBP · Máx. 5 MB</p>
+        </label>
+        <input type="file" id="resena-imagen" accept="image/*" style="display:none;" />
+        <div class="img-preview" id="img-preview">
+          <img id="preview-img" src="" alt="Vista previa de tu foto" />
+        </div>
+      </div>
+
+      <!-- Enviar -->
+      <button type="submit" class="btn btn-primary btn-resena" id="resena-submit">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+        Enviar reseña
+      </button>
+
+      <div class="resena-feedback" id="resena-success">
+        🎉 <strong>¡Muchas gracias por tu reseña!</strong><br>
+        La revisaremos y la publicaremos en el sitio pronto.
+      </div>
+      <div class="resena-feedback" id="resena-error">
+        ❌ <strong>Ocurrió un error al enviar.</strong><br>
+        <span id="resena-error-msg">Por favor intenta de nuevo.</span>
+      </div>
+
+    </form>
+  </div>
+
+  <script src="../config/supabase.config.js"></script>
+  <script>
+    (function () {
+      const cfg = window.SUPABASE_CONFIG;
+      const form       = document.getElementById('resena-form');
+      const fileInput  = document.getElementById('resena-imagen');
+      const preview    = document.getElementById('img-preview');
+      const previewImg = document.getElementById('preview-img');
+      const uploadText = document.getElementById('upload-text');
+      const submitBtn  = document.getElementById('resena-submit');
+      const successEl  = document.getElementById('resena-success');
+      const errorEl    = document.getElementById('resena-error');
+      const errorMsg   = document.getElementById('resena-error-msg');
+      const textarea   = document.getElementById('resena-comentario');
+      const counter    = document.getElementById('char-counter');
+
+      // Contador de caracteres
+      const MAX_CHARS = 500;
+      textarea.addEventListener('input', () => {
+        const len = textarea.value.length;
+        counter.textContent = `${len} / ${MAX_CHARS}`;
+        counter.className = len > MAX_CHARS ? 'char-counter error'
+                          : len >= 450      ? 'char-counter warning'
+                          : 'char-counter';
+      });
+
+      // Vista previa de imagen
+      fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (!file) return;
+        if (file.size > 5 * 1024 * 1024) {
+          alert('La imagen no puede superar los 5 MB.');
+          fileInput.value = '';
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          previewImg.src = e.target.result;
+          preview.style.display = 'block';
+          uploadText.textContent = file.name;
+        };
+        reader.readAsDataURL(file);
+      });
+
+      // Comprime (máx 900px) y convierte a \x<hex> para bytea de PostgreSQL
+      function processImage(file) {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onerror = reject;
+          reader.onload = (e) => {
+            const img = new Image();
+            img.onerror = reject;
+            img.onload = () => {
+              const MAX = 900;
+              let w = img.naturalWidth;
+              let h = img.naturalHeight;
+              if (w > MAX || h > MAX) {
+                const ratio = Math.min(MAX / w, MAX / h);
+                w = Math.round(w * ratio);
+                h = Math.round(h * ratio);
+              }
+              const canvas = document.createElement('canvas');
+              canvas.width = w;
+              canvas.height = h;
+              canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+              // toBlob entrega bytes reales del JPEG; los convertimos a \x+hex
+              // para que PostgREST los almacene como bytea binario, no como texto
+              canvas.toBlob(blob => {
+                if (!blob) { reject(new Error('No se pudo procesar la imagen')); return; }
+                blob.arrayBuffer().then(buf => {
+                  const bytes = new Uint8Array(buf);
+                  let hex = '';
+                  for (let i = 0; i < bytes.length; i++) {
+                    hex += bytes[i].toString(16).padStart(2, '0');
+                  }
+                  resolve('\\x' + hex);
+                }).catch(reject);
+              }, 'image/jpeg', 0.82);
+            };
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        });
+      }
+
+      function resetFeedback() {
+        successEl.className = 'resena-feedback';
+        errorEl.className   = 'resena-feedback';
+      }
+
+      function setLoading(loading) {
+        submitBtn.disabled = loading;
+        submitBtn.innerHTML = loading
+          ? 'Enviando...'
+          : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Enviar reseña';
+      }
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        resetFeedback();
+
+        const name         = document.getElementById('resena-nombre').value.trim();
+        const qualification = Number(form.querySelector('input[name="qualification"]:checked')?.value);
+        const comment      = document.getElementById('resena-comentario').value.trim();
+        const file          = fileInput.files[0];
+
+        if (!name)                    { alert('Por favor ingresa tu nombre.');                    return; }
+        if (!qualification)           { alert('Por favor selecciona una calificación.');          return; }
+        if (!comment)                 { alert('Por favor ingresa un comentario.');                return; }
+        if (comment.length > MAX_CHARS) { alert(`El comentario no puede superar los ${MAX_CHARS} caracteres.`); return; }
+
+        if (!cfg || !cfg.API_URL || !cfg.API_KEY) {
+          errorMsg.textContent = 'Configuración de base de datos no disponible.';
+          errorEl.className = 'resena-feedback error';
+          return;
+        }
+
+        setLoading(true);
+
+        try {
+          const baseUrl     = cfg.API_URL.replace(/\/$/, '');
+          const imageBase64 = file ? await processImage(file) : null;
+
+          const payload = { user_name: name, qualification, comment, visible: false };
+          if (imageBase64) payload.image = imageBase64;
+
+          const res = await fetch(`${baseUrl}/rest/v1/review`, {
+            method: 'POST',
+            headers: {
+              'apikey':        cfg.API_KEY,
+              'Authorization': `Bearer ${cfg.API_KEY}`,
+              'Content-Type':  'application/json',
+              'Prefer':        'return=minimal'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!res.ok) {
+            const detail = await res.text();
+            throw new Error(detail || `Error ${res.status}`);
+          }
+
+          form.reset();
+          counter.textContent = `0 / ${MAX_CHARS}`;
+          counter.className = 'char-counter';
+          preview.style.display = 'none';
+          previewImg.src = '';
+          uploadText.textContent = 'Toca aquí para subir una foto';
+          successEl.className = 'resena-feedback success';
+          successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        } catch (err) {
+          errorMsg.textContent = err.message || 'Por favor intenta de nuevo.';
+          errorEl.className = 'resena-feedback error';
+        } finally {
+          setLoading(false);
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
