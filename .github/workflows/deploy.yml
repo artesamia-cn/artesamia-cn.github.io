@@ -30,8 +30,8 @@ jobs:
           VALOR_OCULTO: ${{ secrets.API_KEY }}
         run: |
           # Reemplaza los marcadores en tu archivo script.js con los valores reales
-          sed -i "s|___VALOR_API_URL___|${VALOR_PUBLICO}|g" ../../supabase.config.js
-          sed -i "s|___VALOR_API_KEY___|${VALOR_OCULTO}|g" ../../supabase.config.js
+          sed -i "s|___VALOR_API_URL___|${VALOR_PUBLICO}|g" config/supabase.config.js
+          sed -i "s|___VALOR_API_KEY___|${VALOR_OCULTO}|g" config/supabase.config.js
 
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5
