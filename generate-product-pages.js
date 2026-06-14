@@ -95,16 +95,16 @@ function generateProductHTML(product) {
 
   <!-- SEO -->
   <title>${cleanName} | Artesamía - Regalos Personalizados Hechos a Mano</title>
-  <meta name="description" content="${product.descripcion.replace(/[<>]/g, '').substring(0, 160)}" />
+  <meta name="description" content="${product.seo || product.descripcion.replace(/[<>]/g, '').substring(0, 160)}" />
   <meta name="keywords" content="${product.nombre}, regalos personalizados, ${product.categoria}, artesanía, madera grabada" />
   <meta property="og:title" content="${cleanName} | Artesamía" />
-  <meta property="og:description" content="${product.descripcion.replace(/[<>]/g, '')}" />
+  <meta property="og:description" content="${product.seo || product.descripcion.replace(/[<>]/g, '')}" />
   <meta property="og:image" content="${SITE_CONFIG.url}/products/${product.id}/${product.imagenes[0]}"/>
   <meta property="og:url" content="${SITE_CONFIG.url}/products/${product.id}/" />
   <meta property="og:type" content="product" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="${cleanName} | Artesamía" />
-  <meta name="twitter:description" content="${product.descripcion.replace(/[<>]/g, '')}" />
+  <meta name="twitter:description" content="${product.seo || product.descripcion.replace(/[<>]/g, '')}" />
   <meta name="twitter:image" content="${SITE_CONFIG.url}/products/${product.id}/${product.imagenes[0]}" />
   <meta name="theme-color" content="#D4897A">
 
@@ -411,6 +411,58 @@ function cleanOldProductPages() {
 }
 
 /**
+ * Sincroniza sitemap.xml con los productos de PRODUCTS_CONFIG.
+ * Preserva entradas estáticas y reporta productos nuevos.
+ */
+function updateSitemap() {
+  const sitemapPath = path.join(__dirname, 'sitemap.xml');
+  const baseUrl = SITE_CONFIG.url || 'https://artesamia.cl';
+  const today = new Date().toISOString().split('T')[0];
+
+  let staticEntries = '';
+  const existingIds = new Set();
+
+  if (fs.existsSync(sitemapPath)) {
+    const content = fs.readFileSync(sitemapPath, 'utf8');
+    const blocks = content.match(/  <url>[\s\S]*?<\/url>/g) || [];
+
+    blocks.forEach(block => {
+      const loc = (block.match(/<loc>(.*?)<\/loc>/) || [])[1] || '';
+      if (loc.includes('/products/')) {
+        const id = loc.replace(`${baseUrl}/products/`, '').replace(/\/$/, '');
+        existingIds.add(id);
+      }
+    });
+
+    staticEntries = blocks
+      .filter(b => !b.includes('/products/'))
+      .join('\n') + '\n';
+  }
+
+  const newProducts = PRODUCTS_CONFIG.filter(p => !existingIds.has(p.id));
+
+  const productEntries = PRODUCTS_CONFIG
+    .map(p =>
+      `  <url>\n    <loc>${baseUrl}/products/${p.id}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.72</priority>\n  </url>`
+    )
+    .join('\n');
+
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${staticEntries}${productEntries}\n</urlset>`;
+
+  try {
+    fs.writeFileSync(sitemapPath, sitemap, 'utf8');
+    if (newProducts.length > 0) {
+      console.log(`🗺️  Sitemap: ${newProducts.length} producto(s) nuevo(s) añadido(s):`);
+      newProducts.forEach(p => console.log(`   ➕ /products/${p.id}/`));
+    } else {
+      console.log(`🗺️  Sitemap sincronizado (${PRODUCTS_CONFIG.length} productos)`);
+    }
+  } catch (err) {
+    console.error(`❌ Error actualizando sitemap: ${err.message}`);
+  }
+}
+
+/**
  * Función principal: genera todas las páginas de productos
  */
 function generateAllProductPages() {
@@ -449,6 +501,8 @@ function generateAllProductPages() {
   });
 
   console.log(`\n📊 Resumen:\n   ✅ ${created} páginas creadas\n   ❌ ${errors} errores`);
+
+  updateSitemap();
 }
 
 // Ejecutar
