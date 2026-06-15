@@ -26,12 +26,16 @@ jobs:
       # --- AQUÍ SE INYECTAN LAS VARIABLES ---
       - name: Inyectar variables en el código
         env:
-          VALOR_PUBLICO: ${{ vars.API_URL }}
-          VALOR_OCULTO: ${{ secrets.API_KEY }}
+          VALOR_API_URL: ${{ vars.API_URL }}
+          VALOR_API_KEY: ${{ secrets.API_KEY }}
+          VALOR_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          VALOR_PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
         run: |
           # Reemplaza los marcadores en tu archivo script.js con los valores reales
-          sed -i "s|___VALOR_API_URL___|${VALOR_PUBLICO}|g" config/supabase.config.js
-          sed -i "s|___VALOR_API_KEY___|${VALOR_OCULTO}|g" config/supabase.config.js
+          sed -i "s|___VALOR_API_URL___|${VALOR_API_URL}|g" config/supabase.config.js
+          sed -i "s|___VALOR_API_KEY___|${VALOR_API_KEY}|g" config/supabase.config.js
+          sed -i "s|___VALOR_ACCESS_TOKEN___|${VALOR_ACCESS_TOKEN}|g" config/mp.config.js
+          sed -i "s|___VALOR_PUBLIC_KEY___|${VALOR_PUBLIC_KEY}|g" config/mp.config.js
           
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5

@@ -484,6 +484,21 @@ function initCart() {
   const cartTotal = document.getElementById('cart-total');
   const cartSubtotal = document.getElementById('cart-subtotal');
   const cartWhatsapp = document.getElementById('cart-whatsapp');
+  /*const cartCheckout = (() => {
+    const path = window.location.pathname;
+    if (path.includes('checkout')) return null;
+    let href;
+    if (path.includes('/products/')) href = '../../pages/checkout.html';
+    else if (path.includes('/pages/')) href = 'checkout.html';
+    else href = 'pages/checkout.html';
+    const a = document.createElement('a');
+    a.href = href;
+    a.className = 'btn btn-primary';
+    a.style.cssText = 'width:100%;display:block;text-align:center;margin-top:8px;';
+    a.textContent = 'Ir al checkout';
+    cartWhatsapp?.insertAdjacentElement('afterend', a);
+    return a;
+  })();*/
   const cartClear = document.getElementById('cart-clear');
   const cartClose = document.getElementById('cart-close');
   const cartOpen = document.getElementById('cart-open');
