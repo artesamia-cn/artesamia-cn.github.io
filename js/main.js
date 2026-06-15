@@ -484,7 +484,7 @@ function initCart() {
   const cartTotal = document.getElementById('cart-total');
   const cartSubtotal = document.getElementById('cart-subtotal');
   const cartWhatsapp = document.getElementById('cart-whatsapp');
-  const cartCheckout = (() => {
+  /*const cartCheckout = (() => {
     const path = window.location.pathname;
     if (path.includes('checkout')) return null;
     let href;
@@ -498,7 +498,7 @@ function initCart() {
     a.textContent = 'Ir al checkout';
     cartWhatsapp?.insertAdjacentElement('afterend', a);
     return a;
-  })();
+  })();*/
   const cartClear = document.getElementById('cart-clear');
   const cartClose = document.getElementById('cart-close');
   const cartOpen = document.getElementById('cart-open');
