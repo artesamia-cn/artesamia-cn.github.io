@@ -129,6 +129,15 @@ p { color: var(--color-text-muted); line-height: 1.8; }
   box-shadow: 0 8px 24px rgba(212, 137, 122, 0.45);
 }
 
+.btn-mp {
+  background: rgb(0, 158, 227);
+  color: var(--color-white);
+}
+.btn-mp:hover {
+  background: rgb(0, 158, 227);
+  transform: translateY(-2px);
+}
+
 .btn-primary-preview {
   background: var(--color-rose-300);
   color: var(--color-white);
