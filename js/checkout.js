@@ -21,15 +21,62 @@
     el.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
 
+  function formatFecha(isoString) {
+    return new Date(isoString).toLocaleString('es-CL', {
+      dateStyle: 'medium',
+      timeStyle: 'short'
+    });
+  }
+
+  function showTransactionInfo(preferenceId, order) {
+    const el = document.getElementById('checkout-status-msg');
+    const info = document.createElement('div');
+    info.className = 'checkout-transaction-info';
+    info.innerHTML = `
+      <h3><strong>Información de la Transacción</strong></h3>
+      <p><strong>Medio de Pago:</strong> Mercado Pago</p>
+      <p><strong>Monto Pagado:</strong> ${formatCLP(order.amount)}</p>
+      <p><strong>Identificador:</strong> ${preferenceId}</p>
+      <p><strong>Fecha de la Transacción:</strong> ${formatFecha(order.created_at)}</p>
+    `;
+    el.appendChild(info);
+  }
+
+  async function fetchOrderInfo(preferenceId) {
+    const cfg = window.SUPABASE_CONFIG;
+    if (!cfg || !cfg.API_URL || !cfg.API_KEY || !preferenceId) return null;
+
+    const base = cfg.API_URL.replace(/\/$/, '');
+    const url = base + '/rest/v1/order?preference_id=eq.' + encodeURIComponent(preferenceId) + '&select=total_order,created_at';
+
+    try {
+      const res = await fetch(url, {
+        headers: {
+          'apikey': cfg.API_KEY,
+          'Authorization': 'Bearer ' + cfg.API_KEY
+        }
+      });
+      const data = await res.json().catch(() => null);
+      if (!res.ok || !Array.isArray(data) || data.length === 0) return null;
+      return data[0];
+    } catch (e) {
+      console.error('[fetchOrderInfo] error de red:', e);
+      return null;
+    }
+  }
+
   function renderCartSummary(cart) {
     const itemsEl = document.getElementById('checkout-items');
     const totalEl = document.getElementById('checkout-total-amount');
 
-    itemsEl.innerHTML = cart.map(item => `
+    itemsEl.innerHTML = cart.map((item, index) => `
       <div class="checkout-item">
-        <span class="checkout-item-name">${item.name}</span>
-        <span class="checkout-item-qty">x${item.quantity}</span>
-        <span>${formatCLP(item.price * item.quantity)}</span>
+        <div class="checkout-item-row">
+          <span class="checkout-item-name">${item.name}</span>
+          <span class="checkout-item-qty">x${item.quantity}</span>
+          <span>${formatCLP(item.price * item.quantity)}</span>
+        </div>
+        <textarea class="checkout-item-notes" data-item-index="${index}" placeholder="Instrucciones especiales para este producto (opcional)"></textarea>
       </div>
     `).join('');
 
@@ -117,15 +164,22 @@
     if (status === 'success') {
       showStatus('success', '¡Pago exitoso! Recibirás un email de confirmación. Gracias por tu compra en Artesamía.');
       localStorage.removeItem(STORAGE_KEY);
+
+      fetchOrderInfo(preferenceId).then(order => {
+        if (order != null) showTransactionInfo(preferenceId, order.total_order, order.created_at);
+      });
     } else if (status === 'failure') {
       showStatus('failure', 'Hubo un problema con el pago. Puedes intentarlo nuevamente.');
     } else if (status === 'pending') {
       showStatus('pending', 'Tu pago está pendiente de confirmación. Te avisaremos por email cuando se acredite.');
+      fetchOrderInfo(preferenceId).then(order => {
+          if (order != null) showTransactionInfo(preferenceId, order);
+      });
     }
   }
 
   async function createPreference(cart, payer) {
-    const token = window.MP_CONFIG && window.MP_CONFIG.ACCESS_TOKEN;
+    const token = window.MERCADOPAGO_CONFIG && window.MERCADOPAGO_CONFIG.ACCESS_TOKEN;
     if (!token) throw new Error('Configuración de MercadoPago no disponible.');
 
     const body = {
@@ -195,7 +249,7 @@
     return data;
   }
 
-  async function saveOrder({ nombre, rut, email, telefono, cart, total, preferenceId }) {
+  async function saveOrder({ nombre, rut, email, telefono, direccion, depto, region, comuna, cart, total, preferenceId }) {
     const cfg = window.SUPABASE_CONFIG;
     if (!cfg || !cfg.API_URL || !cfg.API_KEY) return;
 
@@ -230,10 +284,11 @@
         customer_mail: email,
         customer_phone: telefono || '',
         customer_rut: rut || '',
-        customer_address_1: '',
-        customer_address_2: '',
-        customer_address_3: ''
-      }, 
+        customer_address_1: direccion || '',
+        customer_address_2: depto || '',
+        customer_address_3: comuna || '',
+        customer_address_4: region || ''
+      },
       false);
 
     await sbPost(
@@ -247,7 +302,7 @@
         unit_price: Math.round(item.price),
         product_total_amount: Math.round(item.price * item.quantity),
         detail_1: item.name,
-        detail_2: '',
+        detail_2: item.specialInstructions || '',
         detail_3: ''
       })),
       false
@@ -270,6 +325,37 @@
 
     const form = document.getElementById('checkout-form');
     const btn = document.getElementById('checkout-btn');
+
+    const regionSelect = document.getElementById('co-region');
+    const comunaSelect = document.getElementById('co-comuna');
+    const regiones = window.CHILE_REGIONES || [];
+
+    if (regionSelect) {
+      regiones.forEach(r => {
+        const opt = document.createElement('option');
+        opt.value = r.nombre;
+        opt.textContent = r.nombre;
+        regionSelect.appendChild(opt);
+      });
+
+      regionSelect.addEventListener('change', () => {
+        setFieldError('co-region', 'err-region', false);
+        const region = regiones.find(r => r.nombre === regionSelect.value);
+        comunaSelect.innerHTML = '';
+
+        if (!region) {
+          comunaSelect.appendChild(new Option('Selecciona primero una región', ''));
+          comunaSelect.disabled = true;
+          return;
+        }
+
+        comunaSelect.disabled = false;
+        comunaSelect.appendChild(new Option('Selecciona una comuna', ''));
+        region.comunas.forEach(c => comunaSelect.appendChild(new Option(c, c)));
+      });
+
+      comunaSelect.addEventListener('change', () => setFieldError('co-comuna', 'err-comuna', false));
+    }
 
     function isValidEmail(v) {
       return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
@@ -352,18 +438,33 @@
       const rut = document.getElementById('co-rut').value.trim();
       const email = document.getElementById('co-email').value.trim();
       const telefono = document.getElementById('co-telefono').value.trim();
+      const direccion = document.getElementById('co-direccion').value.trim();
+      const depto = document.getElementById('co-depto').value.trim();
+      const region = document.getElementById('co-region').value;
+      const comuna = document.getElementById('co-comuna').value;
 
       const errNombre = !nombre;
       const errRut = !isValidRut(rut);
       const errEmail = !isValidEmail(email);
       const errTel = !isValidPhone(telefono);
+      const errDireccion = !direccion;
+      const errRegion = !region;
+      const errComuna = !comuna;
 
       setFieldError('co-nombre', 'err-nombre', errNombre);
       setFieldError('co-rut', 'err-rut', errRut);
       setFieldError('co-email', 'err-email', errEmail);
       setFieldError('co-telefono', 'err-telefono', errTel);
+      setFieldError('co-direccion', 'err-direccion', errDireccion);
+      setFieldError('co-region', 'err-region', errRegion);
+      setFieldError('co-comuna', 'err-comuna', errComuna);
 
-      if (errNombre || errRut || errEmail || errTel) return;
+      if (errNombre || errRut || errEmail || errTel || errDireccion || errRegion || errComuna) return;
+
+      document.querySelectorAll('.checkout-item-notes').forEach(textarea => {
+        const idx = Number(textarea.dataset.itemIndex);
+        if (cart[idx]) cart[idx].specialInstructions = textarea.value.trim();
+      });
 
       btn.disabled = true;
       btn.textContent = 'Creando orden…';
@@ -372,7 +473,7 @@
         const preference = await createPreference(cart, { nombre, email, telefono });
 
         try {
-          await saveOrder({ nombre, rut, email, telefono, cart, total: getTotal(cart), preferenceId: preference.id });
+          await saveOrder({ nombre, rut, email, telefono, direccion, depto, region, comuna, cart, total: getTotal(cart), preferenceId: preference.id });
         } catch (saveErr) {
           console.error('saveOrder falló:', saveErr.message);
         }
