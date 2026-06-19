@@ -63,27 +63,10 @@
           <div id="cart-empty-checkout" class="checkout-empty" style="display:none;">
             <p><strong>Tu carro está vacío.</strong><br><a href="catalogo.html"><strong>🛍️ Volver al catálogo</strong></a></p>
           </div>
-
+          
+          <a type="button" href="catalogo.html" id="cart-close" >← Seguir comprando</a>
+          <br></br>
           <div id="checkout-main" class="checkout-grid" style="display:none;">
-
-            <!-- Resumen del carrito -->
-            <div class="checkout-box fade-up">
-              <h3>Resumen del pedido</h3>
-              <div id="checkout-items"></div>
-              <div class="checkout-subtotal">
-                <span>Subtotal</span>
-                <span id="checkout-subtotal-amount"></span>
-              </div>
-              <div class="checkout-shipping">
-                <span>Envío</span>
-                <span id="checkout-shipping-amount" style="color:#888;">Selecciona tu región y comuna</span>
-              </div>
-              <div class="checkout-total">
-                <span>Total</span>
-                <span id="checkout-total-amount"></span>
-              </div>
-              <p class="checkout-tax-note" id="checkout-tax-note"></p>
-            </div>
 
             <!-- Formulario de datos -->
             <div class="checkout-box fade-up">
@@ -132,15 +115,48 @@
                   </select>
                   <span class="field-error" id="err-comuna">Selecciona una comuna.</span>
                 </div>
-
-                <button type="submit" class="btn btn-mp" id="checkout-btn">
-                  <img src="../assets/logos/mercado-pago-seeklogo.svg" alt="MercadoPago" style="height:20px;vertical-align:middle;" />
-                  Pagar con Mercado Pago
-                </button>
-                <p class="checkout-note">Serás redirigido a MercadoPago para completar el pago de forma segura.</p>
               </form>
             </div>
 
+            <!-- Resumen del carrito -->
+            <div class="checkout-box fade-up">
+              <h3>Resumen del pedido</h3>
+              <div id="checkout-items"></div>
+              <div class="checkout-subtotal">
+                <span>Subtotal</span>
+                <span id="checkout-subtotal-amount"></span>
+              </div>
+              <div class="checkout-shipping">
+                <span>Envío</span>
+                <span id="checkout-shipping-amount" style="color:#888;">Selecciona tu región y comuna</span>
+              </div>
+              <div class="checkout-total">
+                <span>Total</span>
+                <span id="checkout-total-amount"></span>
+              </div>
+              <p class="checkout-tax-note" id="checkout-tax-note"></p>
+              
+              <br></br>
+              <div class="checkout-payment-methods" aria-label="Medios de pago disponibles">
+                  <p>Medios de pago disponibles:</p>
+                  <div class="checkout-payment-logos">
+                    <img src="../assets/logos/logo-mercadopago.svg" alt="Mercado Pago" loading="lazy" />
+                    <img src="../assets/logos/default-brand-visa--7fc2fe6b.webp" alt="Visa" loading="lazy" />
+                    <img src="../assets/logos/default-brand-mastercard--824fb8e9.webp" alt="Mastercard" loading="lazy" />
+                    <img src="../assets/logos/amex-logo--2b055765.jpg" alt="American Express" loading="lazy" />
+                    <img src="../assets/logos/diners-club@2x--a1a294e0.png" alt="Diners Club" loading="lazy" />
+                    <img src="../assets/logos/Redcompra@2x--9905e830.png" alt="Red Compra" loading="lazy" />
+                  </div>
+                </div>
+                
+              <button type="submit" class="btn btn-mp" id="checkout-btn" form="checkout-form">
+                  <img src="../assets/logos/mercado-pago-seeklogo.svg" alt="MercadoPago" style="height:20px;vertical-align:middle;" />
+                  Pagar con Mercado Pago
+                </button>
+                <p class="checkout-note">Serás redirigido a MercadoPago para completar el pago de forma segura. 🔒</p>
+
+
+            </div>
           </div>
         </div>
 
@@ -154,7 +170,7 @@
         <h3 id="cart-modal-title">Carro</h3>
         <div class="cart-panel-actions">
           <button type="button" class="cart-panel-close" id="cart-clear">Vaciar carro</button>
-          <button type="button" class="cart-panel-close" id="cart-close">Cerrar</button>
+          <button type="button" class="cart-panel-close" id="cart-close">Seguir comprando</button>
         </div>
       </div>
       <div id="cart-empty" class="cart-empty">Aún no agregas productos. Elige uno para comenzar tu pedido.</div>
@@ -166,9 +182,8 @@
         </div>
         <div class="cart-footer-row-include">
           <span>*Impuestos Incluidos</span><br>
-          <span>*No incluye costos de envío</span>
+          <span>*Costo de envío se calcula en checkout</span>
         </div>
-        <a id="cart-whatsapp" class="btn btn-whatsapp" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
       </div>
     </div>
   </main>

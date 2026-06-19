@@ -7,6 +7,8 @@
  */
 
 const SITE_CONFIG = {
+  nombre: 'Artesamía',
+  url: 'https://artesamia.cl',
 
   // ── Marca ─────────────────────────────────────────
   marca: {
@@ -125,6 +127,12 @@ const SITE_CONFIG = {
     ctaTexto: "Ver productos",
     ctaLink: "pages/catalogo.html",
   },
+
+  // Precios de despacho
+  minimo_envio_gratis: 20000,
+  despacho_tramo_1 : 2900,
+  despacho_tramo_2 : 5900,
+  despacho_tramo_3 : 6900,
 };
 
 // Hacer disponible en el navegador

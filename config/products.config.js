@@ -383,6 +383,8 @@ const PRODUCTS_CONFIG = [
     ],
     precio: "$12.000",
     imagenes: ["image_1.png"],
+    requiereImagen: true,
+    cantidadImagenes: 1,
     disponible: true,
     destacado: false,
     tags: ["Oferta", "Bebés", "Regalos"]

@@ -23,26 +23,27 @@
     'San Bernardo', 'Puente Alto'
   ]);
 
-  const REGIONES_5900 = new Set([
-    'Arica y Parinacota', 'Tarapacá', 'Antofagasta',
-    'Aysén del General Carlos Ibáñez del Campo', 'Magallanes y de la Antártica Chilena'
-  ]);
-
-  const REGIONES_4900 = new Set([
+  const REGIONES_TRAMO_2 = new Set([
     'Atacama', 'Coquimbo', 'Valparaíso',
     "Libertador General Bernardo O'Higgins", 'Maule', 'Ñuble', 'Biobío',
     'La Araucanía', 'Los Ríos', 'Los Lagos'
   ]);
 
+  const REGIONES_TRAMO_3 = new Set([
+    'Arica y Parinacota', 'Tarapacá', 'Antofagasta',
+    'Aysén del General Carlos Ibáñez del Campo', 'Magallanes y de la Antártica Chilena'
+  ]);
+
   function calcularEnvio(region, comuna, subtotal) {
+    const cfg = window.SITE_CONFIG;
     if (!region || !comuna) return null;
     if (region === 'Metropolitana de Santiago') {
-      if (subtotal >= 20000 && COMUNAS_ENVIO_GRATIS.has(comuna)) return 0;
-      return 2900;
+      if (subtotal >= cfg.minimo_envio_gratis && COMUNAS_ENVIO_GRATIS.has(comuna)) return 0;
+      return cfg.despacho_tramo_1;
     }
-    if (REGIONES_5900.has(region)) return 5900;
-    if (REGIONES_4900.has(region)) return 4900;
-    return 2900;
+    if (REGIONES_TRAMO_2.has(region)) return cfg.despacho_tramo_2;
+    if (REGIONES_TRAMO_3.has(region)) return cfg.despacho_tramo_3;
+    return cfg.despacho_tramo_1;
   }
 
   function actualizarEnvio() {
