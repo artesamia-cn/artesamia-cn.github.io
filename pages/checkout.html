@@ -70,11 +70,19 @@
             <div class="checkout-box fade-up">
               <h3>Resumen del pedido</h3>
               <div id="checkout-items"></div>
+              <div class="checkout-subtotal">
+                <span>Subtotal</span>
+                <span id="checkout-subtotal-amount"></span>
+              </div>
+              <div class="checkout-shipping">
+                <span>Envío</span>
+                <span id="checkout-shipping-amount" style="color:#888;">Selecciona tu región y comuna</span>
+              </div>
               <div class="checkout-total">
                 <span>Total</span>
                 <span id="checkout-total-amount"></span>
               </div>
-              <p style="font-size:0.82rem;color:#888;margin-top:10px;">* No incluye costos de envío. Se coordinan tras el pago.</p>
+              <p class="checkout-tax-note" id="checkout-tax-note"></p>
             </div>
 
             <!-- Formulario de datos -->
@@ -239,6 +247,7 @@
   <script src="../config/site.config.js"></script>
   <script src="../config/supabase.config.js"></script>
   <script src="../config/mercadopago.config.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="../js/main.js"></script>
   <script src="../js/chile-regiones.js"></script>
   <script src="../js/checkout.js"></script>

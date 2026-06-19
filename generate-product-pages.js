@@ -234,7 +234,7 @@ function generateProductHTML(product) {
             <h3 class="product-nombre" id="product-heading">${product.nombre}</h3>
             <br>
             <p>${product.descripcion}</p>
-            <p>${product.descripcion2}</p>
+            <p>${product.descripcion2 || ''}</p>
 
             <!-- CARACTERÍSTICAS -->
             ${product.caracteristicas && product.caracteristicas.length > 0 ? '<div class="product-characteristics"><h3>Detalles:</h3><ul>' + caractsHtml + '</ul></div>' : ''}
@@ -248,7 +248,13 @@ function generateProductHTML(product) {
             <!-- ACCIONES -->
             <div class="product-actions-container">
               ${!hasDesdePrice ? `
-              <button type="button" class="btn btn-outline cart-add-btn" data-product-id="${product.id}" data-product-name="${product.nombre}" data-product-price="${priceStr}" data-product-image="${product.imagenes[0]}">
+              <button type="button" class="btn btn-outline cart-add-btn" 
+                data-product-id="${product.id}" 
+                data-product-name="${product.nombre}" 
+                data-product-price="${priceStr}" 
+                data-product-image="${product.imagenes[0]}" 
+                data-product-requiereImg="${product.requiereImagen ? 'true' : 'false'}"
+                data-product-cantidadImg="${product.cantidadImagenes || 0}">
                 🛒 Agregar al carro
               </button>
               ` : ''}

@@ -313,18 +313,26 @@ function initProductos() {
           ${prevNextHtml}
           ${p.imagenes.length > 1 ? `<div class="carousel-dots" id="dots-${p.id}">${dotsHtml}</div>` : ''}
         </div>
-                  <a href="../products/${p.id}/index.html" aria-label="Ver detalles de ${p.nombre}">
-
         <div class="product-body">
-          ${categoriasHtml ? `<div class="product-tags">${categoriasHtml}</div>` : ''}
-          <h3 class="product-nombre">${p.nombre}</h3>
-          <div class="product-footer">
-            ${p.precioAntes ? `<div class="product-precio-antes">${p.precioAntes}</div>` : ''}
-            <span class="product-precio">&nbsp;${p.precio} CLP</span>
-            <span class="product-impuestos">Impuestos Incluidos</span>
-          </div>    
+          <a href="../products/${p.id}/index.html" class="product-body-link" aria-label="Ver detalles de ${p.nombre}">
+            ${categoriasHtml ? `<div class="product-tags">${categoriasHtml}</div>` : ''}
+            <h3 class="product-nombre">${p.nombre}</h3>
+            <div class="product-footer">
+              ${p.precioAntes ? `<div class="product-precio-antes">${p.precioAntes}</div>` : ''}
+              <span class="product-precio">&nbsp;${p.precio} CLP</span>
+              <span class="product-impuestos">Impuestos Incluidos</span>
+            </div>
+          </a>
+          <button type="button" class="btn btn-outline cart-add-btn" style="justify-content:center;margin-top:8px;" 
+                  data-product-id="${p.id}"
+                  data-product-name="${p.nombre}"
+                  data-product-price="${productPrice}"
+                  data-product-image="${p.imagenes[0]}"
+                  data-product-requiereimg="${p.requiere_img || false}"
+                  data-product-cantidadimg="${p.cantidad_img || 0}">
+            🛒 Agregar al carro
+          </button>
         </div>
-        </a>
       </article>
     `;
   }
@@ -484,7 +492,7 @@ function initCart() {
   const cartTotal = document.getElementById('cart-total');
   const cartSubtotal = document.getElementById('cart-subtotal');
   const cartWhatsapp = document.getElementById('cart-whatsapp');
-  /*const cartCheckout = (() => {
+  const cartCheckout = (() => {
     const path = window.location.pathname;
     if (path.includes('checkout')) return null;
     let href;
@@ -498,7 +506,7 @@ function initCart() {
     a.textContent = 'Ir al checkout';
     cartWhatsapp?.insertAdjacentElement('afterend', a);
     return a;
-  })();*/
+  })();
   const cartClear = document.getElementById('cart-clear');
   const cartClose = document.getElementById('cart-close');
   const cartOpen = document.getElementById('cart-open');
@@ -658,7 +666,9 @@ function initCart() {
         name: product.name,
         price: product.price,
         image: product.image,
-        quantity: 1
+        quantity: 1,
+        requiereImg: product.requiereImg,
+        cantidadImg: product.cantidadImg||0
       });
     }
 
@@ -700,7 +710,9 @@ function initCart() {
       id: button.dataset.productId,
       name: button.dataset.productName,
       price: Number(button.dataset.productPrice),
-      image: button.dataset.productImage
+      image: button.dataset.productImage,
+      requiereImg: button.dataset.productRequiereimg,
+      cantidadImg: button.dataset.productCantidadimg
     });
   });
 
