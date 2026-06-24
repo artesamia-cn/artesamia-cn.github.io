@@ -85,7 +85,7 @@ const SITE_CONFIG = {
     },
     {
       pregunta: "¿Hacen pedidos corporativos?",
-      respuesta: "¡Por supuesto que realizamos regalos corporativos y pedidos en cantidad!. <strong>Contáctanos</strong> para cotizar y te ofrecemos precios especiales por volumen.",
+      respuesta: "¡Por supuesto que realizamos productos corporativos y pedidos en cantidad!. <strong>Contáctanos</strong> para cotizar y te ofrecemos precios especiales por volumen.",
     },
         {
       pregunta: "¿Cuáles son los métodos de pago?",
@@ -93,11 +93,11 @@ const SITE_CONFIG = {
     },
   ],
 
-  // ── Empresas / Regalos Corporativos ───────────────
+  // ── Empresas / Productos Corporativos ───────────────
   empresas: {
     hero: {
-      eyebrow: "🏢 Regalos para Empresas",
-      titulo: "Regalos corporativos\n<em>que dejan huella</em>",
+      eyebrow: "🏢 Productos para Empresas",
+      titulo: "Productos corporativos\n<em>que dejan huella</em>",
       subtitulo: "Personaliza con el logo de tu empresa y sorprende a tu equipo, clientes y socios con piezas artesanales únicas. Pedidos en volumen con precios especiales.",
     },
     beneficios: [
@@ -116,7 +116,7 @@ const SITE_CONFIG = {
     cta: {
       titulo: "¿Listo para cotizar?",
       subtitulo: "Cuéntanos tu idea y te respondemos en menos de 24 horas con una cotización personalizada.",
-      mensajeWhatsapp: "¡Hola Artesamía! Me interesa cotizar regalos corporativos para mi empresa. ¿Podrían ayudarme?",
+      mensajeWhatsapp: "¡Hola Artesamía! Me interesa cotizar productos corporativos para mi empresa. ¿Podrían ayudarme?",
     },
   },
 
