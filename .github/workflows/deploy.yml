@@ -26,8 +26,10 @@ jobs:
       # --- AQUÍ SE INYECTAN LAS VARIABLES ---
       - name: Inyectar variables en el código
         env:
+         # --- VARIABLES SUPABASE ---
           VALOR_API_URL: ${{ vars.API_URL }}
           VALOR_API_KEY: ${{ secrets.API_KEY }}
+           # --- VARIABLES MERCADOPAGO ---
           VALOR_ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
           VALOR_PUBLIC_KEY: ${{ secrets.PUBLIC_KEY }}
         run: |
