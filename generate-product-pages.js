@@ -328,7 +328,7 @@ function generateProductHTML(product) {
           <h4>PRODUCTOS</h4>
           <nav class="footer-links">
             <a href="../../pages/catalogo.html">Ver catálogo completo</a>
-            <a href="../../pages/empresas.html">Regalos Corporativos</a>
+            <a href="../../pages/empresas.html">Productos Corporativos</a>
           </nav>
         </div>
 

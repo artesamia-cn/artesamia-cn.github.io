@@ -772,7 +772,7 @@ function initCart() {
 }
 
 /* ══════════════════════════════════════════════════
-   EMPRESAS — Regalos Corporativos
+   EMPRESAS — Productos Corporativos
    ══════════════════════════════════════════════════ */
 function initEmpresas() {
   const cfg = window.SITE_CONFIG;
@@ -802,7 +802,7 @@ function initEmpresas() {
   if (waBtn) waBtn.href = waUrl;
   if (ctaHeroBtn) ctaHeroBtn.href = waUrl;
   if (mailBtn) {
-    const asunto = encodeURIComponent('Consulta regalos corporativos - Artesamía');
+    const asunto = encodeURIComponent('Consulta productos corporativos - Artesamía');
     mailBtn.href = `mailto:${cfg.contacto.email}?subject=${asunto}`;
   }
 
