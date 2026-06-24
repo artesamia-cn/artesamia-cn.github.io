@@ -40,7 +40,7 @@ const PRODUCTS_CONFIG = [
     imagenes: ["image_1.png"],
     requiereImagen: false,
     disponible: true,
-    destacado: true,
+    destacado: false,
     tags: ["Día del Padre", "Regalos"]
   },
     {
@@ -57,7 +57,7 @@ const PRODUCTS_CONFIG = [
     precio: "$12.000",
     imagenes: ["image_1.png"],
     disponible: true,
-    destacado: true,
+    destacado: false,
     tags: ["Día del Padre", "Regalos"]
   },
   {
