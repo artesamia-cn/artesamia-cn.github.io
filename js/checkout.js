@@ -402,7 +402,7 @@
     return zip.generateAsync({ type: 'base64', compression: 'DEFLATE' });
   }
 
-  async function saveOrder({ nombre, rut, email, telefono, direccion, depto, region, comuna, cart, total, preferenceId, imageFilesMap }) {
+  async function saveOrder({ nombre, rut, email, telefono, direccion, depto, region, comuna, cart, total, costoEnvio, preferenceId, imageFilesMap }) {
     const cfg = window.SUPABASE_CONFIG;
     if (!cfg || !cfg.API_URL || !cfg.API_KEY) return;
 
@@ -456,21 +456,37 @@
       }
     }
 
+    const productRows = cart.map((item, idx) => ({
+      order_id: orderId,
+      id_product: item.id,
+      amount: item.quantity,
+      unit_price: Math.round(item.price),
+      product_total_amount: Math.round(item.price * item.quantity),
+      detail_1: item.name,
+      detail_2: item.specialInstructions || '',
+      detail_3: '',
+      img_product: imgData[idx] || null
+    }));
+
+    if (costoEnvio) {
+      productRows.push({
+        order_id: orderId,
+        id_product: 'envio',
+        amount: 1,
+        unit_price: Math.round(costoEnvio),
+        product_total_amount: Math.round(costoEnvio),
+        detail_1: 'Envío',
+        detail_2: '',
+        detail_3: '',
+        img_product: null
+      });
+    }
+
     await sbPost(
       base,
       key,
       '/rest/v1/product_order',
-      cart.map((item, idx) => ({
-        order_id: orderId,
-        id_product: item.id,
-        amount: item.quantity,
-        unit_price: Math.round(item.price),
-        product_total_amount: Math.round(item.price * item.quantity),
-        detail_1: item.name,
-        detail_2: item.specialInstructions || '',
-        detail_3: '',
-        img_product: imgData[idx] || null
-      })),
+      productRows,
       false
     );
   }
@@ -653,7 +669,7 @@
         const preference = await createPreference(cart, { nombre, email, telefono }, costoEnvio);
 
         try {
-          await saveOrder({ nombre, rut, email, telefono, direccion, depto, region, comuna, cart, total: subtotal + costoEnvio, preferenceId: preference.id, imageFilesMap });
+          await saveOrder({ nombre, rut, email, telefono, direccion, depto, region, comuna, cart, total: subtotal + costoEnvio, costoEnvio, preferenceId: preference.id, imageFilesMap });
         } catch (saveErr) {
           console.error('saveOrder falló:', saveErr.message);
         }
