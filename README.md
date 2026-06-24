@@ -20,7 +20,7 @@ artesamia-cn.github.io/
 │   ├── site.config.js         ← textos, contacto, FAQ, redes
 │   ├── products.config.js     ← catálogo de productos
 │   ├── supabase.config.js     ← credenciales Supabase
-│   └── mp.config.js           ← credenciales MercadoPago
+│   └── mercadopago.config.js           ← credenciales MercadoPago
 ├── css/
 │   └── styles.css
 ├── js/
@@ -114,10 +114,10 @@ Define cada producto del catálogo.
 
 ## Checkout y Pagos (MercadoPago)
 
-### `config/mp.config.js`
+### `config/mercadopago.config.js`
 
 ```js
-const MP_CONFIG = {
+const MERCADOPAGO_CONFIG = {
   ACCESS_TOKEN: 'APP_USR-...',
   PUBLIC_KEY:   'APP_USR-...'
 };

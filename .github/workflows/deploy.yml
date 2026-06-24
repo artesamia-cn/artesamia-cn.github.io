@@ -34,8 +34,8 @@ jobs:
           # Reemplaza los marcadores en tu archivo script.js con los valores reales
           sed -i "s|___VALOR_API_URL___|${VALOR_API_URL}|g" config/supabase.config.js
           sed -i "s|___VALOR_API_KEY___|${VALOR_API_KEY}|g" config/supabase.config.js
-          sed -i "s|___VALOR_ACCESS_TOKEN___|${VALOR_ACCESS_TOKEN}|g" config/mp.config.js
-          sed -i "s|___VALOR_PUBLIC_KEY___|${VALOR_PUBLIC_KEY}|g" config/mp.config.js
+          sed -i "s|___VALOR_ACCESS_TOKEN___|${VALOR_ACCESS_TOKEN}|g" config/mercadopago.config.js
+          sed -i "s|___VALOR_PUBLIC_KEY___|${VALOR_PUBLIC_KEY}|g" config/mercadopago.config.js
           
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v5

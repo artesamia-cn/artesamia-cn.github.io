@@ -7,90 +7,8 @@
   <meta name="description" content="Finaliza tu compra en Artesamía." />
   <meta name="theme-color" content="#D4897A">
   <link rel="icon" type="image/png" href="../assets/logos/favicon-32x32.png" />
+    <!-- CSS -->
   <link rel="stylesheet" href="../css/styles.css" />
-  <style>
-    .checkout-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      align-items: start;
-    }
-    .checkout-box {
-      background: var(--color-surface, #faf8f6);
-      border-radius: 16px;
-      padding: 32px;
-      border: 1px solid rgba(0,0,0,0.07);
-    }
-    .checkout-box h3 {
-      margin-bottom: 20px;
-      font-size: 1.2rem;
-    }
-    .checkout-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-      font-size: 0.95rem;
-      gap: 12px;
-    }
-    .checkout-item:last-of-type { border-bottom: none; }
-    .checkout-item-name { flex: 1; }
-    .checkout-item-qty { color: #888; font-size: 0.85rem; }
-    .checkout-total {
-      display: flex;
-      justify-content: space-between;
-      font-weight: 700;
-      font-size: 1.1rem;
-      padding-top: 16px;
-      margin-top: 8px;
-      border-top: 2px solid var(--color-primary, #D4897A);
-    }
-    .checkout-empty {
-      text-align: center;
-      padding: 40px 0;
-      color: #888;
-    }
-    .checkout-empty a {
-      color: var(--color-primary, #D4897A);
-      text-decoration: underline;
-    }
-    .checkout-status {
-      border-radius: 12px;
-      padding: 20px 24px;
-      margin-bottom: 32px;
-      font-size: 1rem;
-      display: none;
-    }
-    .checkout-status.success { background: #d4edda; color: #155724; display: block; }
-    .checkout-status.failure { background: #f8d7da; color: #721c24; display: block; }
-    .checkout-status.pending { background: #fff3cd; color: #856404; display: block; }
-    #checkout-btn {
-      width: 100%;
-      margin-top: 8px;
-      position: relative;
-      text-align: center;
-      justify-content: center;
-    }
-    #checkout-btn:disabled { opacity: 0.7; cursor: not-allowed; }
-    .field-error {
-      color: #b91c1c;
-      font-size: 0.82rem;
-      margin-top: 4px;
-      display: none;
-    }
-    .field-error.visible { display: block; }
-    .form-group input.invalid { border-color: #b91c1c; }
-    .checkout-note {
-      font-size: 0.82rem;
-      color: #888;
-      text-align: center;
-      margin-top: 12px;
-    }
-    @media (max-width: 768px) {
-      .checkout-grid { grid-template-columns: 1fr; }
-    }
-  </style>
 </head>
 
 <body>
@@ -112,11 +30,6 @@
         <a href="empresas.html" class="nav-link">Empresas</a>
         <a href="faq-contacto.html" class="nav-link">FAQ</a>
         <a href="faq-contacto.html#contacto" class="nav-link">Contáctanos</a>
-        <button type="button" class="nav-cart-btn" id="cart-open" aria-label="Abrir carro">
-          <span class="nav-cart-icon">🛒</span>
-          <span class="nav-cart-badge" id="nav-cart-badge">0</span>
-          <span class="nav-cart-tip" id="nav-cart-tip">Total: $0</span>
-        </button>
       </div>
 
       <div class="nav-mobile-actions">
@@ -139,9 +52,8 @@
     <section class="section">
       <div class="container">
 
-        <div class="section-header fade-up" style="margin-bottom: 40px; text-align: center;">
+        <div id="section-header-checkout" class="section-header fade-up" style="margin-bottom: 40px; text-align: center;">
           <span class="section-label">🛍️ Finalizar compra</span>
-          <h2>Checkout</h2>
         </div>
 
         <div id="checkout-status-msg" class="checkout-status" style="text-align: center;"></div>
@@ -151,23 +63,14 @@
           <div id="cart-empty-checkout" class="checkout-empty" style="display:none;">
             <p><strong>Tu carro está vacío.</strong><br><a href="catalogo.html"><strong>🛍️ Volver al catálogo</strong></a></p>
           </div>
-
+          
+          <a type="button" href="catalogo.html" id="cart-close" >← Seguir comprando</a>
+          <br></br>
           <div id="checkout-main" class="checkout-grid" style="display:none;">
-
-            <!-- Resumen del carrito -->
-            <div class="checkout-box fade-up">
-              <h3>Resumen del pedido</h3>
-              <div id="checkout-items"></div>
-              <div class="checkout-total">
-                <span>Total</span>
-                <span id="checkout-total-amount"></span>
-              </div>
-              <p style="font-size:0.82rem;color:#888;margin-top:10px;">* No incluye costos de envío. Se coordinan tras el pago.</p>
-            </div>
 
             <!-- Formulario de datos -->
             <div class="checkout-box fade-up">
-              <h3>Tus datos</h3>
+              <h3>Tus datos de pago y envío</h3>
               <form id="checkout-form" novalidate>
                 <div class="form-group">
                   <label for="co-nombre">Nombre completo *</label>
@@ -189,15 +92,71 @@
                   <input type="tel" id="co-telefono" name="telefono" autocomplete="tel" placeholder="+56 9 1234 5678" />
                   <span class="field-error" id="err-telefono">Ingresa un teléfono válido (ej: +56 9 1234 5678).</span>
                 </div>
-
-                <button type="submit" class="btn btn-mp" id="checkout-btn">
-                  <img src="../assets/logos/mercado-pago-seeklogo.svg" alt="MercadoPago" style="height:20px;vertical-align:middle;" />
-                  Pagar con Mercado Pago
-                </button>
-                <p class="checkout-note">Serás redirigido a MercadoPago para completar el pago de forma segura.</p>
+                <div class="form-group">
+                  <label for="co-direccion">Dirección *</label>
+                  <input type="text" id="co-direccion" name="direccion" required autocomplete="address-line1" placeholder="Ej: Av. Siempre Viva 1234" />
+                  <span class="field-error" id="err-direccion">Ingresa tu dirección.</span>
+                </div>
+                <div class="form-group">
+                  <label for="co-depto">Casa, departamento, etc. (opcional)</label>
+                  <input type="text" id="co-depto" name="depto" autocomplete="address-line2" placeholder="Ej: Depto 304, Casa B" />
+                </div>
+                <div class="form-group">
+                  <label for="co-region">Región *</label>
+                  <select id="co-region" name="region" required autocomplete="address-level1">
+                    <option value="">Selecciona una región</option>
+                  </select>
+                  <span class="field-error" id="err-region">Selecciona una región.</span>
+                </div>
+                <div class="form-group">
+                  <label for="co-comuna">Comuna *</label>
+                  <select id="co-comuna" name="comuna" required autocomplete="address-level2" disabled>
+                    <option value="">Selecciona primero una región</option>
+                  </select>
+                  <span class="field-error" id="err-comuna">Selecciona una comuna.</span>
+                </div>
               </form>
             </div>
 
+            <!-- Resumen del carrito -->
+            <div class="checkout-box fade-up">
+              <h3>Resumen del pedido</h3>
+              <div id="checkout-items"></div>
+              <div class="checkout-subtotal">
+                <span>Subtotal</span>
+                <span id="checkout-subtotal-amount"></span>
+              </div>
+              <div class="checkout-shipping">
+                <span>Envío</span>
+                <span id="checkout-shipping-amount" style="color:#888;">Selecciona tu región y comuna</span>
+              </div>
+              <div class="checkout-total">
+                <span>Total</span>
+                <span id="checkout-total-amount"></span>
+              </div>
+              <p class="checkout-tax-note" id="checkout-tax-note"></p>
+              
+              <br></br>
+              <div class="checkout-payment-methods" aria-label="Medios de pago disponibles">
+                  <p>Medios de pago disponibles:</p>
+                  <div class="checkout-payment-logos">
+                    <img src="../assets/logos/logo-mercadopago.svg" alt="Mercado Pago" loading="lazy" />
+                    <img src="../assets/logos/default-brand-visa--7fc2fe6b.webp" alt="Visa" loading="lazy" />
+                    <img src="../assets/logos/default-brand-mastercard--824fb8e9.webp" alt="Mastercard" loading="lazy" />
+                    <img src="../assets/logos/amex-logo--2b055765.jpg" alt="American Express" loading="lazy" />
+                    <img src="../assets/logos/diners-club@2x--a1a294e0.png" alt="Diners Club" loading="lazy" />
+                    <img src="../assets/logos/Redcompra@2x--9905e830.png" alt="Red Compra" loading="lazy" />
+                  </div>
+                </div>
+                
+              <button type="submit" class="btn btn-mp" id="checkout-btn" form="checkout-form">
+                  <img src="../assets/logos/mercado-pago-seeklogo.svg" alt="MercadoPago" style="height:20px;vertical-align:middle;" />
+                  Pagar con Mercado Pago
+                </button>
+                <p class="checkout-note">Serás redirigido a MercadoPago para completar el pago de forma segura. 🔒</p>
+
+
+            </div>
           </div>
         </div>
 
@@ -211,7 +170,7 @@
         <h3 id="cart-modal-title">Carro</h3>
         <div class="cart-panel-actions">
           <button type="button" class="cart-panel-close" id="cart-clear">Vaciar carro</button>
-          <button type="button" class="cart-panel-close" id="cart-close">Cerrar</button>
+          <button type="button" class="cart-panel-close" id="cart-close">Seguir comprando</button>
         </div>
       </div>
       <div id="cart-empty" class="cart-empty">Aún no agregas productos. Elige uno para comenzar tu pedido.</div>
@@ -223,9 +182,8 @@
         </div>
         <div class="cart-footer-row-include">
           <span>*Impuestos Incluidos</span><br>
-          <span>*No incluye costos de envío</span>
+          <span>*Costo de envío se calcula en checkout</span>
         </div>
-        <a id="cart-whatsapp" class="btn btn-whatsapp" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
       </div>
     </div>
   </main>
@@ -303,8 +261,10 @@
 
   <script src="../config/site.config.js"></script>
   <script src="../config/supabase.config.js"></script>
-  <script src="../config/mp.config.js"></script>
+  <script src="../config/mercadopago.config.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
   <script src="../js/main.js"></script>
+  <script src="../js/chile-regiones.js"></script>
   <script src="../js/checkout.js"></script>
 </body>
 </html>

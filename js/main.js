@@ -313,18 +313,32 @@ function initProductos() {
           ${prevNextHtml}
           ${p.imagenes.length > 1 ? `<div class="carousel-dots" id="dots-${p.id}">${dotsHtml}</div>` : ''}
         </div>
-                  <a href="../products/${p.id}/index.html" aria-label="Ver detalles de ${p.nombre}">
-
         <div class="product-body">
-          ${categoriasHtml ? `<div class="product-tags">${categoriasHtml}</div>` : ''}
-          <h3 class="product-nombre">${p.nombre}</h3>
-          <div class="product-footer">
-            ${p.precioAntes ? `<div class="product-precio-antes">${p.precioAntes}</div>` : ''}
-            <span class="product-precio">&nbsp;${p.precio} CLP</span>
-            <span class="product-impuestos">Impuestos Incluidos</span>
-          </div>    
+          <a href="../products/${p.id}/index.html" class="product-body-link" aria-label="Ver detalles de ${p.nombre}">
+            ${categoriasHtml ? `<div class="product-tags">${categoriasHtml}</div>` : ''}
+            <h3 class="product-nombre">${p.nombre}</h3>
+            <div class="product-footer">
+              ${p.precioAntes ? `<div class="product-precio-antes">${p.precioAntes}</div>` : ''}
+              <span class="product-precio">&nbsp;${p.precio} CLP</span>
+              <span class="product-impuestos">Impuestos Incluidos</span>
+            </div>
+          </a>
+          ${!isDesdePrice ? `<button type="button" class="btn btn-outline cart-add-btn" style="justify-content:center;margin-top:8px;" 
+                  data-product-id="${p.id}"
+                  data-product-name="${p.nombre}"
+                  data-product-price="${productPrice}"
+                  data-product-image="${p.imagenes[0]}"
+                  data-product-requiereimg="${p.requiereImagen || false}"
+                  data-product-cantidadimg="${p.cantidadImagenes || 0}">
+            🛒 Agregar al carro
+          </button>` 
+          : `<a href="${waUrl}" target="_blank" rel="noopener" class="btn btn-whatsapp">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Cotizar
+          </a>`}
         </div>
-        </a>
       </article>
     `;
   }
@@ -483,8 +497,23 @@ function initCart() {
   const cartCount = document.getElementById('cart-count');
   const cartTotal = document.getElementById('cart-total');
   const cartSubtotal = document.getElementById('cart-subtotal');
-  const cartWhatsapp = document.getElementById('cart-whatsapp');
-  /*const cartCheckout = (() => {
+  //const cartCheckout = document.getElementById('cart-checkout');
+  const cartClear = document.getElementById('cart-clear');
+  const cartClose = document.getElementById('cart-close');
+  const cartOpen = document.getElementById('cart-open');
+  const cartOpenMobile = document.getElementById('cart-open-mobile');
+  const navCartBadge = document.getElementById('nav-cart-badge');
+  const navCartTip = document.getElementById('nav-cart-tip');
+  const navCartBadgeMobile = document.getElementById('nav-cart-badge-mobile');
+  const navCartTipMobile = document.getElementById('nav-cart-tip-mobile');
+  const productsGrid = document.getElementById('productos-grid');
+
+  if (!cartPanel || !cartBackdrop || !cartItems || !cartEmpty || !cartFooter || !cartSubtotal || !cartClear || !cartClose || !cartOpen || !navCartBadge || !navCartTip) {
+    return;
+  }
+
+
+  const cartCheckout = (() => {
     const path = window.location.pathname;
     if (path.includes('checkout')) return null;
     let href;
@@ -496,22 +525,20 @@ function initCart() {
     a.className = 'btn btn-primary';
     a.style.cssText = 'width:100%;display:block;text-align:center;margin-top:8px;';
     a.textContent = 'Ir al checkout';
-    cartWhatsapp?.insertAdjacentElement('afterend', a);
+    cartFooter?.insertAdjacentElement('afterend', a);
     return a;
-  })();*/
-  const cartClear = document.getElementById('cart-clear');
-  const cartClose = document.getElementById('cart-close');
-  const cartOpen = document.getElementById('cart-open');
-  const cartOpenMobile = document.getElementById('cart-open-mobile');
-  const navCartBadge = document.getElementById('nav-cart-badge');
-  const navCartTip = document.getElementById('nav-cart-tip');
-  const navCartBadgeMobile = document.getElementById('nav-cart-badge-mobile');
-  const navCartTipMobile = document.getElementById('nav-cart-tip-mobile');
-  const productsGrid = document.getElementById('productos-grid');
+  })();
 
-  if (!cartPanel || !cartBackdrop || !cartItems || !cartEmpty || !cartFooter || !cartSubtotal || !cartWhatsapp || !cartClear || !cartClose || !cartOpen || !navCartBadge || !navCartTip) {
-    return;
-  }
+  const path = window.location.pathname;
+  if (path.includes('checkout')) return null;
+  let href;
+  if (path.includes('/products/')) href = '../../pages/checkout.html';
+  else if (path.includes('/pages/')) href = 'checkout.html';
+  else href = 'pages/checkout.html';
+  cartCheckout.href = href;
+  cartCheckout.className = 'btn btn-primary';
+  cartCheckout.style.cssText = 'width:100%;display:block;text-align:center;margin-top:8px;';
+  cartCheckout.textContent = 'Ir al checkout';
 
   const STORAGE_KEY = 'artesamia-cart';
 
@@ -616,7 +643,7 @@ function initCart() {
 
     cartEmpty.hidden = true;
     cartFooter.hidden = false;
-    cartWhatsapp.href = getMessage(cart);
+    //cartWhatsapp.href = getMessage(cart);
 
     var productsPath = '../products';
     if (window.location.pathname.includes("index")) {
@@ -658,7 +685,9 @@ function initCart() {
         name: product.name,
         price: product.price,
         image: product.image,
-        quantity: 1
+        quantity: 1,
+        requiereImg: product.requiereImg,
+        cantidadImg: product.cantidadImg||0
       });
     }
 
@@ -700,7 +729,9 @@ function initCart() {
       id: button.dataset.productId,
       name: button.dataset.productName,
       price: Number(button.dataset.productPrice),
-      image: button.dataset.productImage
+      image: button.dataset.productImage,
+      requiereImg: button.dataset.productRequiereimg,
+      cantidadImg: button.dataset.productCantidadimg
     });
   });
 
