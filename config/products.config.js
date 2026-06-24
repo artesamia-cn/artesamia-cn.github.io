@@ -10,10 +10,10 @@ const PRODUCTS_CONFIG = [
   {
     id: "caja-vino",
     nombre: "🍷 Caja de Vino Premium",
-    seo: "Caja de Vino Premium de Artesamía en madera de MDF, grabada a láser y personalizable con nombre o frase. El regalo ideal para papá en el Día del Padre.",
-    categoria: "Día del Padre",
+    seo: "Caja de Vino Premium de Artesamía en madera de MDF, grabada a láser y personalizable con nombre o frase.",
+    categoria: "Regalos",
     descripcion: "✨ Un brindis con estilo para el mejor ejemplo a seguir 💙 En Artesamía creamos regalos únicos hechos con amor para celebrar como se merece",
-    descripcion2: "🌟Es el obsequio ideal para sorprenderlo en su día y dejar un recuerdo emotivo que combina elegancia, cariño y utilidad.",
+    descripcion2: "🌟Es el obsequio ideal para sorprender y dejar un recuerdo emotivo que combina elegancia, cariño y utilidad.",
     caracteristicas: [
       "⚡ Grabado a láser con acabados de calidad",
       "🌟 Estructura resistente con la capacidad perfecta para una botella de vino de 750 cc (no incluida)",
@@ -29,9 +29,8 @@ const PRODUCTS_CONFIG = [
     id: "six-pack",
     nombre: "🍺 Caja Porta Cervezas x6",
     seo: "Caja Porta Cervezas x6 en madera de MDF grabada a láser, personalizable con nombre o frase. El regalo perfecto para papá cervecero en el Día del Padre.",
-    categoria: "Día del Padre",
-    descripcion: "🎉 Este Día del Padre, regálale algo especial ❤️ En Artesamía creamos detalles únicos como esta hermosa caja de madera fabricada en MDF ✨",
-    descripcion2: "✨Es el regalo ideal para sorprender a papá en su día o para complementar sus momentos de celebración favoritos.",
+    categoria: "Regalos",
+    descripcion: "❤️ En Artesamía creamos detalles únicos como esta hermosa caja de madera fabricada en MDF ✨",
     caracteristicas: [
       "⚡ Grabado a láser con acabados de calidad",
       "🌟 Espacio perfecto para 6 botellas de su cerveza favorita (no incluidas).",
@@ -47,10 +46,9 @@ const PRODUCTS_CONFIG = [
     {
     id: "four-pack",
     nombre: "🍻 Caja Porta Cervezas x4",
-    seo: "Caja Porta Cervezas x4 en madera de MDF grabada a láser, personalizable con nombre o frase. El regalo original y práctico para papá en el Día del Padre.",
-    categoria: "Día del Padre",
-    descripcion: "💙 Un detalle original y práctico para homenajear a papá 🌟 En Artesamía creamos regalos únicos hechos con amor para celebrar como se merece ✨",
-    descripcion2: "✨Es el obsequio ideal para sorprenderlo en su día y dejar un recuerdo emotivo que usará siempre.",
+    seo: "Caja Porta Cervezas x4 en madera de MDF grabada a láser, personalizable con nombre o frase.",
+    categoria: "Regalos",
+    descripcion: "💙 Un detalle original y práctico 🌟 En Artesamía creamos regalos únicos hechos con amor para  como se merece ✨",
     caracteristicas: [
       "⚡ Grabado a láser con acabados de calidad",
       "🌟 Espacio perfecto para 4 botellas de su cerveza favorita (no incluidas)",
@@ -65,10 +63,9 @@ const PRODUCTS_CONFIG = [
   {
     id: "caja-whisky",
     nombre: "🥃 Caja de Whisky Premium",
-    seo: "Caja de Whisky Premium de Artesamía en madera de MDF, grabada a láser y personalizable con nombre o frase. El regalo elegante para papá en su gran día.",
-    categoria: "Día del Padre",
-    descripcion: "🎁 ¡El regalo perfecto para papá está aquí! 🥃 En Artesamía creamos recuerdos únicos para sorprender a ese superhéroe sin capa con un detalle elegante ✨",
-    descripcion2: "Es el obsequio ideal para celebrar este Día del Padre con un regalo que combina estilo, cariño y buen gusto.",
+    seo: "Caja de Whisky Premium de Artesamía en madera de MDF, grabada a láser y personalizable con nombre o frase.",
+    categoria: "Regalos",
+    descripcion: "🎁 ¡El regalo perfecto está aquí! 🥃 En Artesamía creamos recuerdos únicos para sorprender con un detalle elegante ✨",
     caracteristicas: [
       "⚡ Grabado a láser con acabados de calidad",
       "🪵 Caja de madera de MDF de alta calidad, resistente y con un acabado impecable",
@@ -105,8 +102,8 @@ const PRODUCTS_CONFIG = [
     {
     id: "organizador-celular",
     nombre: "📱 Estación de Organización",
-    seo: "Estación Organizadora de escritorio en madera, personalizable a láser. Ordena smartphone, llaves y más. El regalo práctico y moderno para el Día del Padre.",
-    categoria: "Día del Padre",
+    seo: "Estación Organizadora de escritorio en madera, personalizable a láser. Ordena smartphone, llaves y más.",
+    categoria: "Regalos",
     descripcion: "¿Cansado de perder las llaves o no saber dónde dejaste el teléfono? 🪵📱",
     descripcion2: "Mantén tus esenciales diarios en un solo lugar. Transforma el caos de tu mesa en un espacio con estilo y orden. ✨",
     caracteristicas: [
@@ -203,9 +200,9 @@ const PRODUCTS_CONFIG = [
   {
     id: "tabla-cocina",
     nombre: "🔪🥩 Tabla Asado / Gourmet Personalizada",
-    seo: "Tabla de Asado o Gourmet personalizada en madera con canal de goteo, grabada a láser. El regalo práctico e ideal para papá cocinero o asador los domingos.",
-    categoria: "Día del Padre",
-    descripcion: "🔥 El ingrediente secreto para los mejores momentos con papá 👨‍🍳",
+    seo: "Tabla de Asado o Gourmet personalizada en madera con canal de goteo, grabada a láser. El regalo práctico e ideal para el cocinero o asador los domingos.",
+    categoria: "Regalos",
+    descripcion: "🔥 El ingrediente secreto para los mejores momentos con el cocinero del hogar 👨‍🍳",
     descripcion2: "Es el regalo ideal para sus asados de domingo o para lucirse en la cocina, combinando un diseño rústico, gran utilidad y un valor sentimental único.",
     caracteristicas: [
       "⚡ Grabado a láser con acabados de calidad",
@@ -504,7 +501,7 @@ const PRODUCTS_CONFIG = [
 ];
 
 // Categorías para los filtros (en orden)
-const CATEGORIAS = ["Todos", "Día del Padre", "Bebé", "Eventos"];
+const CATEGORIAS = ["Todos", "Regalos", "Bebé", "Eventos"];
 
 // Hacer disponible en el navegador
 if (typeof window !== 'undefined') {

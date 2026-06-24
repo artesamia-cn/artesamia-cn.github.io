@@ -123,7 +123,7 @@ function initProductos() {
       </div>
     `).join('');
   }
-  const products = window.PRODUCTS_CONFIG;
+  let products = window.PRODUCTS_CONFIG;
   const categorias = window.CATEGORIAS;
   if (!products || !categorias) return;
 
@@ -179,6 +179,8 @@ function initProductos() {
 
     return [];
   }
+
+  products = products.filter(p => getCategoriasProducto(p).some(cat => categorias.includes(cat)));
 
   function productoTieneCategoria(p, categoria) {
     return getCategoriasProducto(p).includes(categoria);
@@ -529,17 +531,6 @@ function initCart() {
     return a;
   })();
 
-  const path = window.location.pathname;
-  if (path.includes('checkout')) return null;
-  let href;
-  if (path.includes('/products/')) href = '../../pages/checkout.html';
-  else if (path.includes('/pages/')) href = 'checkout.html';
-  else href = 'pages/checkout.html';
-  cartCheckout.href = href;
-  cartCheckout.className = 'btn btn-primary';
-  cartCheckout.style.cssText = 'width:100%;display:block;text-align:center;margin-top:8px;';
-  cartCheckout.textContent = 'Ir al checkout';
-
   const STORAGE_KEY = 'artesamia-cart';
 
   function setMobileCartTipVisible(visible) {
@@ -632,6 +623,10 @@ function initCart() {
       const isEmpty = totalItems === 0;
       cartOpenMobile.classList.toggle('is-hidden', isEmpty);
       cartOpenMobile.setAttribute('aria-hidden', String(isEmpty));
+    }
+
+    if (cartCheckout) {
+      cartCheckout.hidden = cart.length === 0;
     }
 
     if (cart.length === 0) {

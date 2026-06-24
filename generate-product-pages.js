@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Cargar configuración de productos y sitio
-const { PRODUCTS_CONFIG } = require('./config/products.config.js');
+const { PRODUCTS_CONFIG, CATEGORIAS } = require('./config/products.config.js');
 const SITE_CONFIG = require('./config/site.config.js') || {
   nombre: 'Artesamía',
   url: 'https://artesamia.cl',
@@ -17,6 +17,21 @@ const SITE_CONFIG = require('./config/site.config.js') || {
     whatsapp: { numero: '56945786290' }
   }
 };
+
+/**
+ * Devuelve las categorías de un producto (soporta `categorias` array o `categoria` string)
+ */
+function getCategoriasProducto(product) {
+  if (Array.isArray(product.categorias) && product.categorias.length > 0) {
+    return [...new Set(product.categorias.filter(Boolean))];
+  }
+
+  if (typeof product.categoria === 'string' && product.categoria.trim()) {
+    return [product.categoria.trim()];
+  }
+
+  return [];
+}
 
 /**
  * Genera el Schema JSON-LD para un producto
@@ -422,7 +437,7 @@ function cleanOldProductPages() {
  * Sincroniza sitemap.xml con los productos de PRODUCTS_CONFIG.
  * Preserva entradas estáticas y reporta productos nuevos.
  */
-function updateSitemap() {
+function updateSitemap(productos) {
   const sitemapPath = path.join(__dirname, 'sitemap.xml');
   const baseUrl = SITE_CONFIG.url || 'https://artesamia.cl';
   const today = new Date().toISOString().split('T')[0];
@@ -447,9 +462,9 @@ function updateSitemap() {
       .join('\n') + '\n';
   }
 
-  const newProducts = PRODUCTS_CONFIG.filter(p => !existingIds.has(p.id));
+  const newProducts = productos.filter(p => !existingIds.has(p.id));
 
-  const productEntries = PRODUCTS_CONFIG
+  const productEntries = productos
     .map(p =>
       `  <url>\n    <loc>${baseUrl}/products/${p.id}/</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.72</priority>\n  </url>`
     )
@@ -463,7 +478,7 @@ function updateSitemap() {
       console.log(`🗺️  Sitemap: ${newProducts.length} producto(s) nuevo(s) añadido(s):`);
       newProducts.forEach(p => console.log(`   ➕ /products/${p.id}/`));
     } else {
-      console.log(`🗺️  Sitemap sincronizado (${PRODUCTS_CONFIG.length} productos)`);
+      console.log(`🗺️  Sitemap sincronizado (${productos.length} productos)`);
     }
   } catch (err) {
     console.error(`❌ Error actualizando sitemap: ${err.message}`);
@@ -482,10 +497,19 @@ function generateAllProductPages() {
   // Limpiar archivos anteriores antes de generar nuevos
   cleanOldProductPages();
 
+  const productosValidos = PRODUCTS_CONFIG.filter(p =>
+    getCategoriasProducto(p).some(cat => CATEGORIAS.includes(cat))
+  );
+
+  const omitidos = PRODUCTS_CONFIG.length - productosValidos.length;
+  if (omitidos > 0) {
+    console.log(`⏭️  ${omitidos} producto(s) omitido(s) por categoría no válida\n`);
+  }
+
   let created = 0;
   let errors = 0;
 
-  PRODUCTS_CONFIG.forEach(product => {
+  productosValidos.forEach(product => {
     try {
       const productDir = path.join(__dirname, 'products', product.id);
       const outputFile = path.join(productDir, 'index.html');
@@ -510,7 +534,7 @@ function generateAllProductPages() {
 
   console.log(`\n📊 Resumen:\n   ✅ ${created} páginas creadas\n   ❌ ${errors} errores`);
 
-  updateSitemap();
+  updateSitemap(productosValidos);
 }
 
 // Ejecutar
